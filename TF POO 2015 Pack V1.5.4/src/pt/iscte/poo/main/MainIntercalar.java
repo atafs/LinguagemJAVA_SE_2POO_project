@@ -29,7 +29,7 @@ public class MainIntercalar {
 		casa.novaLinha("quartos", 4); // Linha quartos, 4 tomadas
 		casa.novaLinha("sala", 6); // Linha sala, 6 tomadas
 		
-//		 //TO DELETE: TESTS
+//		 //TO DELETE: TESTS.
 //		 for (Linha linha : casa.getListLinhas()) {
 //			 System.out.println("NOME -> " + linha.getNome() + ", TOMADAS -> " +  linha.getListaTomadas().size());
 //		 }
