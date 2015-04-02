@@ -13,6 +13,8 @@ public abstract class AparelhoPotenciaFixa extends Aparelho{
 	
 	public AparelhoPotenciaFixa(String nome, double potenciaMaxima) {
 		super(nome, potenciaMaxima);
+		//super.setPotenciaActual(potenciaMaxima);
+		super.setPotenciaFixa(true);
 	}
 	
 	

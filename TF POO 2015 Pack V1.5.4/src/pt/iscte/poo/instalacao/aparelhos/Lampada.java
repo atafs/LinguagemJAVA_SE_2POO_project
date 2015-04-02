@@ -16,6 +16,10 @@ public class Lampada extends AparelhoPotenciaFixa{
 		super(nome, potenciaMaxima);
 	}
 	
+	public Lampada(String nome, double potenciaMaxima) {
+		super(nome, potenciaMaxima);
+	}
+	
 	//TOSTRING
 	@Override
 	public String toString() {

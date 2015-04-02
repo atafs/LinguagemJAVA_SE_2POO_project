@@ -14,6 +14,10 @@ public class Frigorifico extends AparelhoPotenciaFixa{
 		super(nome,potenciaMaxima, estadoAparelho, tomada);
 	}
 	
+	public Frigorifico(String nome, double potencia) {
+		super(nome, potencia);	
+	}
+	
 	@Override
 	public double potenciaMaxima() {
 		return super.getPotenciaMaxima();

@@ -54,6 +54,7 @@ public class TesteAparelhos {
 		assertEquals(1050, instalacao.potenciaNaLinha("cozinha"), 0.0000001);	
 	}
 	
+	@SuppressWarnings("unused")
 	@Test
 	public void testeHierarquiaAparelhos() {
 		Lampada lamp1 = new Lampada("lampada1", 50);		

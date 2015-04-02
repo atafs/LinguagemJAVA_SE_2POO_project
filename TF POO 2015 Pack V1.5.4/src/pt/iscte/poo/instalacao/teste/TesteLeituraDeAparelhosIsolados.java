@@ -18,12 +18,10 @@ import pt.iscte.poo.instalacao.Aparelho;
 import pt.iscte.poo.instalacao.Instalacao;
 import pt.iscte.poo.instalacao.aparelhos.Computador;
 import pt.iscte.poo.instalacao.aparelhos.Frigorifico;
-import pt.iscte.poo.instalacao.aparelhos.Lampada;
-import pt.iscte.poo.instalacao.aparelhos.MicroOndas;
-import pt.iscte.poo.instalacao.aparelhos.Torradeira;
 
 public class TesteLeituraDeAparelhosIsolados {
 	
+	@SuppressWarnings("unused")
 	private Instalacao instalacao;
 	
 	@BeforeClass

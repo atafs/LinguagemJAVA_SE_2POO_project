@@ -43,7 +43,9 @@ public class Instalacao {
 	@Override
 	public String toString() {
 		String toReturn = "";
-		toReturn += "listLinhas: " + this.listLinhas;
+		for (Linha linha : listLinhas) {
+			toReturn += linha.getNome() + " " + linha.somaPotenciaLinha() + "W\n";
+		}
 		return toReturn;
 	}
 	
@@ -105,9 +107,12 @@ public class Instalacao {
 //						System.out.println(tomada.getEstadoLinha());
 //						System.out.println(LinhaTomadaEstado.FREE);
 						
-						//ASSUMIR QUE SO EXISTE UM APARELHO POR TOMADA
+						//ASSUMIR QUE SO EXISTE UM APARELHO POR TOMADA (estados)
 						tomada.setEstadoLinha(LinhaTomadaEstado.BEING_USED);
 						aparelho.setEstadoAparelho(AparelhoEstado.STAND_BY);
+						//GUARDAR EM QUE TOMADA O APARELHO ESTA LIGADO
+						aparelho.setTomada(tomada);
+						//ADICIONAR A TOMADA
 						tomada.getListaAparelhos().add(aparelho);
 						return;
 					}

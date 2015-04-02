@@ -3,7 +3,6 @@ package pt.iscte.poo.instalacao.aparelhos;
 import pt.iscte.poo.instalacao.Aparelho;
 import pt.iscte.poo.instalacao.Tomada;
 import pt.iscte.poo.instalacao.enums.AparelhoEstado;
-import pt.iscte.poo.instalacao.interfaces.Variavel;
 
 public abstract class AparelhoPotenciaVariavel extends Aparelho {
 
@@ -14,6 +13,9 @@ public abstract class AparelhoPotenciaVariavel extends Aparelho {
 	
 	public AparelhoPotenciaVariavel(String nome,  double potenciaMaxima) {
 		super(nome, potenciaMaxima);
+		//ALWAYS START WITH ZERO POWER
+		super.setPotenciaActual(0.0);
+		super.setPotenciaFixa(false);
 	}
 
 }

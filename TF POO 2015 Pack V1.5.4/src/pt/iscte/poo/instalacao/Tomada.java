@@ -46,11 +46,14 @@ public class Tomada {
 		//LIMPAR CONTADOR
 		double potenciaNaTomada = 0.0;
 		for (Aparelho aparelho : listaAparelhos) {
-			if (aparelho.estaLigado() && aparelho.getPotenciaActual() == 0) {
+			//APARELHOS POTENCIA FIXA
+			if (aparelho.estaLigado() && aparelho.isPotenciaFixa() ) {
 				potenciaNaTomada += aparelho.getPotenciaMaxima();	
-			} else if (aparelho.estaLigado() && aparelho.getPotenciaActual() != 0) {
+			} 
+			//APARELHOS POTENCIA VARIAVEL
+			else if (aparelho.estaLigado() && !aparelho.isPotenciaFixa()) {
 				potenciaNaTomada += aparelho.getPotenciaActual();	
-			}
+			}		
 		}
 		return potenciaNaTomada;
 	}

@@ -6,6 +6,10 @@ public class Torradeira extends AparelhoPotenciaFixa{
 	public Torradeira(String name, int id) {
 		super(name, id);
 	}
+	
+	public Torradeira(String name, double id) {
+		super(name, id);
+	}
 
 	//TOSTRING
 	@Override

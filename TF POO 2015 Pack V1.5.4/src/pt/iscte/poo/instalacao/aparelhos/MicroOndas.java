@@ -6,6 +6,10 @@ public class MicroOndas extends AparelhoPotenciaVariavel {
 	public MicroOndas(String name, int id) {
 		super(name, id);
 	}
+	
+	public MicroOndas(String name, double id) {
+		super(name, id);
+	}
 
 	// TOSTRING
 	@Override

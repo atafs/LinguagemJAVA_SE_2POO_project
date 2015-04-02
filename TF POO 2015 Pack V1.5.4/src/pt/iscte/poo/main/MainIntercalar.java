@@ -11,7 +11,6 @@ import org.json.simple.parser.ParseException;
 
 import pt.iscte.poo.instalacao.Aparelho;
 import pt.iscte.poo.instalacao.Instalacao;
-import pt.iscte.poo.instalacao.Linha;
 import pt.iscte.poo.instalacao.Relogio;
 import pt.iscte.poo.instalacao.aparelhos.Computador;
 import pt.iscte.poo.instalacao.aparelhos.Frigorifico;
@@ -23,6 +22,7 @@ public class MainIntercalar {
 	
 	private static final int END_T = 1000;
 
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		Instalacao casa = Instalacao.getInstanciaUnica();
 		casa.novaLinha("cozinha", 10); // Linha cozinha, 10 tomadas
@@ -47,9 +47,10 @@ public class MainIntercalar {
 //			 i++;
 //		 }
 		
+		int t = 0;
+		System.out.println("t = " + t);
 		System.out.println(casa); // Imprime estado da casa (tempo + consumo por linha)
 		
-		int t = 0;
 		for (; t != END_T / 4; t++) {
 			Relogio.getInstanciaUnica().tique(); // Avança uma unidade de tempo	
 		}
@@ -66,6 +67,7 @@ public class MainIntercalar {
 //			i++;
 //		}
 		 
+		System.out.println("t = " + t);
 		System.out.println(casa);
 		
 		for (; t != END_T / 2; t++) {
@@ -113,6 +115,7 @@ public class MainIntercalar {
 //			 System.out.println(linha.getListaTomadas().get(0).toString());
 //		 }
 		
+		System.out.println("t = " + t);
 		System.out.println(casa);
 		
 		for (; t != 3 * END_T / 4; t++) {
@@ -140,7 +143,7 @@ public class MainIntercalar {
 //			 System.out.println(linha.getListaTomadas().get(0).toString());
 //		 }
 		 
+		System.out.println("t = " + t);
 		System.out.println(casa);
 	}
-
 }
