@@ -1,20 +1,28 @@
 package pt.iscte.poo.instalacao.aparelhos;
 
 import pt.iscte.poo.instalacao.Aparelho;
-import pt.iscte.poo.instalacao.Tomada;
 import pt.iscte.poo.instalacao.enums.AparelhoEstado;
+import pt.iscte.poo.instalacao.enums.NovoAparelho_Potencia;
 
 public abstract class AparelhoPotenciaFixa extends Aparelho{
 
-	//CONSTRUCTORS
-	public AparelhoPotenciaFixa(String nome, double potenciaMaxima, AparelhoEstado estadoAparelho, Tomada tomada) {
-		super(nome,potenciaMaxima, estadoAparelho, tomada);
-	}
-	
+	//CONSTRUCTOR
 	public AparelhoPotenciaFixa(String nome, double potenciaMaxima) {
 		super(nome, potenciaMaxima);
-		//super.setPotenciaActual(potenciaMaxima);
-		super.setPotenciaFixa(true);
+		super.setPotenciaAparelho(NovoAparelho_Potencia.POTENCIA_MAXIMA);
+	}
+	
+	@Override
+	public double potenciaMaxima() {
+		return super.getPotenciaMaxima();
+	}
+
+	@Override
+	public double potenciaAtual() {
+		if (super.getEstadoAparelho() == AparelhoEstado.ON) {
+			super.setPotenciaActual(super.getPotenciaMaxima());
+		}
+		return super.getPotenciaActual();
 	}
 	
 	

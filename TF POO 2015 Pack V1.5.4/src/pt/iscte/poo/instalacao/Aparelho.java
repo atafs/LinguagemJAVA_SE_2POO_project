@@ -2,145 +2,124 @@ package pt.iscte.poo.instalacao;
 
 import org.json.simple.JSONObject;
 
-import pt.iscte.poo.instalacao.aparelhos.Computador;
-import pt.iscte.poo.instalacao.aparelhos.Frigorifico;
-import pt.iscte.poo.instalacao.aparelhos.Lampada;
-import pt.iscte.poo.instalacao.aparelhos.MicroOndas;
-import pt.iscte.poo.instalacao.aparelhos.Torradeira;
 import pt.iscte.poo.instalacao.enums.AparelhoEstado;
+import pt.iscte.poo.instalacao.enums.NovoAparelho_Potencia;
+import pt.iscte.poo.instalacao.enums.NovoAparelho_Tipo;
 import pt.iscte.poo.instalacao.interfaces.Variavel;
 
-public abstract class Aparelho implements Ligavel, Variavel{
-	
-	//ATTRIBUTES
+public abstract class Aparelho implements Ligavel, Variavel {
+
+	// ATTRIBUTES
 	private String nome;
 	private double potenciaMaxima;
 	private double potenciaActual;
+	// ENUM (constantes)
 	private AparelhoEstado estadoAparelho;
+	private NovoAparelho_Tipo tipoAparelho;
+	private NovoAparelho_Potencia potenciaAparelho;
+	// APARELHO SABER A QUE TOMADA PERTENCE
 	private Tomada tomada;
-	private boolean potenciaFixa = false;
-	
-	//CONSTRUCTOR (overload methods)
-	public Aparelho(String nome,  double potenciaMaxima, AparelhoEstado estadoAparelho, Tomada tomada) {
-		//DEVICE
-		this.nome = nome;
-		this.potenciaMaxima = potenciaMaxima;
-		this.estadoAparelho = estadoAparelho;
-		this.tomada = tomada;
-		
-		//IF aparelho for de potencia variavel, mudar o seu valor
-		this.potenciaActual = 0.0;
-	}
-	
-	//JUnit requires this constructor
+
+	// CONSTRUCTOR JUnit requires this constructor
+	/** */
 	public Aparelho(String nome, double potencia) {
 		this.nome = nome;
 		this.potenciaMaxima = potencia;
 	}
-	
-	//TOSTRING
+
+	// TOSTRING
 	@Override
 	public String toString() {
-		String toReturn = ""/*super.toString()*/;
-		toReturn += "-> APARELHO: ";
-		toReturn += " -> NOME: " + this.nome;	
-		toReturn += " -> POTENCIA: " + potenciaMaxima;	
+		String toReturn = ""/* super.toString() */;
+		toReturn += "NOME: " + this.nome;
+		toReturn += " -> POTENCIA: " + potenciaMaxima;
 		toReturn += " -> ESTADO: " + this.estadoAparelho;
-		
+		toReturn += "]";
 		return toReturn;
 	}
-	
-	//STATIC METHODS
-	/** Metodo que utiliza um JSONObject (tipo um hashMap) */
+
+	// STATIC METHODS
+	/**
+	 * DESCRICAO: devolve uma aparelho ligavel. Atraves de um objecto JSON,
+	 * busca o seu tipo e id (nome). No Enum NovoAparelho_Tipo, sao chamados
+	 * dois metodos. Um busca o valor de potencia (seja ele fixa ou variavel). O
+	 * outro metodo, a partir de tipo, nome e potencia, cria um aparelho novo.
+	 * Esta incluido neste metodo um upperCase(), de forma a tornar o programa
+	 * mais robusto (do tipo existente no JSON). E um switch que permite
+	 * selecionar que qual o aparelho a ser criado.
+	 * 
+	 * Este metodo foi desenvolvido com a intensao de simplicar a manutencao e
+	 * insercao de novo tipos de aparelho. Permitindo a expansao com facilidade
+	 * do objecto JSON.
+	 * 
+	 * NOTA: JSONObject e uma especie de hashMap.
+	 */
 	public static Ligavel novoAparelho(JSONObject obj) {
-	
+
 		String tipo = (String) obj.get("tipo");
 		String id = (String) obj.get("id");
-		
-		//POWER (max or variable)
-		double potencia = -1;
-		if(obj.get("potencia") != null) {
-			potencia = (double)((long)obj.get("potencia"));
-		}
-		
-		if(obj.get("potenciaMaxima") != null) {
-			potencia = (double)obj.get("potenciaMaxima");
-		}
-		
-//		//TO DELETE
-//		System.out.println(id);
-//		System.out.println(potencia);
-		
-		//INSTANTIATE ALL DEVICES FROM THE TYPE (name of device)
-		if(tipo.equals("computador")) {
-			return new Computador(id, potencia);
-		}
-		
-		else if(tipo.equals("frigorifico")) {
-			return new Frigorifico(id, potencia);
-		}
-		
-		else if(tipo.equals("lampada")) {
-			return new Lampada(id, potencia);
-		}
-		
-		else if(tipo.equals("microOndas")) {
-			return new MicroOndas(id, potencia);
-		}
-		
-		else if(tipo.equals("torradeira")) {
-			return new Torradeira(id, potencia);
-		}
-		
-		else if(tipo.equals("outrosAparelhos")) {
-			return null;
-		}
-		return null;
-	}
-	
-	//INTERFACES METHODS
-	@Override
-	/** */
-	public void liga() {
-		estadoAparelho = AparelhoEstado.ON;	
+
+		// NOVO APARELHO POTENCIA
+		double potencia = NovoAparelho_Tipo.selecionaNovoAparelhoPotencia(obj);
+
+		// NOVO APARELHO TIPO
+		return NovoAparelho_Tipo.selecionaNovoAparelho(tipo, id, potencia);
 	}
 
+	// INTERFACES METHODS
+	/**
+	 * DESCRICAO: muda o estado do aparelho para ON. Isso vai ter influencia no
+	 * comportamento de metodos, como o de somar o consumo total na linha.
+	 */
+	@Override
+	public void liga() {
+		estadoAparelho = AparelhoEstado.ON;
+	}
+
+	/** DESCRICAO: mudo o estado do aparelho para OFF */
 	@Override
 	public void desliga() {
-		estadoAparelho = AparelhoEstado.OFF;	
+		estadoAparelho = AparelhoEstado.OFF;
 	}
-	
+
 	@Override
 	public boolean estaLigado() {
-		//IF the device state is set as ON, then it is true;
+		// Se o aparelho estiver ON, return true
 		return (estadoAparelho == AparelhoEstado.ON);
 	}
-	
+
+	/**
+	 * DESCRICAO: Se o valor que estou a receber em parametro somado ao valor ja
+	 * guardado na variavel da classe, for menor ou igual ao valor maximo,
+	 * permitido pelo aparelho, entao acrescenta ao valor ja existente no mesmo
+	 * o valor em parametro.
+	 * 
+	 * Caso contrario, coloco o atributo com o valor maximo, evitando assim
+	 * danificar o aparelho por permitir um incremento excessivo do mesmo.
+	 */
 	@Override
 	public void aumenta(int potenciaActual) {
-		if ((this.potenciaActual + potenciaActual)  <= potenciaMaxima) {
+		if ((this.potenciaActual + potenciaActual) <= potenciaMaxima) {
 			this.potenciaActual += potenciaActual;
-			//System.out.println(this.potenciaActual);
 		} else {
 			this.potenciaActual = potenciaMaxima;
-			//System.out.println("ERROR: CAN NOT GET HIGHER THE INTENSiTY. IT IS ALREADY MAX!!!");
-			//System.out.println(this.potenciaActual);
-			//throw new IllegalStateException("ERROR: CAN NOT GET HIGHER THE INTENSiTY. IT IS ALREADY MAX!!!");
 		}
 	}
 
+	/**
+	 * DESCRICAO: funcionamento equivalente ao aumenta(). Decrementando ate um
+	 * valor minimo de 0. Nao permite valores negativos.
+	 */
 	@Override
 	public void diminui(int potenciaActual) {
 		if ((this.potenciaActual + potenciaActual) >= 0) {
-			this.potenciaActual -= potenciaActual;	
+			this.potenciaActual -= potenciaActual;
 		} else {
-			//System.out.println("ERROR: CAN NOT LOWER THE INTENSiTY ANY MORE. IT IS ALREADY ZERO!!!");
 			this.potenciaActual = 0;
-			throw new IllegalStateException("ERROR: CAN NOT LOWER THE INTENSiTY ANY MORE. IT IS ALREADY ZERO!!!");
 		}
 	}
-	
-	//GETTERS AND SETTERS
+
+	// GETTERS AND SETTERS
 	public String getNome() {
 		return nome;
 	}
@@ -152,6 +131,7 @@ public abstract class Aparelho implements Ligavel, Variavel{
 	public double getPotenciaMaxima() {
 		return potenciaMaxima;
 	}
+
 	public void setPotenciaMaxima(double potenciaMaxima) {
 		this.potenciaMaxima = potenciaMaxima;
 	}
@@ -180,11 +160,19 @@ public abstract class Aparelho implements Ligavel, Variavel{
 		this.potenciaActual = potenciaActual;
 	}
 
-	public boolean isPotenciaFixa() {
-		return potenciaFixa;
+	public NovoAparelho_Tipo getTipoAparelho() {
+		return tipoAparelho;
 	}
 
-	public void setPotenciaFixa(boolean potenciaFixa) {
-		this.potenciaFixa = potenciaFixa;
+	public void setTipoAparelho(NovoAparelho_Tipo tipoAparelho) {
+		this.tipoAparelho = tipoAparelho;
+	}
+
+	public NovoAparelho_Potencia getPotenciaAparelho() {
+		return potenciaAparelho;
+	}
+
+	public void setPotenciaAparelho(NovoAparelho_Potencia potenciaAparelho) {
+		this.potenciaAparelho = potenciaAparelho;
 	}
 }

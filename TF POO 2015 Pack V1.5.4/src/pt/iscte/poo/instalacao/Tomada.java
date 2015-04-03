@@ -3,26 +3,25 @@ package pt.iscte.poo.instalacao;
 import java.util.ArrayList;
 
 import pt.iscte.poo.instalacao.enums.LinhaTomadaEstado;
+import pt.iscte.poo.instalacao.enums.NovoAparelho_Potencia;
 
 public class Tomada {
 
 	// ATTRIBUTES
-	private int id;
 	private String nome;
 	private LinhaTomadaEstado estadoLinha;
 	private ArrayList<Aparelho> listaAparelhos = new ArrayList<Aparelho>();
 	
 
 	// CONSTRUCTOR
-	public Tomada(String nome, int id, LinhaTomadaEstado estadoLinha, ArrayList<Aparelho> listaAparelhos) {
+	public Tomada(String nome, LinhaTomadaEstado estadoLinha, ArrayList<Aparelho> listaAparelhos) {
 		this.nome = nome;
-		this.id = id;
 		this.listaAparelhos = listaAparelhos;
 		this.estadoLinha = estadoLinha;
 	}
 
 	public Tomada() {
-		this("", 0, LinhaTomadaEstado.FREE, new ArrayList<Aparelho>());
+		this("", LinhaTomadaEstado.FREE, new ArrayList<Aparelho>());
 	}
 
 	// TOSTRING
@@ -47,11 +46,11 @@ public class Tomada {
 		double potenciaNaTomada = 0.0;
 		for (Aparelho aparelho : listaAparelhos) {
 			//APARELHOS POTENCIA FIXA
-			if (aparelho.estaLigado() && aparelho.isPotenciaFixa() ) {
+			if (aparelho.estaLigado() && aparelho.getPotenciaAparelho().equals(NovoAparelho_Potencia.POTENCIA_MAXIMA) ) {
 				potenciaNaTomada += aparelho.getPotenciaMaxima();	
 			} 
 			//APARELHOS POTENCIA VARIAVEL
-			else if (aparelho.estaLigado() && !aparelho.isPotenciaFixa()) {
+			else if (aparelho.estaLigado() && aparelho.getPotenciaAparelho().equals(NovoAparelho_Potencia.POTENCIA)) {
 				potenciaNaTomada += aparelho.getPotenciaActual();	
 			}		
 		}
@@ -65,14 +64,6 @@ public class Tomada {
 
 	public void setListaAparelhos(ArrayList<Aparelho> listaAparelhos) {
 		this.listaAparelhos = listaAparelhos;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getNome() {
