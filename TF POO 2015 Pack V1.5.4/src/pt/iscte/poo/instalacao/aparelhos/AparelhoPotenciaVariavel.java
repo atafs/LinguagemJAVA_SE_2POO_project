@@ -12,11 +12,6 @@ public abstract class AparelhoPotenciaVariavel extends Aparelho {
 		super.setPotenciaActual(0.0);
 		super.setPotenciaAparelho(NovoAparelho_Potencia.POTENCIA);
 	}
-	
-	@Override
-	public double potenciaMaxima() {
-		return super.getPotenciaMaxima();
-	}
 
 	@Override
 	public double potenciaAtual() {

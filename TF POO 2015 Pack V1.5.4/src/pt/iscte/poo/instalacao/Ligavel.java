@@ -16,7 +16,4 @@ public interface Ligavel {
 	/** */
 	public boolean estaLigado();
 	
-	/** */
-	public double potenciaMaxima();
-
 }

@@ -11,18 +11,13 @@ public abstract class AparelhoPotenciaFixa extends Aparelho{
 		super(nome, potenciaMaxima);
 		super.setPotenciaAparelho(NovoAparelho_Potencia.POTENCIA_MAXIMA);
 	}
-	
-	@Override
-	public double potenciaMaxima() {
-		return super.getPotenciaMaxima();
-	}
 
 	@Override
 	public double potenciaAtual() {
 		if (super.getEstadoAparelho() == AparelhoEstado.ON) {
-			super.setPotenciaActual(super.getPotenciaMaxima());
+			super.setPotenciaActual(super.potenciaMaxima());
 		}
-		return super.getPotenciaActual();
+		return super.potenciaActual();
 	}
 	
 	

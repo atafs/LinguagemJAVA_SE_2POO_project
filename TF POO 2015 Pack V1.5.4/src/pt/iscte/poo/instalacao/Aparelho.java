@@ -120,7 +120,7 @@ public abstract class Aparelho implements Ligavel, Variavel {
 	}
 
 	// GETTERS AND SETTERS
-	public String getNome() {
+	public String getId() {
 		return nome;
 	}
 
@@ -128,7 +128,7 @@ public abstract class Aparelho implements Ligavel, Variavel {
 		this.nome = nome;
 	}
 
-	public double getPotenciaMaxima() {
+	public double potenciaMaxima() {
 		return potenciaMaxima;
 	}
 
@@ -152,7 +152,7 @@ public abstract class Aparelho implements Ligavel, Variavel {
 		this.tomada = tomada;
 	}
 
-	public double getPotenciaActual() {
+	public double potenciaActual() {
 		return potenciaActual;
 	}
 

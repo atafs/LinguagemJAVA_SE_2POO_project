@@ -7,9 +7,4 @@ public class Lampada extends AparelhoPotenciaFixa{
 		super(nome, potenciaMaxima);
 	}
 	
-	//GETTERS AND SETTERS
-	public String getId() {
-		return super.getNome();
-	}
-
 }

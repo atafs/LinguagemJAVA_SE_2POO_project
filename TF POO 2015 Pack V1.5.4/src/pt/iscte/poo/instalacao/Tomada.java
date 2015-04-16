@@ -29,8 +29,8 @@ public class Tomada {
 	public String toString() {
 		String toReturn = "";
 		for (Aparelho aparelho : listaAparelhos) {
-			toReturn = "-> NOME: " + aparelho.getNome() 
-					+ " -> POTENCIA: " + aparelho.getPotenciaMaxima() 
+			toReturn = "-> NOME: " + aparelho.getId() 
+					+ " -> POTENCIA: " + aparelho.potenciaMaxima() 
 					+ " -> ESTADO: " + aparelho.getEstadoAparelho();
 		}
 		return toReturn;
@@ -47,11 +47,11 @@ public class Tomada {
 		for (Aparelho aparelho : listaAparelhos) {
 			//APARELHOS POTENCIA FIXA
 			if (aparelho.estaLigado() && aparelho.getPotenciaAparelho().equals(NovoAparelho_Potencia.POTENCIA_MAXIMA) ) {
-				potenciaNaTomada += aparelho.getPotenciaMaxima();	
+				potenciaNaTomada += aparelho.potenciaMaxima();	
 			} 
 			//APARELHOS POTENCIA VARIAVEL
 			else if (aparelho.estaLigado() && aparelho.getPotenciaAparelho().equals(NovoAparelho_Potencia.POTENCIA)) {
-				potenciaNaTomada += aparelho.getPotenciaActual();	
+				potenciaNaTomada += aparelho.potenciaActual();	
 			}		
 		}
 		return potenciaNaTomada;

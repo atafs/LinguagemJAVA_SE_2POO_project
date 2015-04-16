@@ -131,7 +131,7 @@ public class Instalacao {
 		for (Linha linha : listLinhas) {
 			for (Tomada tomada : linha.getListaTomadas()) {
 				for (Aparelho aparelho1 : tomada.getListaAparelhos()) {
-					if (aparelho.equals(aparelho1.getNome())) {
+					if (aparelho.equals(aparelho1.getId())) {
 						return aparelho1;
 					}
 				}
