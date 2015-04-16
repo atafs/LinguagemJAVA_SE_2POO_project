@@ -11,6 +11,7 @@ import org.junit.Test;
 
 public class TestJUnit {
 
+	@SuppressWarnings("unused")
 	@Test
 	public void test() {
 		double value = 0.5;

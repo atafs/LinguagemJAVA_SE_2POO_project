@@ -12,6 +12,7 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.Stack;
 
+@SuppressWarnings("unused")
 public class CollectionsExamples {
 
 	public static void main(String[] args) {
