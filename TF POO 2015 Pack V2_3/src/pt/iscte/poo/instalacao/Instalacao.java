@@ -83,7 +83,7 @@ public class Instalacao {
 						toReturn = tomada.getNome();
 						return toReturn;
 					} else {
-						System.out.println("ERROR => NENHUMA TOMADA ESTA LIVRE");
+						System.out.println("ERROR = NENHUMA TOMADA ESTA LIVRE");
 					}
 				}
 			}
