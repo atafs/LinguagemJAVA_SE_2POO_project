@@ -18,7 +18,8 @@ public class Instalacao {
 	private ArrayList<Linha> listLinhas;
 
 	// private Aparelho aparelho;
-
+	//commit test
+	
 	// CONSTRUCTOR
 	private Instalacao(ArrayList<Linha> listLinhas) {
 		this.listLinhas = listLinhas;
