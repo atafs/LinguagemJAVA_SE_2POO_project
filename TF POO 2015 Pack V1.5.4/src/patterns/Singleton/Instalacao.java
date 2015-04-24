@@ -109,7 +109,7 @@ public class Instalacao {
 //						System.out.println(LinhaTomadaEstado.FREE);
 						
 						//ASSUMIR QUE SO EXISTE UM APARELHO POR TOMADA
-						tomada.setEstadoLinha(LinhaTomadaEstado.BEING_USED);
+						tomada.setEstadoLinha(LinhaTomadaEstado.BEING_USED_ONE_PLUGIN);
 						aparelho.setEstadoAparelho(AparelhoEstado.STAND_BY);
 						tomada.getListaAparelhos().add(aparelho);
 						return;
@@ -131,7 +131,7 @@ public class Instalacao {
 		for (Linha linha : listLinhas) {
 			for (Tomada tomada : linha.getListaTomadas()) {
 				for (Aparelho aparelho1 : tomada.getListaAparelhos()) {
-					if (aparelho.equals(aparelho1.getNome())) {
+					if (aparelho.equals(aparelho1)) {
 						return aparelho1;
 					}
 				}
