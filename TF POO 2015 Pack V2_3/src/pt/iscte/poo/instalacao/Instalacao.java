@@ -10,6 +10,7 @@ import pt.iscte.poo.instalacao.aparelhos.Ligavel;
 import pt.iscte.poo.instalacao.enums.AparelhoEstado;
 import pt.iscte.poo.instalacao.enums.LinhaTomadaEstado;
 
+/** comment */
 public class Instalacao {
 
 	// ATTRIBUTES
