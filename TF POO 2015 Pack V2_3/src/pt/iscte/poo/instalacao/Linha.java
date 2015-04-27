@@ -2,6 +2,7 @@ package pt.iscte.poo.instalacao;
 
 import java.util.ArrayList;
 
+import pt.iscte.poo.instalacao.aparelhos.Tripla;
 import pt.iscte.poo.instalacao.enums.LinhaTomadaEstado;
 
 public class Linha {
@@ -10,6 +11,8 @@ public class Linha {
 	private String nome;
 	private LinhaTomadaEstado estadoLinha;
 	private ArrayList<Tomada> listaTomadas = new ArrayList<Tomada>();
+	
+	private ArrayList<Tripla> listaTriplas = new ArrayList<Tripla>();
 
 	// CONSTRUCTOR
 	public Linha(String nome) {
@@ -45,7 +48,7 @@ public class Linha {
 	}
 
 	/** Recebe um numero de tomadas inteiro e inicializa as listas desta linha */
-	public void instalarTomadas(int numeroTomadas) {
+	public void instalarTomadas(long numeroTomadas) {
 		for (int i = 0; i < numeroTomadas; i++) {
 			listaTomadas.add(new Tomada());
 		}
@@ -74,5 +77,12 @@ public class Linha {
 
 	public void setEstadoLinha(LinhaTomadaEstado estadoLinha) {
 		this.estadoLinha = estadoLinha;
+	}
+	
+	/** */
+	//2ºparte project
+	public void addTripla(Tripla t) {
+		listaTriplas.add(t);
+		listaTomadas.addAll(t.getListaTomadas());
 	}
 }

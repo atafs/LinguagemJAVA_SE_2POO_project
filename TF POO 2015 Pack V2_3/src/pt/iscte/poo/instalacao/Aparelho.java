@@ -1,5 +1,6 @@
 package pt.iscte.poo.instalacao;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import pt.iscte.poo.instalacao.aparelhos.Ligavel;
@@ -57,14 +58,8 @@ public abstract class Aparelho implements Ligavel, Variavel {
 	 */
 	public static Ligavel novoAparelho(JSONObject obj) {
 
-		String tipo = (String) obj.get("tipo");
-		String id = (String) obj.get("id");
-
-		// NOVO APARELHO POTENCIA
-		double potencia = NovoAparelho_Tipo.selecionaNovoAparelhoPotencia(obj);
-
 		// NOVO APARELHO TIPO
-		return NovoAparelho_Tipo.selecionaNovoAparelho(tipo, id, potencia);
+		return NovoAparelho_Tipo.selecionaNovoAparelho(obj);
 	}
 
 	// INTERFACES METHODS
@@ -119,7 +114,7 @@ public abstract class Aparelho implements Ligavel, Variavel {
 			this.potenciaActual = 0;
 		}
 	}
-
+	
 	// GETTERS AND SETTERS
 	public String getId() {
 		return nome;

@@ -1,16 +1,21 @@
 package pt.iscte.poo.instalacao.enums;
 
+import java.util.ArrayList;
+
 import org.json.simple.JSONObject;
 
 import pt.iscte.poo.instalacao.aparelhos.Computador;
 import pt.iscte.poo.instalacao.aparelhos.Frigorifico;
 import pt.iscte.poo.instalacao.aparelhos.Lampada;
+import pt.iscte.poo.instalacao.aparelhos.LampadaVariavel;
 import pt.iscte.poo.instalacao.aparelhos.Ligavel;
+import pt.iscte.poo.instalacao.aparelhos.MaquinaLavarLoica;
 import pt.iscte.poo.instalacao.aparelhos.MicroOndas;
 import pt.iscte.poo.instalacao.aparelhos.Torradeira;
+import pt.iscte.poo.instalacao.aparelhos.Tripla;
 
 public enum NovoAparelho_Tipo {
-	COMPUTADOR("computador"), FRIGORIFICO("frigorifico"), LAMPADA("lampada"), MICRO_ONDAS("microOndas"), TORRADEIRA("torradeira"), OTHERS("porCriar");;
+	LAMPADA_VARIAVEL("lampadaVariavel"), MAQ_LAVAR_ROUPA("maqLavarRoupa"), TRIPLA("tripla"), COMPUTADOR("computador"), FRIGORIFICO("frigorifico"), LAMPADA("lampada"), MICRO_ONDAS("microOndas"), TORRADEIRA("torradeira"), OTHERS("porCriar");;
 	
 	// ATTRIBUTES
 	private String text;
@@ -49,8 +54,15 @@ public enum NovoAparelho_Tipo {
 	
 	// STATIC METHOD (from the class, not the instance)
 	/** Seleccao do novo aparelho */
-	public static Ligavel selecionaNovoAparelho(String tipo, String id, double potencia) {
+	public static Ligavel selecionaNovoAparelho(JSONObject obj) {
 
+		//JSONObject attributes
+		String tipo = (String) obj.get("tipo");
+		String id = (String) obj.get("id");
+		//programas
+		double potencia = selecionaNovoAparelhoPotencia(obj);
+		
+		
 		// .toUpperCase() lets you select type and still match
 		String tipoUpperCase = tipo.toUpperCase();
 		try {
@@ -58,6 +70,41 @@ public enum NovoAparelho_Tipo {
 			NovoAparelho_Tipo novo = NovoAparelho_Tipo.valueOf(tipoUpperCase);
 
 			switch (novo) {
+			case LAMPADA_VARIAVEL:
+				LampadaVariavel lampadaVariavel = new LampadaVariavel(id, potencia);	
+				lampadaVariavel.setTipoAparelho(novo);
+				lampadaVariavel.setPotenciaAparelho(novoAparelhoPotencia);
+				
+//				//TO DELETE
+//				Instalacao.getInstanciaUnica().ligaAparelhoATomadaLivre(Instalacao.getInstanciaUnica().getListLinhas().get(2).getNome(), lampadaVariavel);
+//				lampadaVariavel.aumenta(100);
+//				lampadaVariavel.liga();
+				
+			case MAQ_LAVAR_ROUPA:
+				MaquinaLavarLoica maqLavarLoica = new MaquinaLavarLoica(id, potencia);
+				maqLavarLoica.setTipoAparelho(novo);
+				maqLavarLoica.setPotenciaAparelho(novoAparelhoPotencia);
+				
+				//class Programa
+				//class Ciclo
+				if (obj.get("highTemp").equals(MaqLavarLoicaEstado.HIGH_TEMP.toString())) {
+					//fazer algo
+				}
+				else if(obj.get("lowTemp").equals(MaqLavarLoicaEstado.LOW_TEMP.toString())) {
+					//fazer algo
+				}
+				
+//				//TO DELETE
+//				Instalacao.getInstanciaUnica().ligaAparelhoATomadaLivre(Instalacao.getInstanciaUnica().getListLinhas().get(2).getNome(), maqLavarLoica);
+//				maqLavarLoica.aumenta(100);
+//				maqLavarLoica.liga();
+				
+			case TRIPLA:
+				long nTomadas = (long) obj.get("nTomadas");
+				Tripla tripla = new Tripla(id, potencia, nTomadas);
+				tripla.setTipoAparelho(novo);
+				tripla.setPotenciaAparelho(novoAparelhoPotencia);
+			
 			case COMPUTADOR:
 				Computador computador = new Computador(id, potencia);
 				computador.setTipoAparelho(novo);

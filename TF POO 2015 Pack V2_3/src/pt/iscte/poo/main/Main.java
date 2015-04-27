@@ -28,12 +28,14 @@ public class Main {
 			instalacao.addObserver(grafico);
 
 			JSONArray objectos = (JSONArray) json.parse(new BufferedReader(new FileReader("instalacao.json")));
+			
 			//TO CREATE
 			instalacao.init(objectos);
-
+			
 			JSONArray listaAparelhos = (JSONArray) json.parse(new BufferedReader(new FileReader("aparelhos.json")));
 			//TO CREATE
 			List<Ligavel> aparelhos = instalacao.lerAparelhos(listaAparelhos);
+			//System.out.println("I AM HERE");
 			
 			JSONArray listaLigacoes = (JSONArray) json.parse(new BufferedReader(new FileReader("ligacoes.json")));
 			//TO CREATE

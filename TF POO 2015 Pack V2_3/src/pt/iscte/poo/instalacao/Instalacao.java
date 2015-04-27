@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import pt.iscte.poo.graficos.Chart;
 import pt.iscte.poo.instalacao.aparelhos.Ligavel;
@@ -65,7 +66,7 @@ public class Instalacao {
 	 * de linhas.
 	 * 
 	 */
-	public void novaLinha(String string, int i) {
+	public void novaLinha(String string, long i) {
 		Linha linha = new Linha(string);
 		linha.instalarTomadas(i);
 		listLinhas.add(linha);
@@ -165,11 +166,6 @@ public class Instalacao {
 	}
 	
 	/** */
-	public void init(JSONArray objectos){
-		
-	}
-	
-	/** */
 	public List<Ligavel> lerAparelhos(JSONArray listaAparelhos){
 		
 		//INITIALZE
@@ -177,6 +173,22 @@ public class Instalacao {
 		
 		//RETURN
 		return aparelhos;
+	}
+	
+	/** */
+	//OBJ: criar instalacao
+	public void init(JSONArray objectos){
+		
+		for(Object object: objectos) {
+			JSONObject obj = (JSONObject) object;
+			
+			//LE DO JSONObject NOME E NUM_TOMADAS
+			String nome = (String) obj.get("nome");
+			long tomadas = (long) obj.get("tomadas");
+			
+			novaLinha(nome, tomadas);
+			//Aparelho.novoAparelho(obj);
+		}
 	}
 	
 	/** */
@@ -193,4 +205,5 @@ public class Instalacao {
 	public void simula(long fim){
 		
 	}
+	
 }
