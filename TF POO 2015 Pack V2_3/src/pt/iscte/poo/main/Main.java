@@ -17,6 +17,7 @@ import pt.iscte.poo.instalacao.aparelhos.Ligavel;
 
 public class Main {
 
+	//MAIN
 	public static void main(String[] args) {
 		JSONParser json = new JSONParser();
 		try {
