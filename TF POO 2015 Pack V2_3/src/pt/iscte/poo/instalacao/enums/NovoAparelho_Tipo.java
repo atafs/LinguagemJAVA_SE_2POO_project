@@ -1,9 +1,7 @@
 package pt.iscte.poo.instalacao.enums;
 
 import java.util.ArrayList;
-
 import org.json.simple.JSONObject;
-
 import pt.iscte.poo.instalacao.aparelhos.Computador;
 import pt.iscte.poo.instalacao.aparelhos.Frigorifico;
 import pt.iscte.poo.instalacao.aparelhos.Lampada;

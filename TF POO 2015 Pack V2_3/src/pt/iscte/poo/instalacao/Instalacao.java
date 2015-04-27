@@ -15,7 +15,10 @@ public class Instalacao {
 
 	// ATTRIBUTES
 	private static Instalacao instance = null;
+	
+	//LISTS
 	private ArrayList<Linha> listLinhas;
+	private List<Ligavel> ligaveis = new ArrayList<>();
 
 	// private Aparelho aparelho;
 
@@ -166,13 +169,14 @@ public class Instalacao {
 	}
 	
 	/** */
-	public List<Ligavel> lerAparelhos(JSONArray listaAparelhos){
+	public List<Ligavel> lerAparelhos(JSONArray aparelhos){
 		
-		//INITIALZE
-		List<Ligavel> aparelhos = new ArrayList<>();
-		
-		//RETURN
-		return aparelhos;
+		for(Object object: aparelhos) {
+			JSONObject obj = (JSONObject) object;
+			//ADD TO LIST
+			ligaveis.add(Aparelho.novoAparelho(obj));	
+		}
+		return ligaveis;
 	}
 	
 	/** */
