@@ -73,6 +73,11 @@ public class Instalacao {
 		Linha linha = new Linha(string);
 		linha.instalarTomadas(i);
 		listLinhas.add(linha);
+		
+		//TO DELETE
+		System.out.println(linha.getNome());
+		System.out.println(linha.getEstadoLinha());
+		System.out.println(linha.getListaTomadas().toString());
 	}
 
 	/** */
@@ -85,7 +90,7 @@ public class Instalacao {
 						toReturn = tomada.getNome();
 						return toReturn;
 					} else {
-						System.out.println("ERROR: NENHUMA TOMADA ESTA LIVRE");
+						System.out.println("ERROR -> NENHUMA TOMADA ESTA LIVRE");
 					}
 				}
 			}
@@ -129,7 +134,7 @@ public class Instalacao {
 						// ASSUMIR QUE SO EXISTE UM APARELHO POR TOMADA
 						// (estados)
 						tomada.setEstadoLinha(LinhaTomadaEstado.BEING_USED_ONE_PLUGIN);
-						aparelho.setEstadoAparelho(AparelhoEstado.STAND_BY);
+						aparelho.setEstadoAparelho(AparelhoEstado.EM_ESPERA);
 						// GUARDAR EM QUE TOMADA O APARELHO ESTA LIGADO
 						aparelho.setTomada(tomada);
 						// ADICIONAR A TOMADA
@@ -196,8 +201,12 @@ public class Instalacao {
 	}
 	
 	/** */
-	public void lerLigacoes(JSONArray listaLigacoes, List<Ligavel> aparelhos){
+	public void lerLigacoes(JSONArray listaLigacoes, List<Ligavel> ligaveis){
 		
+		for(Object object: listaLigacoes) {
+			JSONObject obj = (JSONObject) object;
+			
+		}
 	}
 	
 	/** */
@@ -207,6 +216,12 @@ public class Instalacao {
 	
 	/** */
 	public void simula(long fim){
+		
+		//START THE CLOCK
+		int t;
+		for (t = 0; t != fim; t++) {
+			Relogio.getInstanciaUnica().tique();
+		}
 		
 	}
 	

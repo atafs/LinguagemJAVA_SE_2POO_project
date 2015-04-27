@@ -1,8 +1,6 @@
 package pt.iscte.poo.instalacao;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-
 import pt.iscte.poo.instalacao.aparelhos.Ligavel;
 import pt.iscte.poo.instalacao.enums.AparelhoEstado;
 import pt.iscte.poo.instalacao.enums.NovoAparelho_Potencia;
@@ -69,19 +67,19 @@ public abstract class Aparelho implements Ligavel, Variavel {
 	 */
 	@Override
 	public void liga() {
-		estadoAparelho = AparelhoEstado.ON;
+		estadoAparelho = AparelhoEstado.LIGA;
 	}
 
 	/** DESCRICAO: mudo o estado do aparelho para OFF */
 	@Override
 	public void desliga() {
-		estadoAparelho = AparelhoEstado.OFF;
+		estadoAparelho = AparelhoEstado.DESLIGA;
 	}
 
 	@Override
 	public boolean estaLigado() {
 		// Se o aparelho estiver ON, return true
-		return (estadoAparelho == AparelhoEstado.ON);
+		return (estadoAparelho == AparelhoEstado.LIGA);
 	}
 
 	/**

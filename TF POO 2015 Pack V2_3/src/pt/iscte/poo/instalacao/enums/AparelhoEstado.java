@@ -9,9 +9,11 @@ public enum AparelhoEstado {
 	
 	//STATUS
 	/** INSERT DIFERENT STATES IN THE DEVICES
-	 * ON = is consuming energy
-	 * STAND_BY = is plugged in but no consuming
-	 * OFF = is not plugged in */
-	ON, STAND_BY, OFF
+	 * LIGA = is consuming energy
+	 * AUMENTA = the power s increased
+	 * PROGRAMA: it will run a washing machine program (with several states and powers associated)
+	 * EM_ESPERA = is plugged in but no consuming
+	 * DESLIGA = is not plugged in */
+	LIGA, AUMENTA, PROGRAMA, EM_ESPERA, DESLIGA
 
 }

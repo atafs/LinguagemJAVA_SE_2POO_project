@@ -17,7 +17,7 @@ import pt.iscte.poo.instalacao.aparelhos.Ligavel;
 
 public class Main {
 
-	//MAIN test2 ;-)
+	//MAIN ;-)
 	public static void main(String[] args) {
 		JSONParser json = new JSONParser();
 		try {
@@ -30,17 +30,17 @@ public class Main {
 
 			JSONArray objectos = (JSONArray) json.parse(new BufferedReader(new FileReader("instalacao.json")));
 			
-			//TO CREATE
 			instalacao.init(objectos);
 			
+//			//TO DELETE
+//			System.out.println("I AM HERE");
+			
 			JSONArray listaAparelhos = (JSONArray) json.parse(new BufferedReader(new FileReader("aparelhos.json")));
-			//TO CREATE
 			List<Ligavel> aparelhos = instalacao.lerAparelhos(listaAparelhos);
-			//System.out.println("I AM HERE");
 			
 			JSONArray listaLigacoes = (JSONArray) json.parse(new BufferedReader(new FileReader("ligacoes.json")));
 			//TO CREATE
-			instalacao.lerLigacoes(listaLigacoes, aparelhos);			
+			instalacao.lerLigacoes(listaLigacoes, aparelhos);	
 			
 			JSONArray listaEventos = (JSONArray) json.parse(new BufferedReader(new FileReader("eventos.json")));
 			//TO CREATE
@@ -49,8 +49,10 @@ public class Main {
 			long fim = Long.valueOf(JOptionPane.showInputDialog("Please enter the end time"));
 			
 			grafico.setVisible(true);
-			//TO CREATE
 			instalacao.simula(fim);
+			
+			//TO DELETE
+			System.err.println("END WITH SUCCESS!!!");
 
 		} catch (IOException e) {
 			e.printStackTrace();

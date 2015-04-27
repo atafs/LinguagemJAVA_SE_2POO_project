@@ -14,7 +14,7 @@ public abstract class AparelhoPotenciaFixa extends Aparelho{
 
 	@Override
 	public double potenciaAtual() {
-		if (super.getEstadoAparelho() == AparelhoEstado.ON) {
+		if (super.getEstadoAparelho() == AparelhoEstado.LIGA) {
 			super.setPotenciaActual(super.potenciaMaxima());
 		}
 		return super.potenciaActual();
