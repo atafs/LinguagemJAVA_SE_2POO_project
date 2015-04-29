@@ -74,10 +74,10 @@ public class Instalacao {
 		linha.instalarTomadas(i);
 		listLinhas.add(linha);
 		
-		//TO DELETE
-		System.out.println(linha.getNome());
-		System.out.println(linha.getEstadoLinha());
-		System.out.println(linha.getListaTomadas().toString());
+//		//TO DELETE
+//		System.out.println(linha.getNome());
+//		System.out.println(linha.getEstadoLinha());
+//		System.out.println(linha.getListaTomadas().toString());
 	}
 
 	/** */
@@ -206,7 +206,15 @@ public class Instalacao {
 		for(Object object: listaLigacoes) {
 			JSONObject obj = (JSONObject) object;
 			
+			//JSONObject attributes
+			String linha = (String) obj.get("ligadoA");
+			
+			//SEARCH FOR APAELHO
+			Aparelho aparelho = (Aparelho)Aparelho.novoAparelho(obj);
+			ligaAparelhoATomadaLivre(linha, aparelho); 
 		}
+		
+
 	}
 	
 	/** */

@@ -12,7 +12,9 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import pt.iscte.poo.graficos.Chart;
+import pt.iscte.poo.instalacao.Aparelho;
 import pt.iscte.poo.instalacao.Instalacao;
+import pt.iscte.poo.instalacao.Linha;
 import pt.iscte.poo.instalacao.aparelhos.Ligavel;
 
 public class Main {
@@ -29,18 +31,23 @@ public class Main {
 			instalacao.addObserver(grafico);
 
 			JSONArray objectos = (JSONArray) json.parse(new BufferedReader(new FileReader("instalacao.json")));
-			
 			instalacao.init(objectos);
-			
-//			//TO DELETE
-//			System.out.println("I AM HERE");
 			
 			JSONArray listaAparelhos = (JSONArray) json.parse(new BufferedReader(new FileReader("aparelhos.json")));
 			List<Ligavel> aparelhos = instalacao.lerAparelhos(listaAparelhos);
 			
+//			//TO DELETE
+//			for (Ligavel ligavel : aparelhos) {
+//				System.out.println(ligavel.toString());
+//			}
+			
 			JSONArray listaLigacoes = (JSONArray) json.parse(new BufferedReader(new FileReader("ligacoes.json")));
-			//TO CREATE
 			instalacao.lerLigacoes(listaLigacoes, aparelhos);	
+			
+			//TO DELETE
+			for (Linha linha : instalacao.getListLinhas()) {
+				System.out.println(linha.toString());
+			}
 			
 			JSONArray listaEventos = (JSONArray) json.parse(new BufferedReader(new FileReader("eventos.json")));
 			//TO CREATE
