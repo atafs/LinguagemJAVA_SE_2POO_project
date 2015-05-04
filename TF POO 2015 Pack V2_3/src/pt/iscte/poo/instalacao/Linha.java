@@ -9,9 +9,9 @@ public class Linha {
 
 	// ATTRIBUTES
 	private String nome;
+	private long numeroTomadas;
 	private LinhaTomadaEstado estadoLinha;
 	private ArrayList<Tomada> listaTomadas = new ArrayList<Tomada>();
-	
 	private ArrayList<Tripla> listaTriplas = new ArrayList<Tripla>();
 
 	// CONSTRUCTOR
@@ -25,9 +25,10 @@ public class Linha {
 	@Override
 	public String toString() {
 		String toReturn = "";
-		toReturn = "nome: " + nome;
-		toReturn = "estadoLinha: " + estadoLinha;
-		toReturn = "listaTomadas: " + listaTomadas;
+		toReturn += "Nome: " + nome;
+		toReturn += ", NumeroTomadas: " + numeroTomadas;
+		toReturn += ", EstadoLinha: " + estadoLinha;
+		toReturn += ", ListaTomadas: " + listaTomadas;
 		return toReturn;
 	}
 
@@ -79,10 +80,20 @@ public class Linha {
 		this.estadoLinha = estadoLinha;
 	}
 	
+	public long getNumeroTomadas() {
+		return numeroTomadas;
+	}
+
+	public void setNumeroTomadas(long numeroTomadas) {
+		this.numeroTomadas = numeroTomadas;
+	}
+	
 	/** */
 	//2ºparte project
 	public void addTripla(Tripla t) {
 		listaTriplas.add(t);
 		listaTomadas.addAll(t.getListaTomadas());
 	}
+
+
 }

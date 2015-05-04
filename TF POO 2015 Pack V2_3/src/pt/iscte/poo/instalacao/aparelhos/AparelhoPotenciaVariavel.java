@@ -1,7 +1,9 @@
 package pt.iscte.poo.instalacao.aparelhos;
 
+import org.json.simple.JSONObject;
+
 import pt.iscte.poo.instalacao.Aparelho;
-import pt.iscte.poo.instalacao.enums.NovoAparelho_Potencia;
+import pt.iscte.poo.instalacao.enums.Ligavel_Potencia;
 
 public abstract class AparelhoPotenciaVariavel extends Aparelho {
 
@@ -10,7 +12,13 @@ public abstract class AparelhoPotenciaVariavel extends Aparelho {
 		super(nome, potenciaMaxima);
 		//ALWAYS START WITH ZERO POWER
 		super.setPotenciaActual(0.0);
-		super.setPotenciaAparelho(NovoAparelho_Potencia.POTENCIA);
+		super.setPotenciaAparelho(Ligavel_Potencia.POTENCIA);
+	}
+	
+	//OVERLOAD
+	public AparelhoPotenciaVariavel(JSONObject obj) {
+		super((String)obj.get("id"), (double)obj.get("potencia"));
+		super.setPotenciaAparelho(Ligavel_Potencia.POTENCIA);
 	}
 
 	@Override
