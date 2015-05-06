@@ -22,6 +22,10 @@ public class Tripla implements Ligavel {
 	private Tomada tomada = null;
 	// LISTS
 	private ArrayList<Tomada> listaTomadas = new ArrayList<Tomada>();
+	
+	// GUARDAR TEMPOS DE INICIO E FIM
+	private long tempoInicio;
+	private long tempoFim;
 
 
 	//CONSTRUCTOR
@@ -64,6 +68,8 @@ public class Tripla implements Ligavel {
 		toReturn += "\n-> TIPO ESTADO: " + this.estadoTripla;
 		toReturn += "\n-> TIPO TRIPLA: " + this.tipoTripla.toString();
 		toReturn += "\n-> TIPO POTENCIA: " + this.potenciaTripla;
+		toReturn += "\n-> TEMPO INICIAL: " + this.tempoInicio;
+		toReturn += "\n-> TEMPO FINAL: " + this.tempoFim;
 		toReturn += "\n";
 		return toReturn;
 	}
@@ -127,6 +133,22 @@ public class Tripla implements Ligavel {
 
 	public void setnTomadas(long nTomadas) {
 		this.nTomadas = nTomadas;
+	}
+	
+	public long getTempoFim() {
+		return tempoFim;
+	}
+
+	public void setTempoFim(long tempoFim) {
+		this.tempoFim = tempoFim;
+	}
+
+	public long getTempoInicio() {
+		return tempoInicio;
+	}
+
+	public void setTempoInicio(long tempoInicio) {
+		this.tempoInicio = tempoInicio;
 	}
 
 	@Override

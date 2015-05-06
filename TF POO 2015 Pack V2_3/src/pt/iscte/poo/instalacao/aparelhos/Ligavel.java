@@ -40,6 +40,17 @@ public interface Ligavel {
 	/** */
 	public Ligavel_Potencia getPotenciaAparelho();
 	
+	//
+	/** */
+	public String toString();
+	
+	/** */
+	public long getTempoInicio();
+	public void setTempoInicio(long tempo);
+	
+	public long getTempoFim();
+	public void setTempoFim(long tempo);
+	
 
 
 	

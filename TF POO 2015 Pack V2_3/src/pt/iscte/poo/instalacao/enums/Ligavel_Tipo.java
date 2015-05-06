@@ -1,13 +1,6 @@
 package pt.iscte.poo.instalacao.enums;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.json.simple.JSONObject;
-
-import com.sun.javafx.fxml.builder.TriangleMeshBuilder;
-
-import pt.iscte.poo.instalacao.Aparelho;
 import pt.iscte.poo.instalacao.aparelhos.Computador;
 import pt.iscte.poo.instalacao.aparelhos.Frigorifico;
 import pt.iscte.poo.instalacao.aparelhos.Lampada;
@@ -25,10 +18,6 @@ public enum Ligavel_Tipo {
 	private String text;
 	private static Ligavel_Potencia novoAparelhoPotencia;
 	
-	//TEST LISTS
-	private static List<Aparelho> aparelhos = new ArrayList<Aparelho>();
-	private static List<Tripla> triplasLista = new ArrayList<Tripla>();
-
 	// CONSTRUCTOR
 	private Ligavel_Tipo(String text) {
 		this.text = text;
@@ -84,7 +73,6 @@ public enum Ligavel_Tipo {
 				lampadaVariavel.setEstadoAparelho(LigavelEstado.DESLIGA);
 				lampadaVariavel.setTipoAparelho(novo);
 				lampadaVariavel.setPotenciaAparelho(novoAparelhoPotencia);
-				aparelhos.add(lampadaVariavel);
 				//System.out.print(lampadaVariavel.getTipoAparelho());
 				return lampadaVariavel;
 				
@@ -98,7 +86,6 @@ public enum Ligavel_Tipo {
 				maqLavarRoupa.setEstadoAparelho(LigavelEstado.DESLIGA);
 				maqLavarRoupa.setTipoAparelho(novo);
 				maqLavarRoupa.setPotenciaAparelho(novoAparelhoPotencia);
-				aparelhos.add(maqLavarRoupa);
 //				//class Programa
 //				//class Ciclo
 //				MaqLavarRoupaEstado.executaPrograma(obj);
@@ -119,7 +106,6 @@ public enum Ligavel_Tipo {
 				tripla.setTipoTripla(novo);
 				tripla.setPotenciaTripla(novoAparelhoPotencia);
 				//System.out.print(tripla.getTipoAparelho());
-				triplasLista.add(tripla);
 				return tripla;
 			
 			case COMPUTADOR:
@@ -127,7 +113,7 @@ public enum Ligavel_Tipo {
 				computador.setEstadoAparelho(LigavelEstado.DESLIGA);
 				computador.setTipoAparelho(novo);
 				computador.setPotenciaAparelho(novoAparelhoPotencia);
-				aparelhos.add(computador);
+			
 //				//TO DELETE
 //				Instalacao.getInstanciaUnica().ligaAparelhoATomadaLivre(Instalacao.getInstanciaUnica().getListLinhas().get(2).getNome(), computador);
 //				computador.liga();
@@ -138,7 +124,7 @@ public enum Ligavel_Tipo {
 				frigorifico.setEstadoAparelho(LigavelEstado.DESLIGA);
 				frigorifico.setTipoAparelho(novo);
 				frigorifico.setPotenciaAparelho(novoAparelhoPotencia);
-				aparelhos.add(frigorifico);
+			
 //				//TO DELETE
 //				Instalacao.getInstanciaUnica().ligaAparelhoATomadaLivre(Instalacao.getInstanciaUnica().getListLinhas().get(2).getNome(), frigorifico);
 //				frigorifico.aumenta(100);
@@ -151,7 +137,6 @@ public enum Ligavel_Tipo {
 				lampada.setTipoAparelho(novo);
 				lampada.setPotenciaAparelho(novoAparelhoPotencia);
 				//System.out.print(lampada.getTipoAparelho());
-				aparelhos.add(lampada);
 				return lampada;
 				
 			case MICROONDAS:
@@ -160,7 +145,6 @@ public enum Ligavel_Tipo {
 				microOndas.setTipoAparelho(novo);
 				microOndas.setPotenciaAparelho(novoAparelhoPotencia);
 				//System.out.print(microOndas.getTipoAparelho());
-				aparelhos.add(microOndas);
 				return microOndas;
 				
 			case TORRADEIRA:
@@ -169,7 +153,6 @@ public enum Ligavel_Tipo {
 				torradeira.setTipoAparelho(novo);
 				torradeira.setPotenciaAparelho(novoAparelhoPotencia);
 				//System.out.print(torradeira.getTipoAparelho());
-				aparelhos.add(torradeira);
 				return torradeira;
 				
 			case OTHERS:
@@ -181,22 +164,4 @@ public enum Ligavel_Tipo {
 		}
 		return null;
 	}
-	
-	//GETTERS AND SETTERS
-	public static List<Aparelho> getAparelhos() {
-		return aparelhos;
-	}
-
-	public static void setAparelhos(List<Aparelho> aparelhos) {
-		Ligavel_Tipo.aparelhos = aparelhos;
-	}
-
-	public static List<Tripla> getTriplasLista() {
-		return triplasLista;
-	}
-
-	public static void setTriplasLista(List<Tripla> triplasLista) {
-		Ligavel_Tipo.triplasLista = triplasLista;
-	}
-
 }

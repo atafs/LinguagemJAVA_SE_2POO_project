@@ -11,7 +11,7 @@ public class MaquinaLavarRoupa extends AparelhoPotenciaVariavel {
 	//ATTRIBUTES
 	private ArrayList<Programa> programas = new ArrayList<Programa>();
 	private Programa programaSelecionado;
-	private MaqLavarRoupaEstado estado = MaqLavarRoupaEstado.STAND_BY; //by default
+	private MaqLavarRoupaEstado estado;
 	
 	//CONSTRUCTOR
 	public MaquinaLavarRoupa(String nome, double potenciaMaxima) {
@@ -21,7 +21,7 @@ public class MaquinaLavarRoupa extends AparelhoPotenciaVariavel {
 	public MaquinaLavarRoupa(JSONObject obj) {
 		super(obj);
 		
-		JSONArray tempPrograma = (JSONArray) obj.get("Programas");
+		JSONArray tempPrograma = (JSONArray) obj.get("programas");
 		for (Object o : tempPrograma) {
 			JSONObject p = (JSONObject) o;
 			programaSelecionado = null/*p.selecionado()*/;

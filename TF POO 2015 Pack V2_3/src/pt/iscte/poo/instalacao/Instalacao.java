@@ -18,7 +18,7 @@ import pt.iscte.poo.instalacao.ligacoes.Ligacao;
 
 public class Instalacao extends Observable {
 
-	// ATTRIBUTES
+	//ATTRIBUTES
 	private static Instalacao instance = null;
 	
 	//LISTS
@@ -163,7 +163,7 @@ public class Instalacao extends Observable {
 	 * aparelhos o respectivo.
 	 * 
 	 */
-	public void ligaAparelhoATomadaLivre(String name, Aparelho aparelho) {
+	public void ligaAparelhoATomadaLivre(String name, Ligavel ligavel) {
 		
 		// ADICIONA A LINHA name o APARELHO aparelho
 		for (Linha linha : listLinhas) {		
@@ -175,12 +175,23 @@ public class Instalacao extends Observable {
 						// ASSUMIR QUE SO EXISTE UM APARELHO POR TOMADA
 						// (estados)
 						tomada.setEstadoLinha(LinhaTomadaEstado.USED);
-						aparelho.setEstadoAparelho(LigavelEstado.EM_ESPERA);
-		
-						// GUARDAR EM QUE TOMADA O APARELHO ESTA LIGADO
-						aparelho.setTomada(tomada);
+						
 						// ADICIONAR A TOMADA
-						tomada.setLigavel(aparelho);
+						tomada.setLigavel(ligavel);
+						
+						//ADD TO LIST Ligavel
+						for (Ligavel ligavelTemp : ligaveis) {
+							///VERIFICA SE NA LIST Ligaveis EXISTE ESTA ENTRADA
+							if (ligavelTemp.equals(ligavel)) {
+								ligavel.setEstadoAparelho(LigavelEstado.EM_ESPERA);
+								// GUARDAR EM QUE TOMADA O APARELHO ESTA LIGADO
+								ligavel.setTomada(tomada);
+								
+								//TO DELETE
+								System.out.println("CLASS: Instalacao");
+								System.out.println("METHOD: ligaAparelhoATomadaLivre");
+							}
+						 }
 						//tomada.getListaAparelhos().add(aparelho);
 						
 						// LOOP LISTS aparelhos and triplasLista
@@ -307,17 +318,35 @@ public class Instalacao extends Observable {
 			// ADD TO LIST (extra)
 			Ligacao ligacao = new Ligacao(ligavel, linha);
 			ligacoes.add(ligacao);
+			
+			//LIGA APARELHO A TOMADA DE UMA LINHA
+			for (Ligacao ligacaoTemp1 : ligacoes) {
+				
+				//PERCORRER A LISTA DE LIGAVEIS
+				for (Ligavel ligavel2 : ligaveis) {
+					if (ligavel2.getId().equals(ligacaoTemp1.getAparelho())) {
+						ligaAparelhoATomadaLivre(ligacaoTemp1.getLigadoA(), ligavel2);
+						
+//						//TO DELETE
+//						System.out.println("List<Ligacao> ligacoes - "+ligacaoTemp1.getLigadoA());
+//						
+						//ERRO: nao consigo imprimir o Ligavel 
+//						System.err.println("List<Ligavel> ligaveis - "+ligavel2);
+					}
+				}
+				
+			}
 
-			// LOOP LISTS aparelhos and triplasLista
-			for (Aparelho aparelho : Ligavel_Tipo.getAparelhos()) {
-
-				// IF: STRING lig equals STRING ligavel
-				if (aparelho.getId().equals(ligavel)) {
+//			// LOOP LISTS aparelhos and triplasLista
+//			for (Aparelho aparelho : Ligavel_Tipo.getAparelhos()) {
+//
+//				// IF: STRING lig equals STRING ligavel
+//				if (aparelho.getId().equals(ligavel)) {
 
 					// KEEP STRING lig.getId(), APARELHO lig
-					ligaAparelhoATomadaLivre(linha, aparelho);
-				}
-			}
+//			ligaAparelhoATomadaLivre(linha, aparelho);
+//				}
+//			}
 			
 //			// LOOP LISTS aparelhos and triplasLista
 //			for (Tripla tripla : Ligavel_Tipo.getTriplasLista()) {
@@ -334,8 +363,8 @@ public class Instalacao extends Observable {
 		// TO DELETE
 		System.out.println("----------------PRINT_03_LIGACOES------------------");
 		// TO DELETE (print)
-		for (Ligacao ligacaoTemp : ligacoes) {
-			System.err.println(ligacaoTemp);
+		for (Ligacao ligacaoTemp2 : ligacoes) {
+			System.err.println(ligacaoTemp2);
 		}
 		
 //		System.out.println("----------------PRINT_04_TRIPLAS------------------");
@@ -375,6 +404,20 @@ public class Instalacao extends Observable {
 			//READ FROM JSON and SELECT ACTION
 			Evento evento = LigavelEstado.executaAccao(obj); //??? void, Ligavel,...	
 			eventos.add(evento);
+		}
+		
+		//LIGA LIGAVEL MUDANDO O ESTADO E REGISTANDO TEMPOS (inicio e fim)
+		for (Evento evento1 : eventos) {
+			//PERCORRER A LISTA DE LIGAVEIS
+			for (Ligavel ligavel2 : ligaveis) {
+				if (ligavel2.getId().equals(evento1.getIdAparelho())) {
+					//MUDAR ESTADO LIGAVEL E TEMPOS INICIO E FIM
+					ligavel2.setEstadoAparelho(evento1.getEstado());
+					ligavel2.setTempoInicio(Relogio.getInstanciaUnica().getCounter());
+					long fimContador = Relogio.getInstanciaUnica().getCounter() + evento1.getTempo();
+					ligavel2.setTempoFim(fimContador);
+				}
+			}
 		}
 		
 		//TO DELETE

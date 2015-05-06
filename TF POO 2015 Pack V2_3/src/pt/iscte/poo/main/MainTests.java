@@ -34,7 +34,7 @@ public class MainTests {
 			instalacao.init(objectos);
 			
 			// TO PRINT
-			 System.out.println("----------------PRINT_01_LINHAS------------------");
+			 System.out.println("----------------PRINT_01_LINHAS_DONE------------------");
 			 for (Linha linha : instalacao.getListLinhas()) {
 				 System.err.println(linha.toString());
 			 }
@@ -44,7 +44,7 @@ public class MainTests {
 			List<Ligavel> aparelhos = instalacao.lerAparelhos(listaAparelhos);
 
 			// TO PRINT
-			 System.out.println("----------------PRINT_02_APARELHOS------------------");
+			 System.out.println("----------------PRINT_02_APARELHOS_DONE------------------");
 			 for (Ligavel ligavel : aparelhos) {
 				 System.out.println(ligavel.toString());
 			 }
@@ -54,10 +54,31 @@ public class MainTests {
 			//TO CREATE
 			instalacao.lerLigacoes(listaLigacoes, aparelhos);
 
+			// TO PRINT
+			System.out.println("----------------PRINT_07_LIGACOES------------------");
+			for (Ligavel ligavel : instalacao.getLigaveis()) {
+				System.out.println("ligacao: " + ligavel.getId());
+				// System.out.println(ligavel.toString());
+				System.out.println("-> " + ligavel.getPotenciaAparelho());
+				System.out.println("-> " + ligavel.getTempoInicio());
+				System.out.println("-> " + ligavel.getTempoFim() + "\n");
+			}
+			 paragraph();
 			
 			JSONArray listaEventos = (JSONArray) json.parse(new BufferedReader(new FileReader("eventos.json")));
 			// TO CREATE
 			instalacao.lerEventos(listaEventos);
+			
+			// TO PRINT
+			 System.out.println("----------------PRINT_08_EVENTOS_TEMPOS------------------");
+			 for (Ligavel ligavel : instalacao.getLigaveis()) {
+				 System.out.println("evento: " + ligavel.getId());
+				 //System.out.println(ligavel.toString());
+				 System.out.println("-> " + ligavel.getPotenciaAparelho());
+				 System.out.println("-> " + ligavel.getTempoInicio());
+				 System.out.println("-> " + ligavel.getTempoFim() + "\n"); 
+			 }
+			 paragraph();
 
 			long fim = Long.valueOf(JOptionPane.showInputDialog("Please enter the end time"));
 
@@ -65,6 +86,7 @@ public class MainTests {
 			instalacao.simula(fim);
 
 			// TO DELETE
+			System.err.println("fim: " + fim + ";[unidades]");
 			System.err.println("END WITH SUCCESS!!!");
 
 		} catch (IOException e) {
