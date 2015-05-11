@@ -9,9 +9,7 @@ import org.json.simple.JSONObject;
 
 import pt.iscte.poo.graficos.Chart;
 import pt.iscte.poo.instalacao.aparelhos.Ligavel;
-import pt.iscte.poo.instalacao.aparelhos.Tripla;
 import pt.iscte.poo.instalacao.enums.LigavelEstado;
-import pt.iscte.poo.instalacao.enums.Ligavel_Tipo;
 import pt.iscte.poo.instalacao.enums.LinhaTomadaEstado;
 import pt.iscte.poo.instalacao.eventos.Evento;
 import pt.iscte.poo.instalacao.ligacoes.Ligacao;
@@ -114,9 +112,9 @@ public class Instalacao extends Observable {
 	 * de linhas.
 	 * 
 	 */
-	public void novaLinha(String string, long numeroTomadas) {
-		Linha linha = new Linha(string);
-		linha.setNumeroTomadas(numeroTomadas);
+	public void novaLinha(String string, int numeroTomadas) {
+		Linha linha = new Linha(string, numeroTomadas);
+		//linha.setNumeroTomadas(numeroTomadas);
 		linha.instalarTomadas(numeroTomadas);
 		listLinhas.add(linha);
 	}
@@ -163,6 +161,39 @@ public class Instalacao extends Observable {
 	 * aparelhos o respectivo.
 	 * 
 	 */
+	public void ligaAparelhoATomadaLivre(String name, Aparelho aparelho) {
+		
+		// ADICIONA A LINHA name o APARELHO aparelho
+		for (Linha linha : listLinhas) {		
+			// ASSUMIR QUE SO EXISTE UMA LINHA COM O MESMO NOME
+			if (linha.getNome().equals(name)) {		
+				for (Tomada tomada : linha.getListaTomadas()) {
+					// COLOCO NA PRIMEIRA TOMADA LIVRE
+					if (tomada.getEstadoLinha() == LinhaTomadaEstado.FREE) {
+						// ASSUMIR QUE SO EXISTE UM APARELHO POR TOMADA
+						// (estados)
+						tomada.setEstadoLinha(LinhaTomadaEstado.USED);
+						
+						// ADICIONAR A TOMADA
+						tomada.setAparelho(aparelho);//DA ERRO NO JUNIT... CAN BE DELETED
+						tomada.getListaAparelhos().add(aparelho);
+						
+						//ADD TO LIST Ligavel
+						for (Ligavel ligavelTemp : ligaveis) {
+							///VERIFICA SE NA LIST Ligaveis EXISTE ESTA ENTRADA
+							if (ligavelTemp.equals(aparelho)) {
+								aparelho.setEstadoAparelho(LigavelEstado.EM_ESPERA);
+//								// GUARDAR EM QUE TOMADA O APARELHO ESTA LIGADO
+//								aparelho.setTomada(tomada);
+							}
+						 }
+						return;
+					}
+				}
+			}
+		}
+	}
+	
 	public void ligaAparelhoATomadaLivre(String name, Ligavel ligavel) {
 		
 		// ADICIONA A LINHA name o APARELHO aparelho
@@ -184,25 +215,10 @@ public class Instalacao extends Observable {
 							///VERIFICA SE NA LIST Ligaveis EXISTE ESTA ENTRADA
 							if (ligavelTemp.equals(ligavel)) {
 								ligavel.setEstadoAparelho(LigavelEstado.EM_ESPERA);
-								// GUARDAR EM QUE TOMADA O APARELHO ESTA LIGADO
-								ligavel.setTomada(tomada);
-								
-								//TO DELETE
-								System.out.println("CLASS: Instalacao");
-								System.out.println("METHOD: ligaAparelhoATomadaLivre");
+//								// GUARDAR EM QUE TOMADA O APARELHO ESTA LIGADO
+//								ligavel.setTomada(tomada);
 							}
 						 }
-						//tomada.getListaAparelhos().add(aparelho);
-						
-						// LOOP LISTS aparelhos and triplasLista
-
-//						for (int i = 0; i < Ligavel_Tipo.getAparelhos().size(); i++) {
-//							// IF: STRING lig equals STRING ligavel
-//							if (Ligavel_Tipo.getAparelhos().get(i).equals(aparelho.getId())) {
-//								Ligavel_Tipo.getAparelhos().remove(i);    //remove old
-//								Ligavel_Tipo.getAparelhos().add(aparelho);//add new
-//							}
-//						}
 						return;
 					}
 				}
@@ -210,43 +226,6 @@ public class Instalacao extends Observable {
 		}
 	}
 	
-//	//OVERLOAD METHOD
-//	public void ligaAparelhoATomadaLivre(String name, Tripla tripla) {
-//		
-//		// ADICIONA A LINHA name o APARELHO aparelho
-//		for (Linha linha : listLinhas) {		
-//			// ASSUMIR QUE SO EXISTE UMA LINHA COM O MESMO NOME
-//			if (linha.getNome().equals(name)) {		
-//				for (Tomada tomada : linha.getListaTomadas()) {
-//					// COLOCO NA PRIMEIRA TOMADA LIVRE
-//					if (tomada.getEstadoLinha() == LinhaTomadaEstado.FREE) {
-//						// ASSUMIR QUE SO EXISTE UM APARELHO POR TOMADA
-//						// (estados)
-//						tomada.setEstadoLinha(LinhaTomadaEstado.USED);
-//						tripla.setEstadoAparelho(LigavelEstado.EM_ESPERA);
-//		
-//						// GUARDAR EM QUE TOMADA O APARELHO ESTA LIGADO
-//						tripla.setTomada(tomada);
-//						// ADICIONAR A TOMADA
-//						tomada.setLigavel(tripla);
-//						//tomada.getListaAparelhos().add(aparelho);
-//						
-//						// LOOP LISTS aparelhos and triplasLista
-//
-//						for (int i = 0; i < Ligavel_Tipo.getTriplasLista().size(); i++) {
-//							// IF: STRING lig equals STRING ligavel
-//							if (Ligavel_Tipo.getTriplasLista().get(i).equals(tripla.getId())) {
-//								Ligavel_Tipo.getTriplasLista().remove(i);    //remove old
-//								Ligavel_Tipo.getTriplasLista().add(tripla);//add new
-//							}
-//						}
-//						return;
-//					}
-//				}
-//			}
-//		}
-//	}
-
 	/** */
 	public void removeTodasAsLinhas() {
 		// REMOVE ALL
@@ -258,12 +237,11 @@ public class Instalacao extends Observable {
 
 		for (Linha linha : listLinhas) {
 			for (Tomada tomada : linha.getListaTomadas()) {
-				//for (Aparelho aparelho1 : tomada.getListaAparelhos()) {
-				if (aparelho.equals(tomada.getLigavel().getId() /*aparelho1.getId()*/ )) {
-					//return aparelho1;
-					return (Aparelho)tomada.getLigavel();
+				for (Aparelho aparelho1 : tomada.getListaAparelhos()) {
+					if (aparelho.equals(aparelho1.getId())) {
+						return aparelho1;
+					}
 				}
-				//}
 			}
 		}
 		return null;
@@ -297,7 +275,7 @@ public class Instalacao extends Observable {
 			
 			//LE DO JSONObject NOME E NUM_TOMADAS
 			String nome = (String) obj.get("nome");
-			long tomadas = (long) obj.get("tomadas");
+			int tomadas = (int)(long) obj.get("tomadas");
 			
 			novaLinha(nome, tomadas);
 			//Aparelho.novoAparelho(obj);
@@ -326,70 +304,11 @@ public class Instalacao extends Observable {
 				for (Ligavel ligavel2 : ligaveis) {
 					if (ligavel2.getId().equals(ligacaoTemp1.getAparelho())) {
 						ligaAparelhoATomadaLivre(ligacaoTemp1.getLigadoA(), ligavel2);
-						
-//						//TO DELETE
-//						System.out.println("List<Ligacao> ligacoes - "+ligacaoTemp1.getLigadoA());
-//						
-						//ERRO: nao consigo imprimir o Ligavel 
-//						System.err.println("List<Ligavel> ligaveis - "+ligavel2);
 					}
 				}
 				
 			}
-
-//			// LOOP LISTS aparelhos and triplasLista
-//			for (Aparelho aparelho : Ligavel_Tipo.getAparelhos()) {
-//
-//				// IF: STRING lig equals STRING ligavel
-//				if (aparelho.getId().equals(ligavel)) {
-
-					// KEEP STRING lig.getId(), APARELHO lig
-//			ligaAparelhoATomadaLivre(linha, aparelho);
-//				}
-//			}
-			
-//			// LOOP LISTS aparelhos and triplasLista
-//			for (Tripla tripla : Ligavel_Tipo.getTriplasLista()) {
-//
-//				// IF: STRING lig equals STRING ligavel
-//				if (tripla.getId().equals(ligavel)) {
-//
-//					// KEEP STRING lig.getId(), APARELHO lig
-//					ligaAparelhoATomadaLivre(linha, tripla);
-//				}
-//			}
-		}
-		
-		// TO DELETE
-		System.out.println("----------------PRINT_03_LIGACOES------------------");
-		// TO DELETE (print)
-		for (Ligacao ligacaoTemp2 : ligacoes) {
-			System.err.println(ligacaoTemp2);
-		}
-		
-//		System.out.println("----------------PRINT_04_TRIPLAS------------------");
-//		for (Tripla tripla : Ligavel_Tipo.getTriplasLista()) {
-//			System.out.println(tripla);
-//		}
-		
-//		System.out.println("----------------PRINT_05_APARELHOS------------------");
-//		for (Aparelho aparelho : Ligavel_Tipo.getAparelhos()) {
-//			System.out.println(aparelho);
-//		}
-			 
-			 
-			 
-//			 // LOOP LIST ligaveis
-//			for (Ligavel lig  : ligaveis) {
-//
-//				//IF: STRING lig equals STRING ligavel
-//				if (lig.getId().equals(ligavel)) {
-//					
-//					//KEEP STRING lig.getId(), APARELHO lig
-//					ligaAparelhoATomadaLivre(linha, lig);				
-//				}
-//			}
-		
+		}	
 	}
 	
 	/** */
@@ -413,9 +332,7 @@ public class Instalacao extends Observable {
 				if (ligavel2.getId().equals(evento1.getIdAparelho())) {
 					//MUDAR ESTADO LIGAVEL E TEMPOS INICIO E FIM
 					ligavel2.setEstadoAparelho(evento1.getEstado());
-					ligavel2.setTempoInicio(Relogio.getInstanciaUnica().getCounter());
-					long fimContador = Relogio.getInstanciaUnica().getCounter() + evento1.getTempo();
-					ligavel2.setTempoFim(fimContador);
+
 				}
 			}
 		}

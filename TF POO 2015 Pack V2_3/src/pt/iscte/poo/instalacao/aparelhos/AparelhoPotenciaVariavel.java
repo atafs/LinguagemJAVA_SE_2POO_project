@@ -17,8 +17,8 @@ public abstract class AparelhoPotenciaVariavel extends Aparelho {
 		super.setPotenciaAparelho(Ligavel_Potencia.POTENCIA);
 	}
 	
-	public AparelhoPotenciaVariavel(String nome, double potencia, double potenciaActual, LigavelEstado estadoAparelho, Ligavel_Tipo tipoAparelho, Ligavel_Potencia potenciaAparelho, long tempoInicio, long tempoFim) {
-		super(nome, potencia, potenciaActual, estadoAparelho, tipoAparelho, potenciaAparelho, tempoInicio, tempoFim);
+	public AparelhoPotenciaVariavel(String nome, double potencia, double potenciaActual, LigavelEstado estadoAparelho, Ligavel_Tipo tipoAparelho, Ligavel_Potencia potenciaAparelho) {
+		super(nome, potencia, potenciaActual, estadoAparelho, tipoAparelho, potenciaAparelho);
 		//ALWAYS START WITH ZERO POWER
 		super.setPotenciaActual(0.0);
 		super.setPotenciaAparelho(Ligavel_Potencia.POTENCIA);

@@ -29,6 +29,11 @@ public abstract class Evento {
 		return toReturn;
 	}
 	
+	//METHOD
+	public void executa() {
+		//...
+	}
+	
 	//GETTERS AND SETTERS
 	public String getAccao() {
 		return accao;

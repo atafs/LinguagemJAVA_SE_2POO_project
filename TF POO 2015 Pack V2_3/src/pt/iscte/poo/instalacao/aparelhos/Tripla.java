@@ -19,7 +19,8 @@ public class Tripla implements Ligavel {
 	private Ligavel_Tipo tipoTripla;
 	private Ligavel_Potencia potenciaTripla;
 	// APARELHO SABER A QUE TOMADA PERTENCE
-	private Tomada tomada = null;
+	//private Tomada tomada;
+	
 	// LISTS
 	private ArrayList<Tomada> listaTomadas = new ArrayList<Tomada>();
 	
@@ -63,7 +64,7 @@ public class Tripla implements Ligavel {
 		toReturn += "NOME: " + this.id;
 		toReturn += "\n-> POTENCIA MAX: " + potenciaMaxima;
 		toReturn += "\n-> POTENCIA ACTUAL: " + potenciaActual;
-		toReturn += "\n-> TOMADA NOME: " + tomada;
+//		toReturn += "\n-> TOMADA NOME: " + tomada;
 		toReturn += "\n-> TOMADA NUMERO: " + nTomadas;
 		toReturn += "\n-> TIPO ESTADO: " + this.estadoTripla;
 		toReturn += "\n-> TIPO TRIPLA: " + this.tipoTripla.toString();
@@ -123,13 +124,13 @@ public class Tripla implements Ligavel {
 		this.potenciaTripla = potenciaTripla;
 	}
 
-	public Tomada getTomada() {
-		return tomada;
-	}
-
-	public void setTomada(Tomada tomada) {
-		this.tomada = tomada;
-	}
+//	public Tomada getTomada() {
+//		return tomada;
+//	}
+//
+//	public void setTomada(Tomada tomada) {
+//		this.tomada = tomada;
+//	}
 
 	public void setnTomadas(long nTomadas) {
 		this.nTomadas = nTomadas;

@@ -27,8 +27,8 @@ public interface Ligavel {
 	/** */
 	public void setEstadoAparelho(LigavelEstado estadoAparelho);
 	
-	/** */
-	public void setTomada(Tomada tomada);
+//	/** */
+//	public void setTomada(Tomada tomada);
 	
 	//CLASS TOMADA
 	/** */
@@ -43,15 +43,5 @@ public interface Ligavel {
 	//
 	/** */
 	public String toString();
-	
-	/** */
-	public long getTempoInicio();
-	public void setTempoInicio(long tempo);
-	
-	public long getTempoFim();
-	public void setTempoFim(long tempo);
-	
-
-
 	
 }

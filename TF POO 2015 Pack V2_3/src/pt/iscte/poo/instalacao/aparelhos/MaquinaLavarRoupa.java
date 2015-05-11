@@ -1,17 +1,21 @@
 package pt.iscte.poo.instalacao.aparelhos;
 
 import java.util.ArrayList;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import pt.iscte.poo.instalacao.aparelhos.maq_lavar_loica.Programa;
+
+import pt.iscte.poo.instalacao.aparelhos.maq_lavar.Programa;
 import pt.iscte.poo.instalacao.enums.MaqLavarRoupaEstado;
 
 public class MaquinaLavarRoupa extends AparelhoPotenciaVariavel {
 
 	//ATTRIBUTES
 	private ArrayList<Programa> programas = new ArrayList<Programa>();
-	private Programa programaSelecionado;
+	private Programa programaSelecionado = null;
 	private MaqLavarRoupaEstado estado;
+	
+	
 	
 	//CONSTRUCTOR
 	public MaquinaLavarRoupa(String nome, double potenciaMaxima) {
@@ -32,7 +36,14 @@ public class MaquinaLavarRoupa extends AparelhoPotenciaVariavel {
 	
 	//METHOD
 	public void inicio(String p) {
-		//...
+		//String nome Programa
+		//se existir, guardo em Programa
+		
+		//int tempoInicial
+		//Relogio.getInstanciUnica = instanciaActual
+		//Ti Tf
+		
+		
 	}
 	
 	//GETTERS AND SETTERS

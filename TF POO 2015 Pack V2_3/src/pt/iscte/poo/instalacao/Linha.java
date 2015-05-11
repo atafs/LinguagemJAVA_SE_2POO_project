@@ -9,12 +9,20 @@ public class Linha {
 
 	// ATTRIBUTES
 	private String nome;
-	private long numeroTomadas;
+	private int numeroTomadas;
 	private LinhaTomadaEstado estadoLinha;
 	private ArrayList<Tomada> listaTomadas = new ArrayList<Tomada>();
 	private ArrayList<Tripla> listaTriplas = new ArrayList<Tripla>();
 
 	// CONSTRUCTOR
+	public Linha(String nome, int nTomadas) {
+		this.nome = nome;
+		this.numeroTomadas = nTomadas;
+		this.estadoLinha = LinhaTomadaEstado.FREE;
+		this.listaTomadas = new ArrayList<Tomada>();
+	}
+
+	
 	public Linha(String nome) {
 		this.nome = nome;
 		this.estadoLinha = LinhaTomadaEstado.FREE;
@@ -84,7 +92,7 @@ public class Linha {
 		return numeroTomadas;
 	}
 
-	public void setNumeroTomadas(long numeroTomadas) {
+	public void setNumeroTomadas(int numeroTomadas) {
 		this.numeroTomadas = numeroTomadas;
 	}
 	

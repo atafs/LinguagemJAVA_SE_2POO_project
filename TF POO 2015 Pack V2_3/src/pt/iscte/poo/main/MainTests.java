@@ -57,27 +57,30 @@ public class MainTests {
 			// TO PRINT
 			System.out.println("----------------PRINT_07_LIGACOES------------------");
 			for (Ligavel ligavel : instalacao.getLigaveis()) {
-				System.out.println("ligacao: " + ligavel.getId());
-				// System.out.println(ligavel.toString());
-				System.out.println("-> " + ligavel.getPotenciaAparelho());
-				System.out.println("-> " + ligavel.getTempoInicio());
-				System.out.println("-> " + ligavel.getTempoFim() + "\n");
+				System.err.println("ligacao: " + ligavel.getId());
+				System.err.println("-> " + ligavel.getPotenciaAparelho());
+				
 			}
-			 paragraph();
-			
+			 paragraph();		 
+			 
 			JSONArray listaEventos = (JSONArray) json.parse(new BufferedReader(new FileReader("eventos.json")));
 			// TO CREATE
 			instalacao.lerEventos(listaEventos);
 			
 			// TO PRINT
-			 System.out.println("----------------PRINT_08_EVENTOS_TEMPOS------------------");
-			 for (Ligavel ligavel : instalacao.getLigaveis()) {
-				 System.out.println("evento: " + ligavel.getId());
-				 //System.out.println(ligavel.toString());
-				 System.out.println("-> " + ligavel.getPotenciaAparelho());
-				 System.out.println("-> " + ligavel.getTempoInicio());
-				 System.out.println("-> " + ligavel.getTempoFim() + "\n"); 
+			 System.out.println("----------------PRINT:LINHA DE NOVO------------------");
+			 for (Linha linha : instalacao.getListLinhas()) {
+				 System.err.println(linha.toString());
 			 }
+			 paragraph();
+			
+			// TO PRINT
+			System.out.println("----------------PRINT_08_EVENTOS_TEMPOS------------------");
+			for (Ligavel ligavel : instalacao.getLigaveis()) {
+				System.out.println("evento: " + ligavel.getId());
+				// System.out.println(ligavel.toString());
+				System.out.println("-> " + ligavel.getPotenciaAparelho());
+			}
 			 paragraph();
 
 			long fim = Long.valueOf(JOptionPane.showInputDialog("Please enter the end time"));

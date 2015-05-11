@@ -15,8 +15,8 @@ public abstract class AparelhoPotenciaFixa extends Aparelho{
 		super.setPotenciaAparelho(Ligavel_Potencia.POTENCIA_MAXIMA);
 	}
 	
-	public AparelhoPotenciaFixa(String nome, double potencia, double potenciaActual, LigavelEstado estadoAparelho, Ligavel_Tipo tipoAparelho, Ligavel_Potencia potenciaAparelho, long tempoInicio, long tempoFim) {
-		super(nome, potencia, potenciaActual, estadoAparelho, tipoAparelho, potenciaAparelho, tempoInicio, tempoFim);
+	public AparelhoPotenciaFixa(String nome, double potencia, double potenciaActual, LigavelEstado estadoAparelho, Ligavel_Tipo tipoAparelho, Ligavel_Potencia potenciaAparelho) {
+		super(nome, potencia, potenciaActual, estadoAparelho, tipoAparelho, potenciaAparelho);
 		super.setPotenciaAparelho(Ligavel_Potencia.POTENCIA_MAXIMA);
 	}
 	

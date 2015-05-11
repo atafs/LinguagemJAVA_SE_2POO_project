@@ -1,5 +1,7 @@
 package pt.iscte.poo.instalacao;
 
+import java.util.ArrayList;
+
 import pt.iscte.poo.instalacao.aparelhos.Ligavel;
 import pt.iscte.poo.instalacao.enums.LinhaTomadaEstado;
 import pt.iscte.poo.instalacao.enums.Ligavel_Potencia;
@@ -10,27 +12,26 @@ public class Tomada {
 	private String nome;
 	private LinhaTomadaEstado estadoLinha;
 	private Ligavel ligavel;
-	//private ArrayList<Aparelho> listaAparelhos = new ArrayList<Aparelho>();
-	
+	private Aparelho aparelho;
+	private ArrayList<Aparelho> listaAparelhos = new ArrayList<Aparelho>();
 
 	// CONSTRUCTOR
-	public Tomada(String nome, LinhaTomadaEstado estadoLinha, Ligavel ligavel/*ArrayList<Aparelho> listaAparelhos*/) {
+	public Tomada(String nome, LinhaTomadaEstado estadoLinha, ArrayList<Aparelho> listaAparelhos) {
 		this.nome = nome;
-		this.ligavel = ligavel;
-		//this.listaAparelhos = listaAparelhos;
+		this.listaAparelhos = listaAparelhos;
 		this.estadoLinha = estadoLinha;
 	}
 
 	public Tomada() {
-		this("", LinhaTomadaEstado.FREE, null/*new ArrayList<Aparelho>()*/);
+		this("", LinhaTomadaEstado.FREE, new ArrayList<Aparelho>());
 	}
 
 	// TOSTRING
 	@Override
 	public String toString() {
 		String toReturn = "";
-		toReturn += " -> LIGAVEL: " + ligavel;
-		toReturn += " -> ESTADO: " + estadoLinha;
+		toReturn += "\n-> LIGAVEL - " + ligavel;
+		toReturn += "-> ESTADO: " + estadoLinha + "\n";
 		
 //		for (Aparelho aparelho : listaAparelhos) {
 //			toReturn = "-> NOME: " + aparelho.getId() 
@@ -48,28 +49,20 @@ public class Tomada {
 	public double somaPotenciaTomada() {
 		//LIMPAR CONTADOR
 		double potenciaNaTomada = 0.0;
-		/*for (Aparelho aparelho : listaAparelhos) {
-			//APARELHOS POTENCIA FIXA*/
-		if (ligavel.estaLigado() && ligavel.getPotenciaAparelho().equals(Ligavel_Potencia.POTENCIA_MAXIMA)) {
-			potenciaNaTomada += ligavel.potenciaMaxima();
+		for (Aparelho aparelho : listaAparelhos) {
+			//APARELHOS POTENCIA FIXA
+			if (aparelho.estaLigado() && aparelho.getPotenciaAparelho().equals(Ligavel_Potencia.POTENCIA_MAXIMA) ) {
+				potenciaNaTomada += aparelho.potenciaMaxima();	
+			} 
+			//APARELHOS POTENCIA VARIAVEL
+			else if (aparelho.estaLigado() && aparelho.getPotenciaAparelho().equals(Ligavel_Potencia.POTENCIA)) {
+				potenciaNaTomada += aparelho.potenciaActual();	
+			}		
 		}
-		// APARELHOS POTENCIA VARIAVEL
-		else if (ligavel.estaLigado()&& ligavel.getPotenciaAparelho().equals(Ligavel_Potencia.POTENCIA)) {
-			potenciaNaTomada += ligavel.potenciaActual();
-		}		
-		//}
 		return potenciaNaTomada;
 	}
 
 	// GETTERS AND SETTERS
-//	public ArrayList<Aparelho> getListaAparelhos() {
-//		return listaAparelhos;
-//	}
-//
-//	public void setListaAparelhos(ArrayList<Aparelho> listaAparelhos) {
-//		this.listaAparelhos = listaAparelhos;
-//	}
-
 	public String getNome() {
 		return nome;
 	}
@@ -92,5 +85,21 @@ public class Tomada {
 
 	public void setLigavel(Ligavel ligavel) {
 		this.ligavel = ligavel;
+	}
+
+	public Aparelho getAparelho() {
+		return aparelho;
+	}
+
+	public void setAparelho(Aparelho aparelho) {
+		this.aparelho = aparelho;
+	}
+
+	public ArrayList<Aparelho> getListaAparelhos() {
+		return listaAparelhos;
+	}
+
+	public void setListaAparelhos(ArrayList<Aparelho> listaAparelhos) {
+		this.listaAparelhos = listaAparelhos;
 	}
 }

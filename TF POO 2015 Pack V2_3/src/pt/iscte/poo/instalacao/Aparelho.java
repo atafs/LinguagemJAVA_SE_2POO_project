@@ -19,12 +19,8 @@ public abstract class Aparelho implements Ligavel, Variavel {
 	private Ligavel_Tipo tipoAparelho;
 	private Ligavel_Potencia potenciaAparelho;
 	// APARELHO SABER A QUE TOMADA PERTENCE
-	private Tomada tomada = null;
+	//private Tomada tomada = null;
 	
-	// GUARDAR TEMPOS DE INICIO E FIM
-	private long tempoInicio;
-	private long tempoFim;
-
 	// CONSTRUCTOR JUnit requires this constructor
 	/** */
 	public Aparelho(String nome, double potencia) {
@@ -32,30 +28,27 @@ public abstract class Aparelho implements Ligavel, Variavel {
 		this.potenciaMaxima = potencia;
 	}
 	
-	public Aparelho(String nome, double potencia, double potenciaActual, LigavelEstado estadoAparelho, Ligavel_Tipo tipoAparelho, Ligavel_Potencia potenciaAparelho, long tempoInicio, long tempoFim) {
+	public Aparelho(String nome, double potencia, double potenciaActual, LigavelEstado estadoAparelho, Ligavel_Tipo tipoAparelho, Ligavel_Potencia potenciaAparelho) {
 		this.nome = nome;
 		this.potenciaMaxima = potencia;
 		
 		this.estadoAparelho = estadoAparelho;
 		this.tipoAparelho = tipoAparelho;
 		this.potenciaAparelho = potenciaAparelho;
-		this.tempoInicio = tempoInicio;
-		this.tempoFim = tempoFim;	
 	}
 
 	// TOSTRING
 	@Override
 	public String toString() {
 		String toReturn = ""/* super.toString() */;
-		toReturn += "NOME: " + this.nome;
+		
+		toReturn += "TIPO APARELHO: " + this.tipoAparelho.toString();
+		toReturn += "\n-> ID: " + this.nome;
 		toReturn += "\n-> POTENCIA MAX: " + potenciaMaxima;
 		toReturn += "\n-> POTENCIA ACTUAL: " + potenciaActual;
-		toReturn += "\n-> TOMADA NOME: " + tomada;
+//		toReturn += "\n-> TOMADA NOME: " + tomada;
 		toReturn += "\n-> TIPO ESTADO: " + this.estadoAparelho;
-		toReturn += "\n-> TIPO APARELHO: " + this.tipoAparelho.toString();
 		toReturn += "\n-> TIPO POTENCIA: " + this.potenciaAparelho;
-		toReturn += "\n-> TEMPO INICIAL: " + this.tempoInicio;
-		toReturn += "\n-> TEMPO FINAL: " + this.tempoFim;
 		toReturn += "\n";
 		return toReturn;
 	}
@@ -160,13 +153,13 @@ public abstract class Aparelho implements Ligavel, Variavel {
 		this.estadoAparelho = estadoAparelho;
 	}
 
-	public Tomada getTomada() {
-		return tomada;
-	}
-
-	public void setTomada(Tomada tomada) {
-		this.tomada = tomada;
-	}
+//	public Tomada getTomada() {
+//		return tomada;
+//	}
+//
+//	public void setTomada(Tomada tomada) {
+//		this.tomada = tomada;
+//	}
 
 	public double potenciaActual() {
 		return potenciaActual;
@@ -192,21 +185,5 @@ public abstract class Aparelho implements Ligavel, Variavel {
 		this.potenciaAparelho = potenciaAparelho;
 	}
 	
-	
-	public long getTempoFim() {
-		return tempoFim;
-	}
-
-	public void setTempoFim(long tempoFim) {
-		this.tempoFim = tempoFim;
-	}
-
-	public long getTempoInicio() {
-		return tempoInicio;
-	}
-
-	public void setTempoInicio(long tempoInicio) {
-		this.tempoInicio = tempoInicio;
-	}
 
 }
