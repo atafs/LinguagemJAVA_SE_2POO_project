@@ -1,6 +1,6 @@
 package pt.iscte.poo.instalacao.enums;
 
-public enum Ligavel_Potencia {
+public enum NovoAparelho_Potencia {
 	
 	POTENCIA_MAXIMA("potenciaMaxima"), POTENCIA("potencia");
 	
@@ -8,7 +8,7 @@ public enum Ligavel_Potencia {
 	private final String text;
 
 	// CONSTRUCTOR
-	private Ligavel_Potencia(final String text) {
+	private NovoAparelho_Potencia(final String text) {
 		this.text = text;
 	}
 	

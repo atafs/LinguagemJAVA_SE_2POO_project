@@ -2,10 +2,9 @@ package pt.iscte.poo.instalacao;
 
 import org.json.simple.JSONObject;
 
-import pt.iscte.poo.instalacao.aparelhos.Ligavel;
-import pt.iscte.poo.instalacao.enums.LigavelEstado;
-import pt.iscte.poo.instalacao.enums.Ligavel_Potencia;
-import pt.iscte.poo.instalacao.enums.Ligavel_Tipo;
+import pt.iscte.poo.instalacao.enums.AparelhoEstado;
+import pt.iscte.poo.instalacao.enums.NovoAparelho_Potencia;
+import pt.iscte.poo.instalacao.enums.NovoAparelho_Tipo;
 import pt.iscte.poo.instalacao.interfaces.Variavel;
 
 public abstract class Aparelho implements Ligavel, Variavel {
@@ -15,41 +14,27 @@ public abstract class Aparelho implements Ligavel, Variavel {
 	private double potenciaMaxima;
 	private double potenciaActual;
 	// ENUM (constantes)
-	private LigavelEstado estadoAparelho;
-	private Ligavel_Tipo tipoAparelho;
-	private Ligavel_Potencia potenciaAparelho;
+	private AparelhoEstado estadoAparelho;
+	private NovoAparelho_Tipo tipoAparelho;
+	private NovoAparelho_Potencia potenciaAparelho;
 	// APARELHO SABER A QUE TOMADA PERTENCE
-	private Tomada tomada = null;
-	
+	private Tomada tomada;
+
 	// CONSTRUCTOR JUnit requires this constructor
 	/** */
 	public Aparelho(String nome, double potencia) {
 		this.nome = nome;
 		this.potenciaMaxima = potencia;
 	}
-	
-	public Aparelho(String nome, double potencia, double potenciaActual, LigavelEstado estadoAparelho, Ligavel_Tipo tipoAparelho, Ligavel_Potencia potenciaAparelho) {
-		this.nome = nome;
-		this.potenciaMaxima = potencia;
-		
-		this.estadoAparelho = estadoAparelho;
-		this.tipoAparelho = tipoAparelho;
-		this.potenciaAparelho = potenciaAparelho;
-	}
 
 	// TOSTRING
 	@Override
 	public String toString() {
 		String toReturn = ""/* super.toString() */;
-		
-		toReturn += "TIPO APARELHO: " + this.tipoAparelho.toString();
-		toReturn += "\n-> ID: " + this.nome;
-		toReturn += "\n-> POTENCIA MAX: " + potenciaMaxima;
-		toReturn += "\n-> POTENCIA ACTUAL: " + potenciaActual;
-		toReturn += "\n-> TOMADA NOME: " + tomada;
-		toReturn += "\n-> TIPO ESTADO: " + this.estadoAparelho;
-		toReturn += "\n-> TIPO POTENCIA: " + this.potenciaAparelho;
-		toReturn += "\n";
+		toReturn += "NOME: " + this.nome;
+		toReturn += " -> POTENCIA: " + potenciaMaxima;
+		toReturn += " -> ESTADO: " + this.estadoAparelho;
+		toReturn += "]";
 		return toReturn;
 	}
 
@@ -71,8 +56,14 @@ public abstract class Aparelho implements Ligavel, Variavel {
 	 */
 	public static Ligavel novoAparelho(JSONObject obj) {
 
+		String tipo = (String) obj.get("tipo");
+		String id = (String) obj.get("id");
+
+		// NOVO APARELHO POTENCIA
+		double potencia = NovoAparelho_Tipo.selecionaNovoAparelhoPotencia(obj);
+
 		// NOVO APARELHO TIPO
-		return Ligavel_Tipo.selecionaNovoAparelho(obj);
+		return NovoAparelho_Tipo.selecionaNovoAparelho(tipo, id, potencia);
 	}
 
 	// INTERFACES METHODS
@@ -82,19 +73,19 @@ public abstract class Aparelho implements Ligavel, Variavel {
 	 */
 	@Override
 	public void liga() {
-		estadoAparelho = LigavelEstado.LIGA;
+		estadoAparelho = AparelhoEstado.ON;
 	}
 
 	/** DESCRICAO: mudo o estado do aparelho para OFF */
 	@Override
 	public void desliga() {
-		estadoAparelho = LigavelEstado.DESLIGA;
+		estadoAparelho = AparelhoEstado.OFF;
 	}
 
 	@Override
 	public boolean estaLigado() {
 		// Se o aparelho estiver ON, return true
-		return (estadoAparelho == LigavelEstado.LIGA);
+		return (estadoAparelho == AparelhoEstado.ON);
 	}
 
 	/**
@@ -127,7 +118,7 @@ public abstract class Aparelho implements Ligavel, Variavel {
 			this.potenciaActual = 0;
 		}
 	}
-	
+
 	// GETTERS AND SETTERS
 	public String getId() {
 		return nome;
@@ -145,11 +136,11 @@ public abstract class Aparelho implements Ligavel, Variavel {
 		this.potenciaMaxima = potenciaMaxima;
 	}
 
-	public LigavelEstado getEstadoAparelho() {
+	public AparelhoEstado getEstadoAparelho() {
 		return estadoAparelho;
 	}
 
-	public void setEstadoAparelho(LigavelEstado estadoAparelho) {
+	public void setEstadoAparelho(AparelhoEstado estadoAparelho) {
 		this.estadoAparelho = estadoAparelho;
 	}
 
@@ -169,21 +160,19 @@ public abstract class Aparelho implements Ligavel, Variavel {
 		this.potenciaActual = potenciaActual;
 	}
 
-	public Ligavel_Tipo getTipoAparelho() {
+	public NovoAparelho_Tipo getTipoAparelho() {
 		return tipoAparelho;
 	}
 
-	public void setTipoAparelho(Ligavel_Tipo tipoAparelho) {
+	public void setTipoAparelho(NovoAparelho_Tipo tipoAparelho) {
 		this.tipoAparelho = tipoAparelho;
 	}
 
-	public Ligavel_Potencia getPotenciaAparelho() {
+	public NovoAparelho_Potencia getPotenciaAparelho() {
 		return potenciaAparelho;
 	}
 
-	public void setPotenciaAparelho(Ligavel_Potencia potenciaAparelho) {
+	public void setPotenciaAparelho(NovoAparelho_Potencia potenciaAparelho) {
 		this.potenciaAparelho = potenciaAparelho;
 	}
-	
-
 }

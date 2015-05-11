@@ -1,6 +1,6 @@
 package pt.iscte.poo.instalacao.teste;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -15,10 +15,14 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import pt.iscte.poo.instalacao.Aparelho;
+import pt.iscte.poo.instalacao.Instalacao;
 import pt.iscte.poo.instalacao.aparelhos.Computador;
 import pt.iscte.poo.instalacao.aparelhos.Frigorifico;
 
 public class TesteLeituraDeAparelhosIsolados {
+	
+	@SuppressWarnings("unused")
+	private Instalacao instalacao;
 	
 	@BeforeClass
 	public static void preparacaoInicial() {

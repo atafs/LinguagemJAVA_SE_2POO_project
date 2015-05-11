@@ -1,4 +1,4 @@
-package pt.iscte.poo.instalacao;
+package patterns.Singleton;
 
 public class Relogio {
 
@@ -24,20 +24,11 @@ public class Relogio {
 	}
 
 	// METHOD
-	/**
-	 * DESCRICAO: incrementa mais uma unidade (simular unidades de tempo), ao
-	 * contador.
-	 */
 	public void tique() {
 		counter++;
 	}
 
 	// GETTERS AND SETTERS
-	/**
-	 * DESCRICAO: permite saber qual o valor actual de unidades guardadas na
-	 * variavel (simulando qual o quantidade de tempo que passou desde o
-	 * arranque do programa).
-	 */
 	public int getCounter() {
 		return counter;
 	}

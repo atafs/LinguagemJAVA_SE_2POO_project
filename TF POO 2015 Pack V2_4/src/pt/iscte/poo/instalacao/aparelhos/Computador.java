@@ -12,5 +12,4 @@ public class Computador extends AparelhoPotenciaFixa{
 		super(nome, potencia);	
 	}
 
-
 }

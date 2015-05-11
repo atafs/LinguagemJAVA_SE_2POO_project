@@ -1,6 +1,6 @@
 package pt.iscte.poo.instalacao.eventos;
 
-import pt.iscte.poo.instalacao.enums.LigavelEstado;
+import pt.iscte.poo.instalacao.enums.AparelhoEstado;;
 
 public abstract class Evento {
 	
@@ -8,7 +8,7 @@ public abstract class Evento {
 	private String accao;
 	private String idAparelho;
 	private long tempo;
-	private LigavelEstado estado = LigavelEstado.EM_ESPERA;
+	private AparelhoEstado estado = AparelhoEstado.STAND_BY;
 	
 	//CONSTRUCTOR
 	public Evento(String accao, String idAparelho, long tempo) {
@@ -59,11 +59,11 @@ public abstract class Evento {
 		this.tempo = tempo;
 	}
 	
-	public LigavelEstado getEstado() {
+	public AparelhoEstado getEstado() {
 		return estado;
 	}
 
-	public void setEstado(LigavelEstado liga) {
+	public void setEstado(AparelhoEstado liga) {
 		this.estado = liga;
 	}
 	
