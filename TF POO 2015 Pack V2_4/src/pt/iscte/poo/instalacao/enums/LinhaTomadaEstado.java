@@ -13,5 +13,5 @@ public enum LinhaTomadaEstado {
 	 * BEING_USED_ONE_PLUGIN = so posso adicionar um aparelho;
 	 * BEING_USED_SEVERAL_PLUGINS = posso adicionar varios aparelhos;
 	 */
-	FREE, BEING_USED_ONE_PLUGIN, BEING_USED_SEVERAL_PLUGINS;
+	FREE, USED, BEING_USED_SEVERAL_PLUGINS;
 }

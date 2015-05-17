@@ -2,6 +2,7 @@ package pt.iscte.poo.instalacao.aparelhos;
 
 import java.util.ArrayList;
 
+import pt.iscte.poo.instalacao.Ligavel;
 import pt.iscte.poo.instalacao.Tomada;
 import pt.iscte.poo.instalacao.enums.LigavelEstado;
 import pt.iscte.poo.instalacao.enums.Ligavel_Potencia;
@@ -19,7 +20,8 @@ public class Tripla implements Ligavel {
 	private Ligavel_Tipo tipoTripla;
 	private Ligavel_Potencia potenciaTripla;
 	// APARELHO SABER A QUE TOMADA PERTENCE
-	private Tomada tomada = null;
+	//private Tomada tomada;
+	
 	// LISTS
 	private ArrayList<Tomada> listaTomadas = new ArrayList<Tomada>();
 	
@@ -60,16 +62,14 @@ public class Tripla implements Ligavel {
 	@Override
 	public String toString() {
 		String toReturn = ""/* super.toString() */;
-		toReturn += "NOME: " + this.id;
+		toReturn += "TIPO APARELHO: " + this.id;
 		toReturn += "\n-> POTENCIA MAX: " + potenciaMaxima;
 		toReturn += "\n-> POTENCIA ACTUAL: " + potenciaActual;
-		toReturn += "\n-> TOMADA NOME: " + tomada;
+//		toReturn += "\n-> TOMADA NOME: " + tomada;
 		toReturn += "\n-> TOMADA NUMERO: " + nTomadas;
 		toReturn += "\n-> TIPO ESTADO: " + this.estadoTripla;
 		toReturn += "\n-> TIPO TRIPLA: " + this.tipoTripla.toString();
 		toReturn += "\n-> TIPO POTENCIA: " + this.potenciaTripla;
-		toReturn += "\n-> TEMPO INICIAL: " + this.tempoInicio;
-		toReturn += "\n-> TEMPO FINAL: " + this.tempoFim;
 		toReturn += "\n";
 		return toReturn;
 	}
@@ -123,13 +123,13 @@ public class Tripla implements Ligavel {
 		this.potenciaTripla = potenciaTripla;
 	}
 
-	public Tomada getTomada() {
-		return tomada;
-	}
-
-	public void setTomada(Tomada tomada) {
-		this.tomada = tomada;
-	}
+//	public Tomada getTomada() {
+//		return tomada;
+//	}
+//
+//	public void setTomada(Tomada tomada) {
+//		this.tomada = tomada;
+//	}
 
 	public void setnTomadas(long nTomadas) {
 		this.nTomadas = nTomadas;

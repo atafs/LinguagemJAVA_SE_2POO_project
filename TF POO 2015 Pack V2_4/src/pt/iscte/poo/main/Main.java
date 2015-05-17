@@ -13,7 +13,7 @@ import org.json.simple.parser.ParseException;
 
 import pt.iscte.poo.graficos.Chart;
 import pt.iscte.poo.instalacao.Instalacao;
-import pt.iscte.poo.instalacao.aparelhos.Ligavel;
+import pt.iscte.poo.instalacao.Ligavel;
 
 public class Main {
 

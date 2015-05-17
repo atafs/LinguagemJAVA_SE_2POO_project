@@ -2,16 +2,27 @@ package pt.iscte.poo.instalacao;
 
 import java.util.ArrayList;
 
+import pt.iscte.poo.instalacao.aparelhos.Tripla;
 import pt.iscte.poo.instalacao.enums.LinhaTomadaEstado;
 
 public class Linha {
 
 	// ATTRIBUTES
 	private String nome;
+	private int numeroTomadas;
 	private LinhaTomadaEstado estadoLinha;
 	private ArrayList<Tomada> listaTomadas = new ArrayList<Tomada>();
+	private ArrayList<Tripla> listaTriplas = new ArrayList<Tripla>();
 
 	// CONSTRUCTOR
+	public Linha(String nome, int nTomadas) {
+		this.nome = nome;
+		this.numeroTomadas = nTomadas;
+		this.estadoLinha = LinhaTomadaEstado.FREE;
+		this.listaTomadas = new ArrayList<Tomada>();
+	}
+
+	
 	public Linha(String nome) {
 		this.nome = nome;
 		this.estadoLinha = LinhaTomadaEstado.FREE;
@@ -22,9 +33,10 @@ public class Linha {
 	@Override
 	public String toString() {
 		String toReturn = "";
-		toReturn = "nome: " + nome;
-		toReturn = "estadoLinha: " + estadoLinha;
-		toReturn = "listaTomadas: " + listaTomadas;
+		toReturn += "Nome: " + nome;
+		toReturn += ", NumeroTomadas: " + numeroTomadas;
+		toReturn += ", EstadoLinha: " + estadoLinha;
+		toReturn += ", ListaTomadas: " + listaTomadas;
 		return toReturn;
 	}
 
@@ -45,7 +57,7 @@ public class Linha {
 	}
 
 	/** Recebe um numero de tomadas inteiro e inicializa as listas desta linha */
-	public void instalarTomadas(int numeroTomadas) {
+	public void instalarTomadas(long numeroTomadas) {
 		for (int i = 0; i < numeroTomadas; i++) {
 			listaTomadas.add(new Tomada());
 		}
@@ -75,4 +87,21 @@ public class Linha {
 	public void setEstadoLinha(LinhaTomadaEstado estadoLinha) {
 		this.estadoLinha = estadoLinha;
 	}
+	
+	public long getNumeroTomadas() {
+		return numeroTomadas;
+	}
+
+	public void setNumeroTomadas(int numeroTomadas) {
+		this.numeroTomadas = numeroTomadas;
+	}
+	
+	/** */
+	//2ºparte project
+	public void addTripla(Tripla t) {
+		listaTriplas.add(t);
+		listaTomadas.addAll(t.getListaTomadas());
+	}
+
+
 }

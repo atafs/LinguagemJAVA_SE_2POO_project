@@ -29,6 +29,7 @@ public class TesteAparelhos {
 	@Before
 	public void preparacaoDeTeste() {
 		instalacao = Instalacao.getInstanciaUnica();
+		instalacao.removeTodasAsLinhas();
 		instalacao.novaLinha("cozinha", 10); // cozinha, 10 tomadas
 		 
 	}
@@ -51,14 +52,15 @@ public class TesteAparelhos {
 		m.liga();
 		assertEquals(650, instalacao.potenciaNaLinha("cozinha"), 0.0000001);
 		m.aumenta(500); // só 400 efetivo
-		assertEquals(1050, instalacao.potenciaNaLinha("cozinha"), 0.0000001);	
+		assertEquals(1050, instalacao.potenciaNaLinha("cozinha"), 0.0000001);
+		
 	}
 	
-	@SuppressWarnings("unused")
 	@Test
 	public void testeHierarquiaAparelhos() {
 		Lampada lamp1 = new Lampada("lampada1", 50);		
 		Torradeira torradeira = new Torradeira("torradeira1", 100);
+		@SuppressWarnings("unused")
 		AparelhoPotenciaFixa a = lamp1;
 		a = torradeira;
 		MicroOndas m = new MicroOndas("micro1", 900);

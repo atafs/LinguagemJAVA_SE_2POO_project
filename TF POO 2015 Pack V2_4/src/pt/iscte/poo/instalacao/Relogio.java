@@ -45,4 +45,10 @@ public class Relogio {
 	public void setCounter(int counter) {
 		this.counter = counter;
 	}
+	
+	//ADD METHODS FROM CHART
+	/** ???este metodo e igual ao meu getCounter()... ??? E isso?  */
+	public int getTempoAtual(){
+		return this.counter;
+	}
 }

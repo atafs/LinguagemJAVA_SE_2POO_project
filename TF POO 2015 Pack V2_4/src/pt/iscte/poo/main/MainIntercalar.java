@@ -38,8 +38,7 @@ public class MainIntercalar {
 			Relogio.getInstanciaUnica().tique(); // Avança uma unidade de tempo	
 		}
 
-		lamp1.liga(); // Acende a lampada
-
+		lamp1.liga(); // Acende a lâmpada
 		System.out.println(casa);
 		
 		for (; t != END_T / 2; t++) {
@@ -54,28 +53,24 @@ public class MainIntercalar {
 		JSONObject obj = null;
 		try {
 			obj = (JSONObject)json.parse(new BufferedReader(new FileReader("frigorifico.json")));
+			@SuppressWarnings("unused")
 			Frigorifico frigo = (Frigorifico) Aparelho.novoAparelho(obj);
 
 			obj = (JSONObject)json.parse(new BufferedReader(new FileReader("computador.json")));
+			@SuppressWarnings("unused")
 			Computador computador = (Computador) Aparelho.novoAparelho(obj);
-			
-			//TO DELETE --------------------------------------
-			casa.ligaAparelhoATomadaLivre("sala", frigo);
-			frigo.aumenta(50);
-			frigo.liga();
-			
-			casa.ligaAparelhoATomadaLivre("sala", computador);
-			computador.liga();
-			//-------------------------------------------------
-	
+		
 		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ParseException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		
 		Lampada lamp2 = new Lampada("lamp2", 30);
 		casa.ligaAparelhoATomadaLivre("cozinha", lamp2);
 		lamp2.liga();
@@ -92,11 +87,11 @@ public class MainIntercalar {
 
 		torradeira.desliga();
 		
-		MicroOndas microOndas = new MicroOndas("microOndas", 900); // Cria micro-ondas, com 900W de potência maxima
+		MicroOndas microOndas = new MicroOndas("microOndas", 900); // Cria micro-ondas, com 900W de potência máxima
 		casa.ligaAparelhoATomadaLivre("cozinha", microOndas);
 		microOndas.aumenta(500); // Regula a potência a que vai cozinhar
 		
-		lamp2.desliga(); // desliga lampada
+		lamp2.desliga(); // desliga lâmpada
 		System.out.println(casa);
 		
 		for (; t != END_T; t++) {
@@ -104,7 +99,7 @@ public class MainIntercalar {
 		}
 		
 		microOndas.liga(); // Liga micro-ondas
-		 
 		System.out.println(casa);
 	}
+
 }
