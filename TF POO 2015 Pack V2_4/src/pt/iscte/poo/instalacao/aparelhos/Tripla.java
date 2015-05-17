@@ -63,6 +63,7 @@ public class Tripla implements Ligavel {
 	public String toString() {
 		String toReturn = ""/* super.toString() */;
 		toReturn += "TIPO APARELHO: " + this.id;
+		toReturn += "\n-> ID: " + this.id;
 		toReturn += "\n-> POTENCIA MAX: " + potenciaMaxima;
 		toReturn += "\n-> POTENCIA ACTUAL: " + potenciaActual;
 //		toReturn += "\n-> TOMADA NOME: " + tomada;

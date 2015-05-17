@@ -3,28 +3,28 @@ package pt.iscte.poo.instalacao.ligacoes;
 public class Ligacao {
 	
 	//ATTRIBUTES
-	private String aparelho;
+	private String id;
 	private String ligadoA;
 	
 	//CONSTRUCTOR
 	public Ligacao(String aparelho, String ligadoA) {
-		this.aparelho = aparelho;
+		this.id = aparelho;
 		this.ligadoA = ligadoA;
 	}
 
-	public String getAparelho() {
-		return aparelho;
+	public String getId() {
+		return id;
 	}
 
-	public void setAparelho(String aparelho) {
-		this.aparelho = aparelho;
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 	// TOSTRING
 	@Override
 	public String toString() {
 		String toReturn = "";
-		toReturn += "aparelho: " + this.aparelho;
+		toReturn += "aparelho: " + this.id;
 		toReturn += "\n-> ligadoA: " + ligadoA;
 		toReturn += "\n";
 		return toReturn;

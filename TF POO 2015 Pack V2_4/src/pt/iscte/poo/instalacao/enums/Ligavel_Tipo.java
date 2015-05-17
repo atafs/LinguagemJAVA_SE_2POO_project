@@ -1,7 +1,11 @@
 package pt.iscte.poo.instalacao.enums;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.json.simple.JSONObject;
 
+import pt.iscte.poo.instalacao.Aparelho;
 import pt.iscte.poo.instalacao.Ligavel;
 import pt.iscte.poo.instalacao.Tomada;
 import pt.iscte.poo.instalacao.aparelhos.Computador;
@@ -20,6 +24,10 @@ public enum Ligavel_Tipo {
 	private String text;
 	private static Ligavel_Potencia novoAparelhoPotencia;
 	
+	//LISTS
+	private static List<Aparelho> listAparelhos = new ArrayList<Aparelho>();
+	private static List<Tripla> listTriplas = new ArrayList<Tripla>();
+	
 	// CONSTRUCTOR
 	private Ligavel_Tipo(String text) {
 		this.text = text;
@@ -29,7 +37,7 @@ public enum Ligavel_Tipo {
 	@Override
 	public String toString() {
 		String toReturn = "";
-		toReturn += "= " + text;
+		toReturn += text;
 		return toReturn;
 	}
 	
@@ -75,6 +83,8 @@ public enum Ligavel_Tipo {
 				lampadaVariavel.setEstadoAparelho(LigavelEstado.DESLIGA);
 				lampadaVariavel.setTipoAparelho(novo);
 				lampadaVariavel.setPotenciaAparelho(novoAparelhoPotencia);
+				
+				listAparelhos.add(lampadaVariavel);
 				return lampadaVariavel;
 				
 			case MAQLAVARROUPA:
@@ -82,6 +92,8 @@ public enum Ligavel_Tipo {
 				maqLavarRoupa.setEstadoAparelho(LigavelEstado.DESLIGA);
 				maqLavarRoupa.setTipoAparelho(novo);
 				maqLavarRoupa.setPotenciaAparelho(novoAparelhoPotencia);
+				
+				listAparelhos.add(maqLavarRoupa);
 				return maqLavarRoupa;
 				
 			case TRIPLA:
@@ -90,6 +102,8 @@ public enum Ligavel_Tipo {
 				tripla.setEstadoAparelho(LigavelEstado.DESLIGA);
 				tripla.setTipoTripla(novo);
 				tripla.setPotenciaTripla(novoAparelhoPotencia);
+				
+				listTriplas.add(tripla);
 				return tripla;
 			
 			case COMPUTADOR:
@@ -97,6 +111,8 @@ public enum Ligavel_Tipo {
 				computador.setEstadoAparelho(LigavelEstado.DESLIGA);
 				computador.setTipoAparelho(novo);
 				computador.setPotenciaAparelho(novoAparelhoPotencia);
+				
+				listAparelhos.add(computador);
 				return computador;
 				
 			case FRIGORIFICO:
@@ -104,6 +120,8 @@ public enum Ligavel_Tipo {
 				frigorifico.setEstadoAparelho(LigavelEstado.DESLIGA);
 				frigorifico.setTipoAparelho(novo);
 				frigorifico.setPotenciaAparelho(novoAparelhoPotencia);
+				
+				listAparelhos.add(frigorifico);
 				return frigorifico;
 				
 			case LAMPADA:
@@ -111,6 +129,8 @@ public enum Ligavel_Tipo {
 				lampada.setEstadoAparelho(LigavelEstado.DESLIGA);
 				lampada.setTipoAparelho(novo);
 				lampada.setPotenciaAparelho(novoAparelhoPotencia);
+				
+				listAparelhos.add(lampada);
 				return lampada;
 				
 			case MICROONDAS:
@@ -118,6 +138,8 @@ public enum Ligavel_Tipo {
 				microOndas.setEstadoAparelho(LigavelEstado.DESLIGA);
 				microOndas.setTipoAparelho(novo);
 				microOndas.setPotenciaAparelho(novoAparelhoPotencia);
+				
+				listAparelhos.add(microOndas);
 				return microOndas;
 				
 			case TORRADEIRA:
@@ -125,6 +147,8 @@ public enum Ligavel_Tipo {
 				torradeira.setEstadoAparelho(LigavelEstado.DESLIGA);
 				torradeira.setTipoAparelho(novo);
 				torradeira.setPotenciaAparelho(novoAparelhoPotencia);
+				
+				listAparelhos.add(torradeira);
 				return torradeira;
 				
 			case OTHERS:
@@ -136,4 +160,14 @@ public enum Ligavel_Tipo {
 		}
 		return null;
 	}
+	
+	//GETTERS AND SETTERS
+	public static List<Aparelho> getListAparelhos() {
+		return listAparelhos;
+	}
+
+	public static List<Tripla> getListTriplas() {
+		return listTriplas;
+	}
+
 }

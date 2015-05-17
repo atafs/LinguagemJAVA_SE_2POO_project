@@ -54,7 +54,7 @@ public class MainTests {
 			//TO CREATE
 			instalacao.lerLigacoes(listaLigacoes, aparelhos);
 
-			// TO PRINT
+//			// TO PRINT
 //			System.out.println("----------------PRINT_07_LIGACOES------------------");
 //			for (Ligavel ligavel : instalacao.getLigaveis()) {
 //				System.err.println("ligacao: " + ligavel.getId());

@@ -8,23 +8,23 @@ import pt.iscte.poo.instalacao.enums.LinhaTomadaEstado;
 public class Linha {
 
 	// ATTRIBUTES
-	private String nome;
+	private String id;
 	private int numeroTomadas;
 	private LinhaTomadaEstado estadoLinha;
 	private ArrayList<Tomada> listaTomadas = new ArrayList<Tomada>();
 	private ArrayList<Tripla> listaTriplas = new ArrayList<Tripla>();
 
 	// CONSTRUCTOR
-	public Linha(String nome, int nTomadas) {
-		this.nome = nome;
+	public Linha(String id, int nTomadas) {
+		this.id = id;
 		this.numeroTomadas = nTomadas;
 		this.estadoLinha = LinhaTomadaEstado.FREE;
 		this.listaTomadas = new ArrayList<Tomada>();
 	}
 
 	
-	public Linha(String nome) {
-		this.nome = nome;
+	public Linha(String id) {
+		this.id = id;
 		this.estadoLinha = LinhaTomadaEstado.FREE;
 		this.listaTomadas = new ArrayList<Tomada>();
 	}
@@ -33,7 +33,7 @@ public class Linha {
 	@Override
 	public String toString() {
 		String toReturn = "";
-		toReturn += "Nome: " + nome;
+		toReturn += "ID: " + id;
 		toReturn += ", NumeroTomadas: " + numeroTomadas;
 		toReturn += ", EstadoLinha: " + estadoLinha;
 		toReturn += ", ListaTomadas: " + listaTomadas;
@@ -62,14 +62,22 @@ public class Linha {
 			listaTomadas.add(new Tomada());
 		}
 	}
-
-	// GETTERS AND SETTERS
-	public String getNome() {
-		return nome;
+	
+	public void instalarTomadas(long numeroTomadas, String id) {
+		for (int i = 0; i < numeroTomadas; i++) {
+			Tomada tomada = new Tomada();
+			tomada.setId(id);
+			listaTomadas.add(tomada);
+		}
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	// GETTERS AND SETTERS
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public ArrayList<Tomada> getListaTomadas() {

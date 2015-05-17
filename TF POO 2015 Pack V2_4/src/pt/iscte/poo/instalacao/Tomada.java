@@ -62,11 +62,11 @@ public class Tomada {
 	}
 
 	// GETTERS AND SETTERS
-	public String getNome() {
+	public String getId() {
 		return nome;
 	}
 
-	public void setNome(String nome) {
+	public void setId(String nome) {
 		this.nome = nome;
 	}
 

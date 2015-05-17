@@ -8,7 +8,9 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import pt.iscte.poo.graficos.Chart;
+import pt.iscte.poo.instalacao.aparelhos.Tripla;
 import pt.iscte.poo.instalacao.enums.LigavelEstado;
+import pt.iscte.poo.instalacao.enums.Ligavel_Tipo;
 import pt.iscte.poo.instalacao.enums.LinhaTomadaEstado;
 import pt.iscte.poo.instalacao.eventos.Evento;
 import pt.iscte.poo.instalacao.ligacoes.Ligacao;
@@ -23,6 +25,8 @@ public class Instalacao extends Observable {
 	private List<Ligavel> ligaveis = new ArrayList<Ligavel>();
 	private List<Evento> eventos;
 	private List<Ligacao> ligacoes;
+	
+
 	
 	// CONSTRUCTOR (overload)
 	private Instalacao(ArrayList<Linha> listLinhas, ArrayList<Evento> eventos,  ArrayList<Ligacao> ligacoes) {
@@ -89,6 +93,14 @@ public class Instalacao extends Observable {
 	public void setEventos(List<Evento> eventos) {
 		this.eventos = eventos;
 	}
+	
+	public List<Ligacao> getLigacoes() {
+		return ligacoes;
+	}
+
+	public void setLigacoes(List<Ligacao> ligacoes) {
+		this.ligacoes = ligacoes;
+	}
 
 	// TOSTRING
 	@Override
@@ -96,7 +108,7 @@ public class Instalacao extends Observable {
 		String toReturn = "t = " + Relogio.getInstanciaUnica().getCounter()
 				+ "\n";
 		for (Linha linha : listLinhas) {
-			toReturn += linha.getNome() + " " + linha.somaPotenciaLinha()
+			toReturn += linha.getId() + " " + linha.somaPotenciaLinha()
 					+ "W\n";
 		}
 		return toReturn;
@@ -122,10 +134,10 @@ public class Instalacao extends Observable {
 	public String getTomadaLivre(String nome) {
 		String toReturn = "";
 		for (Linha linha : listLinhas) {
-			if (linha.getNome().equals(nome)) {
+			if (linha.getId().equals(nome)) {
 				for (Tomada tomada : linha.getListaTomadas()) {
 					if (tomada.getEstadoLinha() == LinhaTomadaEstado.FREE) {
-						toReturn = tomada.getNome();
+						toReturn = tomada.getId();
 						return toReturn;
 					} else {
 						System.out.println("ERROR -> NENHUMA TOMADA ESTA LIVRE");
@@ -144,7 +156,7 @@ public class Instalacao extends Observable {
 		// LIMPAR CONTADOR
 		double potenciaNaInstalacao = 0.0;
 		for (Linha linha : listLinhas) {
-			if (name.equals(linha.getNome())) {
+			if (name.equals(linha.getId())) {
 				potenciaNaInstalacao += linha.somaPotenciaLinha();
 			}
 		}
@@ -165,7 +177,7 @@ public class Instalacao extends Observable {
 		// ADICIONA A LINHA name o APARELHO aparelho
 		for (Linha linha : listLinhas) {		
 			// ASSUMIR QUE SO EXISTE UMA LINHA COM O MESMO NOME
-			if (linha.getNome().equals(name)) {		
+			if (linha.getId().equals(name)) {		
 				for (Tomada tomada : linha.getListaTomadas()) {
 					// COLOCO NA PRIMEIRA TOMADA LIVRE
 					if (tomada.getEstadoLinha() == LinhaTomadaEstado.FREE) {
@@ -198,7 +210,7 @@ public class Instalacao extends Observable {
 		// ADICIONA A LINHA name o APARELHO aparelho
 		for (Linha linha : listLinhas) {		
 			// ASSUMIR QUE SO EXISTE UMA LINHA COM O MESMO NOME
-			if (linha.getNome().equals(name)) {		
+			if (linha.getId().equals(name)) {		
 				for (Tomada tomada : linha.getListaTomadas()) {
 					// COLOCO NA PRIMEIRA TOMADA LIVRE
 					if (tomada.getEstadoLinha() == LinhaTomadaEstado.FREE) {
@@ -257,10 +269,9 @@ public class Instalacao extends Observable {
 		
 		for(Object object: aparelhos) {
 			JSONObject obj = (JSONObject) object;
-			//ADD TO LIST
-			ligaveis.add(Aparelho.novoAparelho(obj));	
 			
-	
+			//ADDICIONA A LISTA
+			ligaveis.add(Aparelho.novoAparelho(obj));
 		}
 		return ligaveis;
 	}
@@ -290,29 +301,51 @@ public class Instalacao extends Observable {
 			
 			//CAST AND SAVE TO STRING
 			JSONObject obj = (JSONObject) object;
-			String ligavel = (String) obj.get("aparelho");
-			String linha = (String) obj.get("ligadoA");
+			String aparelho = (String) obj.get("aparelho");
+			String ligadoA = (String) obj.get("ligadoA");
 			
 			// ADD TO LIST (extra)
-			Ligacao ligacao = new Ligacao(ligavel, linha);
-			ligacoes.add(ligacao);
-			
-			//LIGA APARELHO A TOMADA DE UMA LINHA
-			for (Ligacao ligacaoTemp1 : ligacoes) {
-				
-				//PERCORRER A LISTA DE LIGAVEIS
-				for (Ligavel ligavel2 : ligaveis) {
-					if (ligavel2.getId().equals(ligacaoTemp1.getAparelho())) {
-						ligaAparelhoATomadaLivre(ligacaoTemp1.getLigadoA(), ligavel2);
-					}
-				}	
-			}
+			Ligacao ligacaoTemp = new Ligacao(aparelho, ligadoA);
+			ligacoes.add(ligacaoTemp);
 		}	
+		
+		//LIGA APARELHO A TOMADA DE UMA LINHA
+		for (Ligacao ligacao : ligacoes) {
+		
+			//PERCORRER A LISTA DE LIGAVEIS
+			for (Ligavel ligavel : ligaveis) {
+				
+				//EXISTE UMA TRIPLA (ligavel e ligacao)
+				if (ligavel.getId().equals(ligacao.getId())) {
+					//EXISTE UMA TRIPLA (ligavel e ligacao)
+
+					if (ligacao.getId().equals(Ligavel_Tipo.TRIPLA.toString())) {
+						//PERCORRER A LISTA DE LINHAS
+						for (Linha linha : listLinhas) {
+							if (linha.getId().equals(ligacao.getLigadoA())) {
+								int nTomadasTripla = (int)searchTriplaList_nTomadas(ligacao.getId());
+								long nTomadasLinha = linha.getNumeroTomadas();
+								int total = (int) (nTomadasTripla + nTomadasLinha);
+								linha.setNumeroTomadas(total);
+								
+								//ADICIONAR NOVAS TOMADAS COM A INFORMACAO DO ID 
+								//para ser mais facil saber na linha a que tomada pertencem
+								linha.instalarTomadas(nTomadasTripla, ligacao.getId());
+							}
+						}
+						ligaAparelhoATomadaLivre(ligacao.getLigadoA(), ligavel);
+					} else {
+						ligaAparelhoATomadaLivre(ligacao.getLigadoA(), ligavel);
+
+					}
+				}
+			}	
+		}
 		
 		// TO PRINT
 		 System.out.println("----------------PRINT_03_LIGACOES------------------");
-		 for (Ligacao ligacao1 : ligacoes) {
-			 System.out.println(ligacao1.toString());
+		 for (Ligacao ligacao : ligacoes) {
+			 System.out.println(ligacao.toString());
 		 }
 		 
 		// TO PRINT
@@ -353,6 +386,17 @@ public class Instalacao extends Observable {
 		for (Evento evento : eventos) {
 			System.out.println(evento.toString());
 		}	
+	}
+	
+	/** Search for the nTomadas in a Class Tripla object, kept in a list of triplas */
+	public long searchTriplaList_nTomadas(String id) {
+		long nTomadas = 0;
+		for (Tripla tripla : Ligavel_Tipo.getListTriplas()) {
+			if (id.equals(tripla.getId())) {
+				nTomadas = tripla.getnTomadas();
+			}
+		}
+		return nTomadas;
 	}
 
 	/** */
