@@ -35,7 +35,7 @@ public enum LigavelEstado {
 	@Override
 	public String toString() {
 		String toReturn = "";
-		toReturn += "= " + text;
+		toReturn += text;
 		return toReturn;
 	}
 	
@@ -61,9 +61,9 @@ public enum LigavelEstado {
 				return eventoLiga;
 	
 			case AUMENTA:
-				EventoAumenta eventoPumenta = new EventoAumenta(accao, idAparelho, tempo, (double) obj.get("valor"));	
-				eventoPumenta.setEstado(LigavelEstado.AUMENTA);
-				return eventoPumenta;
+				EventoAumenta eventoAumenta = new EventoAumenta(accao, idAparelho, tempo, (double) obj.get("valor"));	
+				eventoAumenta.setEstado(LigavelEstado.AUMENTA);
+				return eventoAumenta;
 				
 			case PROGRAMA:
 				EventoPrograma eventoPrograma = new EventoPrograma(accao, idAparelho, tempo, (String) obj.get("programa"));	

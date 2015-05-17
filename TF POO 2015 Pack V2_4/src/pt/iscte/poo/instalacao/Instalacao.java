@@ -342,17 +342,17 @@ public class Instalacao extends Observable {
 			}	
 		}
 		
-		// TO PRINT
-		 System.out.println("----------------PRINT_03_LIGACOES------------------");
-		 for (Ligacao ligacao : ligacoes) {
-			 System.out.println(ligacao.toString());
-		 }
-		 
-		// TO PRINT
-		System.out.println("----------------PRINT_LINHA------------------");
-		for (Linha linha1 : listLinhas) {
-			System.out.println(linha1.toString());
-		}
+//		// TO PRINT
+//		 System.out.println("----------------PRINT_03_LIGACOES------------------");
+//		 for (Ligacao ligacao : ligacoes) {
+//			 System.out.println(ligacao.toString());
+//		 }
+//		 
+//		// TO PRINT
+//		System.out.println("----------------PRINT_LINHA------------------");
+//		for (Linha linha1 : listLinhas) {
+//			System.out.println(linha1.toString());
+//		}
 	}
 	
 	/** */
@@ -365,7 +365,7 @@ public class Instalacao extends Observable {
 			JSONObject obj = (JSONObject) object;
 			
 			//READ FROM JSON and SELECT ACTION
-			Evento evento = LigavelEstado.executaAccao(obj); //??? void, Ligavel,...	
+			Evento evento = LigavelEstado.executaAccao(obj); 	
 			eventos.add(evento);
 		}
 		
