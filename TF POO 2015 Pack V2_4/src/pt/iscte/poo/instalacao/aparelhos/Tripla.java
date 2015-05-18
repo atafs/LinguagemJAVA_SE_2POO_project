@@ -25,11 +25,6 @@ public class Tripla implements Ligavel {
 	// LISTS
 	private ArrayList<Tomada> listaTomadas = new ArrayList<Tomada>();
 	
-	// GUARDAR TEMPOS DE INICIO E FIM
-	private long tempoInicio;
-	private long tempoFim;
-
-
 	//CONSTRUCTOR
 	public Tripla(String id, double potenciaMaxima, long nTomadas) {
 		this.id = id;
@@ -96,7 +91,7 @@ public class Tripla implements Ligavel {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setNome(String id) {
 		this.id = id;
 	}
 
@@ -108,19 +103,19 @@ public class Tripla implements Ligavel {
 		this.potenciaMaxima = potenciaMaxima;
 	}
 
-	public LigavelEstado getEstadoTripla() {
+	public LigavelEstado getEstadoAparelho() {
 		return estadoTripla;
 	}
 
-	public Ligavel_Tipo getTipoTripla() {
+	public Ligavel_Tipo getTipoAparelho() {
 		return tipoTripla;
 	}
 
-	public void setTipoTripla(Ligavel_Tipo tipoTripla) {
+	public void setTipoAparelho(Ligavel_Tipo tipoTripla) {
 		this.tipoTripla = tipoTripla;
 	}
 
-	public void setPotenciaTripla(Ligavel_Potencia potenciaTripla) {
+	public void setPotenciaAparelho(Ligavel_Potencia potenciaTripla) {
 		this.potenciaTripla = potenciaTripla;
 	}
 
@@ -134,22 +129,6 @@ public class Tripla implements Ligavel {
 
 	public void setnTomadas(long nTomadas) {
 		this.nTomadas = nTomadas;
-	}
-	
-	public long getTempoFim() {
-		return tempoFim;
-	}
-
-	public void setTempoFim(long tempoFim) {
-		this.tempoFim = tempoFim;
-	}
-
-	public long getTempoInicio() {
-		return tempoInicio;
-	}
-
-	public void setTempoInicio(long tempoInicio) {
-		this.tempoInicio = tempoInicio;
 	}
 
 	@Override
@@ -171,7 +150,4 @@ public class Tripla implements Ligavel {
 	public double potenciaActual() {
 		return potenciaActual;
 	}
-
-
-
 }

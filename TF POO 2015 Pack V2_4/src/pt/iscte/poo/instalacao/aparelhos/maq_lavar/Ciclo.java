@@ -6,7 +6,7 @@ import org.json.simple.JSONObject;
 public class Ciclo {
 	
 	//ATTRIBUTES
-	private int duracao;
+	private long duracao;
 	private double potencia;
 	
 	//CONSTRUCTOR
@@ -16,14 +16,29 @@ public class Ciclo {
 	}
 	
 	public Ciclo(JSONObject obj) {
-		//...
+		long duracao = (long)obj.get("duracao");
+		double potencia = (double)(long)obj.get("potencia");
+		
+		this.duracao = duracao;
+		this.potencia = potencia;
+		
+	}
+	
+	// TOSTRING
+	@Override
+	public String toString() {
+		String toReturn = "";
+		toReturn += "\n-> DURACAO: " + this.duracao;
+		toReturn += "\n-> POTENCIA: " + this.potencia;
+		toReturn += "\n";
+		return toReturn;
 	}
 
 	//GETTERS AND SETTERS
-	public int getDuracao() {
+	public long getDuracao() {
 		return duracao;
 	}
-	public void setDuracao(int duracao) {
+	public void setDuracao(long duracao) {
 		this.duracao = duracao;
 	}
 	public double getPotencia() {

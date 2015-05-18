@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import pt.iscte.poo.instalacao.Relogio;
-
 /** DAO */
 public class Programa {
 	
@@ -28,12 +26,25 @@ public class Programa {
 	
 	public Programa(JSONObject obj) {
 		id = (String)obj.get("id");
-		JSONArray tempCiclos = (JSONArray) obj.get("Ciclos");
+		JSONArray tempCiclos = (JSONArray) obj.get("ciclos");
 		
 		for (Object o : tempCiclos) {
 			JSONObject p = (JSONObject) o;
-			ciclos.add(new Ciclo(obj));		
+			ciclos.add(new Ciclo((p)));		
 		}
+	}
+	
+	// TOSTRING
+	@Override
+	public String toString() {
+		String toReturn = "";
+		toReturn += "\n-> ID: " + this.id;
+		toReturn += "\n-> CICLO SELECIONADO: " + this.selecionado;
+		toReturn += "\n-> ArrayList<Ciclo>: " + this.ciclos;
+		toReturn += "\n-> TEMPO_INICIAL: " + this.tempoInicio;
+		toReturn += "\n-> TEMPO_FINAL: " + 	this.tempoFim;
+		toReturn += "\n";
+		return toReturn;
 	}
 
 	//GETTERS AND SETTERS
@@ -69,10 +80,4 @@ public class Programa {
 		this.tempoInicio = tempoInicio;
 	}
 
-	/*
-	 * 				ligavel2.setTempoInicio(Relogio.getInstanciaUnica().getCounter());
-					long fimContador = Relogio.getInstanciaUnica().getCounter() + evento1.getTempo();
-					ligavel2.setTempoFim(fimContador);
-	 * */
-	
 }

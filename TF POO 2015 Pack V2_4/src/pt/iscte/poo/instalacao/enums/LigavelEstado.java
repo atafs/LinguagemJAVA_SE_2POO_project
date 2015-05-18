@@ -6,6 +6,8 @@
 package pt.iscte.poo.instalacao.enums;
 
 import org.json.simple.JSONObject;
+
+import pt.iscte.poo.instalacao.aparelhos.maq_lavar.Programa;
 import pt.iscte.poo.instalacao.eventos.Evento;
 import pt.iscte.poo.instalacao.eventos.EventoAumenta;
 import pt.iscte.poo.instalacao.eventos.EventoDesliga;
@@ -41,7 +43,7 @@ public enum LigavelEstado {
 	
 	// STATIC METHOD (from the class, not the instance)
 	/** Seleccao do novo evento */
-	public static Evento executaAccao(JSONObject obj) {
+	public static Evento guardaEventos(JSONObject obj) {
 
 		//JSONObject attributes
 		String accao = (String) obj.get("accao");
@@ -84,5 +86,7 @@ public enum LigavelEstado {
 		}
 		return null;
 	}
+	
+
 
 }

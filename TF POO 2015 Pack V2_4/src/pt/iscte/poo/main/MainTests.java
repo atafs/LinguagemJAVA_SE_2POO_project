@@ -74,12 +74,12 @@ public class MainTests {
 			// TO CREATE
 			instalacao.lerEventos(listaEventos);
 			
-//			// TO PRINT
-//			 System.out.println("----------------PRINT:LINHA DE NOVO------------------");
-//			 for (Linha linha : instalacao.getListLinhas()) {
-//				 System.err.println(linha.toString());
-//			 }
-//			 paragraph();
+			// TO PRINT
+			 System.out.println("----------------PRINT:LINHA DE NOVO------------------");
+			 for (Linha linha : instalacao.getListLinhas()) {
+				 System.err.println(linha.toString());
+			 }
+			 paragraph();
 			
 //			// TO PRINT
 //			System.out.println("----------------PRINT_08_EVENTOS_TEMPOS------------------");
@@ -94,10 +94,6 @@ public class MainTests {
 
 			grafico.setVisible(true);
 			instalacao.simula(fim);
-
-			// TO DELETE
-			System.err.println("fim: " + fim + ";[unidades]");
-			System.err.println("END WITH SUCCESS!!!");
 
 		} catch (IOException e) {
 			e.printStackTrace();

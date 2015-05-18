@@ -13,6 +13,7 @@ public class Tomada {
 	private Ligavel ligavel;
 	private Aparelho aparelho;
 	private ArrayList<Aparelho> listaAparelhos = new ArrayList<Aparelho>();
+	
 
 	// CONSTRUCTOR
 	public Tomada(String nome, LinhaTomadaEstado estadoLinha, ArrayList<Aparelho> listaAparelhos) {
@@ -48,7 +49,9 @@ public class Tomada {
 	public double somaPotenciaTomada() {
 		//LIMPAR CONTADOR
 		double potenciaNaTomada = 0.0;
+		
 		for (Aparelho aparelho : listaAparelhos) {
+
 			//APARELHOS POTENCIA FIXA
 			if (aparelho.estaLigado() && aparelho.getPotenciaAparelho().equals(Ligavel_Potencia.POTENCIA_MAXIMA) ) {
 				potenciaNaTomada += aparelho.potenciaMaxima();	
@@ -58,9 +61,12 @@ public class Tomada {
 				potenciaNaTomada += aparelho.potenciaActual();	
 			}		
 		}
+		
+		
+		
 		return potenciaNaTomada;
 	}
-
+	
 	// GETTERS AND SETTERS
 	public String getId() {
 		return nome;

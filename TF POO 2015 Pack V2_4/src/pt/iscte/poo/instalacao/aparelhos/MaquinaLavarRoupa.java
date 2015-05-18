@@ -2,7 +2,6 @@ package pt.iscte.poo.instalacao.aparelhos;
 
 import java.util.ArrayList;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import pt.iscte.poo.instalacao.aparelhos.maq_lavar.Programa;
@@ -20,18 +19,20 @@ public class MaquinaLavarRoupa extends AparelhoPotenciaVariavel {
 	//CONSTRUCTOR
 	public MaquinaLavarRoupa(String nome, double potenciaMaxima) {
 		super(nome, potenciaMaxima);
+		
+//		JSONArray tempPrograma = (JSONArray) obj.get("programas");
+//		for (Object o : tempPrograma) {
+//			JSONObject p = (JSONObject) o;
+//			programaSelecionado = null/*p.selecionado()*/;
+//			programas.add(new Programa(p));
+//			
+//		}
 	}
-	
+
 	public MaquinaLavarRoupa(JSONObject obj) {
 		super(obj);
 		
-		JSONArray tempPrograma = (JSONArray) obj.get("programas");
-		for (Object o : tempPrograma) {
-			JSONObject p = (JSONObject) o;
-			programaSelecionado = null/*p.selecionado()*/;
-			programas.add(new Programa(p));
-			
-		}
+
 	}
 	
 	//METHOD
@@ -70,6 +71,5 @@ public class MaquinaLavarRoupa extends AparelhoPotenciaVariavel {
 	public void setProgramaSelecionado(Programa programaSelecionado) {
 		this.programaSelecionado = programaSelecionado;
 	}
-	
 
 }

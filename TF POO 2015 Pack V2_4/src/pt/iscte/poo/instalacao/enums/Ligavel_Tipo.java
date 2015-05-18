@@ -16,6 +16,7 @@ import pt.iscte.poo.instalacao.aparelhos.MaquinaLavarRoupa;
 import pt.iscte.poo.instalacao.aparelhos.MicroOndas;
 import pt.iscte.poo.instalacao.aparelhos.Torradeira;
 import pt.iscte.poo.instalacao.aparelhos.Tripla;
+import pt.iscte.poo.instalacao.aparelhos.maq_lavar.Programa;
 
 public enum Ligavel_Tipo {
 	LAMPADAVARIAVEL("lampadaVariavel"), MAQLAVARROUPA("maqLavarRoupa"), TRIPLA("tripla"), COMPUTADOR("computador"), FRIGORIFICO("frigorifico"), LAMPADA("lampada"), MICROONDAS("microOndas"), TORRADEIRA("torradeira"), OTHERS("porCriar");;
@@ -82,6 +83,7 @@ public enum Ligavel_Tipo {
 				LampadaVariavel lampadaVariavel = new LampadaVariavel(id, potencia);	
 				lampadaVariavel.setEstadoAparelho(LigavelEstado.DESLIGA);
 				lampadaVariavel.setTipoAparelho(novo);
+				lampadaVariavel.setPotenciaActual(potencia);
 				lampadaVariavel.setPotenciaAparelho(novoAparelhoPotencia);
 				
 				listAparelhos.add(lampadaVariavel);
@@ -100,8 +102,8 @@ public enum Ligavel_Tipo {
 				int nTomadas = (int)(long) obj.get("nTomadas");
 				Tripla tripla = new Tripla(id, potencia, nTomadas);
 				tripla.setEstadoAparelho(LigavelEstado.DESLIGA);
-				tripla.setTipoTripla(novo);
-				tripla.setPotenciaTripla(novoAparelhoPotencia);
+				tripla.setTipoAparelho(novo);
+				tripla.setPotenciaAparelho(novoAparelhoPotencia);
 				
 				listTriplas.add(tripla);
 				return tripla;
@@ -110,6 +112,7 @@ public enum Ligavel_Tipo {
 				Computador computador = new Computador(id, potencia);
 				computador.setEstadoAparelho(LigavelEstado.DESLIGA);
 				computador.setTipoAparelho(novo);
+				computador.setPotenciaActual(potencia);
 				computador.setPotenciaAparelho(novoAparelhoPotencia);
 				
 				listAparelhos.add(computador);
@@ -119,6 +122,7 @@ public enum Ligavel_Tipo {
 				Frigorifico frigorifico = new Frigorifico(id, potencia);
 				frigorifico.setEstadoAparelho(LigavelEstado.DESLIGA);
 				frigorifico.setTipoAparelho(novo);
+				frigorifico.setPotenciaActual(potencia);
 				frigorifico.setPotenciaAparelho(novoAparelhoPotencia);
 				
 				listAparelhos.add(frigorifico);
@@ -128,6 +132,7 @@ public enum Ligavel_Tipo {
 				Lampada lampada = new Lampada(id, potencia);
 				lampada.setEstadoAparelho(LigavelEstado.DESLIGA);
 				lampada.setTipoAparelho(novo);
+				lampada.setPotenciaActual(potencia);
 				lampada.setPotenciaAparelho(novoAparelhoPotencia);
 				
 				listAparelhos.add(lampada);
@@ -137,6 +142,7 @@ public enum Ligavel_Tipo {
 				MicroOndas microOndas =  new MicroOndas(id, potencia);
 				microOndas.setEstadoAparelho(LigavelEstado.DESLIGA);
 				microOndas.setTipoAparelho(novo);
+				microOndas.setPotenciaActual(potencia);
 				microOndas.setPotenciaAparelho(novoAparelhoPotencia);
 				
 				listAparelhos.add(microOndas);
@@ -146,6 +152,7 @@ public enum Ligavel_Tipo {
 				Torradeira torradeira = new Torradeira(id, potencia);
 				torradeira.setEstadoAparelho(LigavelEstado.DESLIGA);
 				torradeira.setTipoAparelho(novo);
+				torradeira.setPotenciaActual(potencia);
 				torradeira.setPotenciaAparelho(novoAparelhoPotencia);
 				
 				listAparelhos.add(torradeira);

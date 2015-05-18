@@ -186,7 +186,7 @@ public class Instalacao extends Observable {
 						tomada.setEstadoLinha(LinhaTomadaEstado.USED);
 						
 						// ADICIONAR A TOMADA
-						tomada.setAparelho(aparelho);//DA ERRO NO JUNIT... CAN BE DELETED
+						tomada.setAparelho(aparelho);
 						tomada.getListaAparelhos().add(aparelho);
 						
 						//ADD TO LIST Ligavel
@@ -221,15 +221,25 @@ public class Instalacao extends Observable {
 						// ADICIONAR A TOMADA
 						tomada.setLigavel(ligavel);
 						
-						//ADD TO LIST Ligavel
-						for (Ligavel ligavelTemp : ligaveis) {
-							///VERIFICA SE NA LIST Ligaveis EXISTE ESTA ENTRADA
-							if (ligavelTemp.equals(ligavel)) {
-								ligavel.setEstadoAparelho(LigavelEstado.EM_ESPERA);
-//								// GUARDAR EM QUE TOMADA O APARELHO ESTA LIGADO
-//								ligavel.setTomada(tomada);
-							}
-						 }
+						if (ligavel.getId().equals(Ligavel_Tipo.TRIPLA.toString())) {
+							ligavel.setEstadoAparelho(LigavelEstado.EM_ESPERA);
+							System.err.println("FOI ADICIONADO UMA TRIPLA");
+
+						} else { 
+							ligavel.setEstadoAparelho(LigavelEstado.EM_ESPERA);
+							tomada.getListaAparelhos().add((Aparelho) ligavel);
+						}
+						
+						
+//						//ADD TO LIST Ligavel
+//						for (Ligavel ligavelTemp : ligaveis) {
+//							///VERIFICA SE NA LIST Ligaveis EXISTE ESTA ENTRADA
+//							if (ligavelTemp.equals(ligavel)) {
+//								ligavel.setEstadoAparelho(LigavelEstado.EM_ESPERA);
+////								// GUARDAR EM QUE TOMADA O APARELHO ESTA LIGADO
+////								ligavel.setTomada(tomada);
+//							}
+//						 }
 						return;
 					}
 				}
@@ -315,25 +325,25 @@ public class Instalacao extends Observable {
 			//PERCORRER A LISTA DE LIGAVEIS
 			for (Ligavel ligavel : ligaveis) {
 				
-				//EXISTE UMA TRIPLA (ligavel e ligacao)
+				//SE LIGAVEL E LIGACAO EXISTIREM
 				if (ligavel.getId().equals(ligacao.getId())) {
+					
 					//EXISTE UMA TRIPLA (ligavel e ligacao)
-
 					if (ligacao.getId().equals(Ligavel_Tipo.TRIPLA.toString())) {
 						//PERCORRER A LISTA DE LINHAS
 						for (Linha linha : listLinhas) {
 							if (linha.getId().equals(ligacao.getLigadoA())) {
 								int nTomadasTripla = (int)searchTriplaList_nTomadas(ligacao.getId());
 								long nTomadasLinha = linha.getNumeroTomadas();
-								int total = (int) (nTomadasTripla + nTomadasLinha);
+								int total = (int) (nTomadasTripla + nTomadasLinha - 1); //tomada usada pela tripla
 								linha.setNumeroTomadas(total);
 								
 								//ADICIONAR NOVAS TOMADAS COM A INFORMACAO DO ID 
 								//para ser mais facil saber na linha a que tomada pertencem
-								linha.instalarTomadas(nTomadasTripla, ligacao.getId());
+								linha.instalarTomadas((long)nTomadasTripla - 1/*, ligacao.getId()*/);
 							}
 						}
-						ligaAparelhoATomadaLivre(ligacao.getLigadoA(), ligavel);
+						//ligaAparelhoATomadaLivre(ligacao.getLigadoA(), ligavel);
 					} else {
 						ligaAparelhoATomadaLivre(ligacao.getLigadoA(), ligavel);
 
@@ -365,27 +375,45 @@ public class Instalacao extends Observable {
 			JSONObject obj = (JSONObject) object;
 			
 			//READ FROM JSON and SELECT ACTION
-			Evento evento = LigavelEstado.executaAccao(obj); 	
+			Evento evento = LigavelEstado.guardaEventos(obj); 	
 			eventos.add(evento);
 		}
-		
-		//LIGA LIGAVEL MUDANDO O ESTADO E REGISTANDO TEMPOS (inicio e fim)
-		for (Evento evento1 : eventos) {
-			//PERCORRER A LISTA DE LIGAVEIS
-			for (Ligavel ligavel2 : ligaveis) {
-				if (ligavel2.getId().equals(evento1.getIdAparelho())) {
-					//MUDAR ESTADO LIGAVEL E TEMPOS INICIO E FIM
-					ligavel2.setEstadoAparelho(evento1.getEstado());
-
-				}
-			}
-		}
-		
+	
 		//TO DELETE
 		System.out.println("----------------PRINT_06_EVENTOS------------------");
 		for (Evento evento : eventos) {
 			System.out.println(evento.toString());
 		}	
+		
+		// TO PRINT
+		System.out.println("----------------PRINT_07_LIGAVEIS------------------");
+		for (Ligavel ligavel : ligaveis) {
+			System.err.println(ligavel.toString());
+		}
+		
+	}
+	
+	/** */
+	public void executaEventos() {
+		//LIGA LIGAVEL MUDANDO O ESTADO E REGISTANDO TEMPOS (inicio e fim)
+		for (Evento evento1 : eventos) {
+			//PERCORRER A LISTA DE LIGAVEIS
+			for (Ligavel ligavel2 : ligaveis) {
+				//EXISTIR NA LISTA DE EVENTOS O LIGAVEL
+				if (ligavel2.getId().equals(evento1.getIdAparelho())) {
+					//EXISTIR O TEMPO IGUAL TEMPO ACTUAL
+					
+					if (Relogio.getInstanciaUnica().getTempoAtual() == (int)evento1.getTempo()) {
+						//MUDAR ESTADO LIGAVEL E TEMPOS INICIO E FIM
+						
+						ligavel2.setEstadoAparelho(evento1.getEstado());
+						
+						//TO DELETE
+						System.err.println(ligavel2.getId() + " = " + ligavel2.getEstadoAparelho());
+					}			 
+				}
+			}
+		}
 	}
 	
 	/** Search for the nTomadas in a Class Tripla object, kept in a list of triplas */
@@ -402,12 +430,46 @@ public class Instalacao extends Observable {
 	/** */
 	public void simula(long fim){
 		
+//		//LIST PriorityQUEUE and COMPARATOR
+//		Comparator<Evento> comparator = new StringLengthComparator();
+//        PriorityQueue<Evento> listQueue =  new PriorityQueue<Evento>(20, comparator);
+//   
+//        //ADD EVENTOS TO QUEUE
+//        for (Evento evento : eventos) {
+//        	listQueue.add(evento);
+//		}
+        
+//        //ORDENAR A LISTA
+//        Collections.sort(listQueue);
+       
 		//START THE CLOCK
 		int t;
 		for (t = 0; t != fim; t++) {
+			//VERIFICA OS EVENTOS E ACTUALIZA ESTADOS
+			executaEventos();
+			//PRINT TO CONSOLE
+			System.out.println(this.toString());
+			
+//			// TO PRINT
+//			System.out.println("----------------PRINT_07_LIGAVEIS------------------");
+//			for (Ligavel ligavel : ligaveis) {
+//				System.err.println(ligavel.toString());
+//			}
+//			
+			//ADD +1 COUNTER
 			Relogio.getInstanciaUnica().tique();
 		}
 		
+		// TO DELETE
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		System.err.println("fim: " + fim + ";[unidades]");
+		System.err.println("END WITH SUCCESS!!!");
 	}
 	
 }

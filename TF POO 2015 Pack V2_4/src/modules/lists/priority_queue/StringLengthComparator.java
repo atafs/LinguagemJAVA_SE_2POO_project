@@ -2,8 +2,10 @@ package modules.lists.priority_queue;
 
 import java.util.Comparator;
 
-public class StringLengthComparator implements Comparator<String> {
+import pt.iscte.poo.instalacao.eventos.Evento;
 
+public class StringLengthComparator implements Comparator<String> {
+	
 	@Override
 	public int compare(String x, String y) {
 		// Assume neither string is null. Real code should
