@@ -1,20 +1,15 @@
 package pt.iscte.poo.instalacao.eventos;
 
-import pt.iscte.poo.instalacao.aparelhos.maq_lavar.Programa;
-
 public class EventoPrograma extends Evento{
 
 	//ATTRIBUTE EXTRA
 	private String id;
-	private Programa programa;
+	private String programa;
 	
 	//CONSTRUCTOR
 	public EventoPrograma(String accao, String idAparelho, long tempo, String programa) {
 		super(accao, idAparelho, tempo);
-		this.id = programa;
-		
-		//TO DELETE
-		startProgram();
+		this.programa = programa;
 	}
 	
 	// TOSTRING
@@ -27,20 +22,22 @@ public class EventoPrograma extends Evento{
 	}
 
 	//GETTERS AND SETTERS
-	public String getPrograma() {
+	public String getId() {
 		return id;
 	}
 
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getPrograma() {
+		return programa;
+	}
+
 	public void setPrograma(String programa) {
-		this.id = programa;
+		this.programa = programa;
 	}
-	
-	//OTHER METHODS
-	public void startProgram() {
-		programa = new Programa(id, null);
-		System.err.println(programa.toString());
-	}
-	
 
 	
+
 }

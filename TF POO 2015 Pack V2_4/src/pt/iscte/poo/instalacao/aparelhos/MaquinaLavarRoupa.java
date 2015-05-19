@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import org.json.simple.JSONObject;
 
+import pt.iscte.poo.instalacao.Relogio;
+import pt.iscte.poo.instalacao.aparelhos.maq_lavar.Ciclo;
 import pt.iscte.poo.instalacao.aparelhos.maq_lavar.Programa;
 import pt.iscte.poo.instalacao.enums.MaqLavarRoupaEstado;
 
@@ -11,10 +13,8 @@ public class MaquinaLavarRoupa extends AparelhoPotenciaVariavel {
 
 	//ATTRIBUTES
 	private ArrayList<Programa> programas = new ArrayList<Programa>();
-	private Programa programaSelecionado = null;
+	private String programaSelecionado = null;
 	private MaqLavarRoupaEstado estado;
-	
-	
 	
 	//CONSTRUCTOR
 	public MaquinaLavarRoupa(String nome, double potenciaMaxima) {
@@ -32,19 +32,46 @@ public class MaquinaLavarRoupa extends AparelhoPotenciaVariavel {
 	public MaquinaLavarRoupa(JSONObject obj) {
 		super(obj);
 		
-
+	}
+	
+	// TOSTRING
+	@Override
+	public String toString() {
+		String toReturn = "";
+		toReturn += "\n-> programas: " + this.programas;
+		toReturn += "\n-> programaSelecionado: " + this.programaSelecionado;
+		toReturn += "\n-> estado: " + this.estado;
+		toReturn += "\n";
+		return toReturn;
 	}
 	
 	//METHOD
-	public void inicio(String p) {
+	public double potenciaActualMaquina() {
+		
+		//CICLO PARA BUSCAR O PROGRAMA CERTO
+		for (Programa programa : programas) {
+			if (programa.getId().equals(programaSelecionado)) {
+				long tempoInicial = programa.getTempoInicio();
+				long tempoActual = Relogio.getInstanciaUnica().getTempoAtual();
+				long diferenca = tempoActual - tempoInicial;
+				
+				//CICLO PARA BUSCAR A POTENCIA CERTA
+				for (Ciclo ciclo : programa.getCiclos()) {
+					if (diferenca <= ciclo.getDuracao()) {
+						return ciclo.getPotencia();
+					}
+				}
+			}
+		}
+		return 0.0;
+		
+	
 		//String nome Programa
 		//se existir, guardo em Programa
 		
 		//int tempoInicial
 		//Relogio.getInstanciUnica = instanciaActual
-		//Ti Tf
-		
-		
+		//Ti Tf	
 	}
 	
 	//GETTERS AND SETTERS
@@ -64,11 +91,11 @@ public class MaquinaLavarRoupa extends AparelhoPotenciaVariavel {
 		this.programas = programas;
 	}
 
-	public Programa getProgramaSelecionado() {
+	public String getProgramaSelecionado() {
 		return programaSelecionado;
 	}
 
-	public void setProgramaSelecionado(Programa programaSelecionado) {
+	public void setProgramaSelecionado(String programaSelecionado) {
 		this.programaSelecionado = programaSelecionado;
 	}
 

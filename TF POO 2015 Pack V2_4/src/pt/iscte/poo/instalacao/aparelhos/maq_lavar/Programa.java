@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import pt.iscte.poo.instalacao.Ligavel;
+import pt.iscte.poo.instalacao.enums.Ligavel_Tipo;
+
 /** DAO */
 public class Programa {
 	
@@ -15,23 +18,12 @@ public class Programa {
 	
 	// GUARDAR TEMPOS DE INICIO E FIM
 	private long tempoInicio = 0;
-	private long tempoFim = 0;
+	//private long tempoFim = 0;
 	
 	//CONSTRUCTOR
-	public Programa(String id, Ciclo selecionado) {
+	public Programa(String id) {
 		this.id = id;
-		this.selecionado = selecionado;
 		ciclos = new ArrayList<Ciclo>();
-	}
-	
-	public Programa(JSONObject obj) {
-		id = (String)obj.get("id");
-		JSONArray tempCiclos = (JSONArray) obj.get("ciclos");
-		
-		for (Object o : tempCiclos) {
-			JSONObject p = (JSONObject) o;
-			ciclos.add(new Ciclo((p)));		
-		}
 	}
 	
 	// TOSTRING
@@ -40,13 +32,15 @@ public class Programa {
 		String toReturn = "";
 		toReturn += "\n-> ID: " + this.id;
 		toReturn += "\n-> CICLO SELECIONADO: " + this.selecionado;
-		toReturn += "\n-> ArrayList<Ciclo>: " + this.ciclos;
+		for (Ciclo ciclo : ciclos) {
+			toReturn += "\n-> Ciclo: " + ciclo;
+		}
 		toReturn += "\n-> TEMPO_INICIAL: " + this.tempoInicio;
-		toReturn += "\n-> TEMPO_FINAL: " + 	this.tempoFim;
+		//toReturn += "\n-> TEMPO_FINAL: " + 	this.tempoFim;
 		toReturn += "\n";
 		return toReturn;
 	}
-
+	
 	//GETTERS AND SETTERS
 	public String getId() {
 		return id;
@@ -64,13 +58,13 @@ public class Programa {
 		this.selecionado = selecionado;
 	}
 	
-	public long getTempoFim() {
-		return tempoFim;
-	}
-
-	public void setTempoFim(long tempoFim) {
-		this.tempoFim = tempoFim;
-	}
+//	public long getTempoFim() {
+//		return tempoFim;
+//	}
+//
+//	public void setTempoFim(long tempoFim) {
+//		this.tempoFim = tempoFim;
+//	}
 
 	public long getTempoInicio() {
 		return tempoInicio;
@@ -78,6 +72,22 @@ public class Programa {
 
 	public void setTempoInicio(long tempoInicio) {
 		this.tempoInicio = tempoInicio;
+	}
+
+	public Ciclo getSelecionado() {
+		return selecionado;
+	}
+
+	public void setSelecionado(Ciclo selecionado) {
+		this.selecionado = selecionado;
+	}
+
+	public ArrayList<Ciclo> getCiclos() {
+		return ciclos;
+	}
+
+	public void setCiclos(ArrayList<Ciclo> ciclos) {
+		this.ciclos = ciclos;
 	}
 
 }

@@ -17,7 +17,7 @@ public class Ciclo {
 	
 	public Ciclo(JSONObject obj) {
 		long duracao = (long)obj.get("duracao");
-		double potencia = (double)(long)obj.get("potencia");
+		double potencia = (double)obj.get("potencia");
 		
 		this.duracao = duracao;
 		this.potencia = potencia;
@@ -28,9 +28,9 @@ public class Ciclo {
 	@Override
 	public String toString() {
 		String toReturn = "";
-		toReturn += "\n-> DURACAO: " + this.duracao;
-		toReturn += "\n-> POTENCIA: " + this.potencia;
-		toReturn += "\n";
+		toReturn += "[ -> DURACAO: " + this.duracao;
+		toReturn += ", -> POTENCIA: " + this.potencia;
+		toReturn += " ]";
 		return toReturn;
 	}
 

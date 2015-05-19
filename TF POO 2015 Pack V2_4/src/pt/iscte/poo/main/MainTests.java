@@ -74,12 +74,12 @@ public class MainTests {
 			// TO CREATE
 			instalacao.lerEventos(listaEventos);
 			
-			// TO PRINT
-			 System.out.println("----------------PRINT:LINHA DE NOVO------------------");
-			 for (Linha linha : instalacao.getListLinhas()) {
-				 System.err.println(linha.toString());
-			 }
-			 paragraph();
+//			// TO PRINT
+//			 System.out.println("----------------PRINT:LINHA DE NOVO------------------");
+//			 for (Linha linha : instalacao.getListLinhas()) {
+//				 System.err.println(linha.toString());
+//			 }
+//			 paragraph();
 			
 //			// TO PRINT
 //			System.out.println("----------------PRINT_08_EVENTOS_TEMPOS------------------");

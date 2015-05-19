@@ -3,11 +3,11 @@ package pt.iscte.poo.instalacao.enums;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import pt.iscte.poo.instalacao.Aparelho;
 import pt.iscte.poo.instalacao.Ligavel;
-import pt.iscte.poo.instalacao.Tomada;
 import pt.iscte.poo.instalacao.aparelhos.Computador;
 import pt.iscte.poo.instalacao.aparelhos.Frigorifico;
 import pt.iscte.poo.instalacao.aparelhos.Lampada;
@@ -16,10 +16,11 @@ import pt.iscte.poo.instalacao.aparelhos.MaquinaLavarRoupa;
 import pt.iscte.poo.instalacao.aparelhos.MicroOndas;
 import pt.iscte.poo.instalacao.aparelhos.Torradeira;
 import pt.iscte.poo.instalacao.aparelhos.Tripla;
+import pt.iscte.poo.instalacao.aparelhos.maq_lavar.Ciclo;
 import pt.iscte.poo.instalacao.aparelhos.maq_lavar.Programa;
 
 public enum Ligavel_Tipo {
-	LAMPADAVARIAVEL("lampadaVariavel"), MAQLAVARROUPA("maqLavarRoupa"), TRIPLA("tripla"), COMPUTADOR("computador"), FRIGORIFICO("frigorifico"), LAMPADA("lampada"), MICROONDAS("microOndas"), TORRADEIRA("torradeira"), OTHERS("porCriar");;
+	LAMPADAVARIAVEL("lampadaVariavel"), MAQLAVARROUPA("maqLavar"), TRIPLA("tripla"), COMPUTADOR("computador"), FRIGORIFICO("frigorifico"), LAMPADA("lampada"), MICROONDAS("microOndas"), TORRADEIRA("torradeira"), OTHERS("porCriar");;
 	
 	// ATTRIBUTES
 	private String text;
@@ -91,6 +92,38 @@ public enum Ligavel_Tipo {
 				
 			case MAQLAVARROUPA:
 				MaquinaLavarRoupa maqLavarRoupa = new MaquinaLavarRoupa(id, potencia);
+				
+				// NOVO PROGRAMA
+				JSONArray programas = (JSONArray) obj.get("programas");
+				for(Object object: programas) {
+					JSONObject obj1 = (JSONObject) object;
+					
+					//ADDICIONA 
+					String id1 = (String)obj1.get("id");
+					Programa programa = new Programa(id1);
+					
+					JSONArray ciclos = (JSONArray) obj1.get("ciclos");
+					
+					// NOVO CICLO
+					for (Object object1 : ciclos) {
+						JSONObject obj2 = (JSONObject) object1;
+						
+						int duracao = (int)(long)obj2.get("duracao");
+						double potencia2 = (double)obj2.get("potencia");
+						
+						//ADDICIONA 
+						Ciclo ciclo = new Ciclo(duracao, potencia2);
+						programa.getCiclos().add(ciclo);
+					}
+					maqLavarRoupa.getProgramas().add(programa);
+				}
+				
+//				//TO DELETE
+//				 System.out.println("----------------PRINT_08_PROGRAMA------------------");
+//				 for (Programa programa : maqLavarRoupa.getProgramas()) {
+//					 System.err.println(programa.toString());
+//				 }
+				
 				maqLavarRoupa.setEstadoAparelho(LigavelEstado.DESLIGA);
 				maqLavarRoupa.setTipoAparelho(novo);
 				maqLavarRoupa.setPotenciaAparelho(novoAparelhoPotencia);

@@ -8,11 +8,15 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import pt.iscte.poo.graficos.Chart;
+import pt.iscte.poo.instalacao.aparelhos.MaquinaLavarRoupa;
 import pt.iscte.poo.instalacao.aparelhos.Tripla;
+import pt.iscte.poo.instalacao.aparelhos.maq_lavar.Programa;
 import pt.iscte.poo.instalacao.enums.LigavelEstado;
 import pt.iscte.poo.instalacao.enums.Ligavel_Tipo;
 import pt.iscte.poo.instalacao.enums.LinhaTomadaEstado;
 import pt.iscte.poo.instalacao.eventos.Evento;
+import pt.iscte.poo.instalacao.eventos.EventoAumenta;
+import pt.iscte.poo.instalacao.eventos.EventoPrograma;
 import pt.iscte.poo.instalacao.ligacoes.Ligacao;
 
 public class Instalacao extends Observable {
@@ -379,17 +383,17 @@ public class Instalacao extends Observable {
 			eventos.add(evento);
 		}
 	
-		//TO DELETE
-		System.out.println("----------------PRINT_06_EVENTOS------------------");
-		for (Evento evento : eventos) {
-			System.out.println(evento.toString());
-		}	
+//		//TO DELETE
+//		System.out.println("----------------PRINT_06_EVENTOS------------------");
+//		for (Evento evento : eventos) {
+//			System.out.println(evento.toString());
+//		}	
 		
-		// TO PRINT
-		System.out.println("----------------PRINT_07_LIGAVEIS------------------");
-		for (Ligavel ligavel : ligaveis) {
-			System.err.println(ligavel.toString());
-		}
+//		// TO PRINT
+//		System.out.println("----------------PRINT_07_LIGAVEIS------------------");
+//		for (Ligavel ligavel : ligaveis) {
+//			System.err.println(ligavel.toString());
+//		}
 		
 	}
 	
@@ -397,6 +401,11 @@ public class Instalacao extends Observable {
 	public void executaEventos() {
 		//LIGA LIGAVEL MUDANDO O ESTADO E REGISTANDO TEMPOS (inicio e fim)
 		for (Evento evento1 : eventos) {
+			
+			
+			Aparelho aparelho = null;
+			MaquinaLavarRoupa maquinaLavarRoupa = null;
+			Ligavel ligavelTemp = null;
 			//PERCORRER A LISTA DE LIGAVEIS
 			for (Ligavel ligavel2 : ligaveis) {
 				//EXISTIR NA LISTA DE EVENTOS O LIGAVEL
@@ -407,9 +416,73 @@ public class Instalacao extends Observable {
 						//MUDAR ESTADO LIGAVEL E TEMPOS INICIO E FIM
 						
 						ligavel2.setEstadoAparelho(evento1.getEstado());
-						
+
 						//TO DELETE
-						System.err.println(ligavel2.getId() + " = " + ligavel2.getEstadoAparelho());
+						System.err.println(evento1.getIdAparelho());
+						System.err.println(Ligavel_Tipo.MAQLAVARROUPA.toString());
+						System.err.println(evento1.getAccao());
+						System.err.println(LigavelEstado.PROGRAMA.toString());
+						// TO DELETE
+						try {
+							Thread.sleep(500);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+						
+						
+						//ADICIONA STRING COM O PROGRAMA SE A ACCAO FOR PROGRAMA						
+						if (evento1.getIdAparelho().equals(Ligavel_Tipo.MAQLAVARROUPA.toString()) && evento1.getAccao().equals(LigavelEstado.PROGRAMA.toString())) {
+				
+							//ligavelTemp = ligavel2;
+							aparelho = (Aparelho) ligavel2;
+							//ligaveis.remove(ligavel2);
+							maquinaLavarRoupa = (MaquinaLavarRoupa)aparelho;
+							EventoPrograma eventoPrograma = (EventoPrograma)evento1;
+							maquinaLavarRoupa.setProgramaSelecionado(eventoPrograma.getPrograma());
+							maquinaLavarRoupa.setEstadoAparelho(LigavelEstado.LIGA);
+
+							//ligaveis.add((Ligavel)maquinaLavarRoupa);
+						}
+						
+						//LIGA MAQUINA LAVAR ROUPA COLOCANDO O TEMPO NUMA VARIAVEL
+						if (evento1.getIdAparelho().equals(Ligavel_Tipo.MAQLAVARROUPA.toString()) && evento1.getAccao().equals(LigavelEstado.LIGA.toString())) {
+							
+							//ligavelTemp = ligavel2;
+							aparelho = (Aparelho) ligavel2;
+							//ligaveis.remove(ligavel2);
+							maquinaLavarRoupa = (MaquinaLavarRoupa)aparelho;
+							
+							//TO DELETE
+							System.err.println("I AM HERE");
+							
+							for (Programa programa : maquinaLavarRoupa.getProgramas()) {
+								if (programa.getId().equals(maquinaLavarRoupa.getProgramaSelecionado())) {
+									programa.setTempoInicio(evento1.getTempo());
+								}
+							}
+							maquinaLavarRoupa.setPotenciaActual(maquinaLavarRoupa.potenciaActualMaquina());
+							
+							//ligaveis.add((Ligavel)maquinaLavarRoupa);
+						}
+						
+						//AUMENTA VALOR DO APARELHO
+						if (evento1.getAccao().equals(LigavelEstado.AUMENTA.toString())) {
+							
+							//ligavelTemp = ligavel2;
+							aparelho = (Aparelho) ligavel2;
+							//ligaveis.remove(ligavel2);
+							EventoAumenta eventoAumenta = (EventoAumenta)evento1;
+							aparelho.aumenta((int)eventoAumenta.getAumenta());
+							aparelho.setEstadoAparelho(LigavelEstado.LIGA);//manter ligado, mesmo apos aumentar
+							//ligaveis.add((Ligavel)aparelho);
+						}
+						
+						
+						
+//						//TO DELETE
+//						System.err.println(ligavel2.getId() + " = " + ligavel2.getEstadoAparelho());
 					}			 
 				}
 			}
