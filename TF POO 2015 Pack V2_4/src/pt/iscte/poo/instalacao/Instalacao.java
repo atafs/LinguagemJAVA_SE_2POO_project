@@ -445,9 +445,7 @@ public class Instalacao extends Observable {
 							EventoPrograma eventoPrograma = (EventoPrograma)evento1;
 							maquinaLavarRoupa.setProgramaSelecionado(eventoPrograma.getPrograma());
 							maquinaLavarRoupa.setEstadoAparelho(LigavelEstado.LIGA);
-							
-							
-
+				
 							//ligaveis.add((Ligavel)maquinaLavarRoupa);
 						}
 						
@@ -481,25 +479,19 @@ public class Instalacao extends Observable {
 							EventoAumenta eventoAumenta = (EventoAumenta)evento1;
 							aparelho.aumenta((int)eventoAumenta.getAumenta());
 							aparelho.setEstadoAparelho(LigavelEstado.LIGA);//manter ligado, mesmo apos aumentar
-							aparelho.aumenta((int)eventoAumenta.getAumenta());
 							//ligaveis.add((Ligavel)aparelho);
-							
-	
-							
+
 							//VOLTA A COLOCAR NA LISTA
 							ligavel2 = (Ligavel)aparelho;
 							
-						
+							//TO DELETE
+							System.out.println("----------------PRINT_02_APARELHOS_DONE------------------");
+							System.out.println(ligavel2.toString());
 							
+	
 						}
-						
 						//EXIT LOOP
 						break;
-						
-						
-						
-//						//TO DELETE
-//						System.err.println(ligavel2.getId() + " = " + ligavel2.getEstadoAparelho());
 					}
 				}
 				
@@ -512,10 +504,6 @@ public class Instalacao extends Observable {
 				else if (Relogio.getInstanciaUnica().getTempoAtual() > (int)evento1.getTempo()) { 
 					break;
 				} 
-				
-				
-
-				
 			}
 		}
 	}

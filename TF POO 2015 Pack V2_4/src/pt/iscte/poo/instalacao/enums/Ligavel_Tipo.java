@@ -84,7 +84,10 @@ public enum Ligavel_Tipo {
 				LampadaVariavel lampadaVariavel = new LampadaVariavel(id, potencia);	
 				lampadaVariavel.setEstadoAparelho(LigavelEstado.DESLIGA);
 				lampadaVariavel.setTipoAparelho(novo);
-				lampadaVariavel.setPotenciaActual(potencia);
+				//POTENCIA MAXIMA DO APARELHO
+				lampadaVariavel.setPotenciaMaxima(potencia);
+				//POTENCIA INICIAL DO APARELHO (50% DA POTENCIA MAXIMA)
+				lampadaVariavel.setPotenciaActual(potencia/2);
 				lampadaVariavel.setPotenciaAparelho(novoAparelhoPotencia);
 				
 				listAparelhos.add(lampadaVariavel);
