@@ -57,7 +57,7 @@ public class MaquinaLavarRoupa extends AparelhoPotenciaVariavel {
 				
 				//CICLO PARA BUSCAR A POTENCIA CERTA
 				for (Ciclo ciclo : programa.getCiclos()) {
-					if (diferenca <= ciclo.getDuracao()) {
+					if (diferenca < ciclo.getDuracao()) {
 						return ciclo.getPotencia();
 					}
 				}
