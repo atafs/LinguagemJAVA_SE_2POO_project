@@ -402,35 +402,38 @@ public class Instalacao extends Observable {
 		//LIGA LIGAVEL MUDANDO O ESTADO E REGISTANDO TEMPOS (inicio e fim)
 		for (Evento evento1 : eventos) {
 			
-			
-			Aparelho aparelho = null;
-			MaquinaLavarRoupa maquinaLavarRoupa = null;
-			Ligavel ligavelTemp = null;
 			//PERCORRER A LISTA DE LIGAVEIS
 			for (Ligavel ligavel2 : ligaveis) {
-				//EXISTIR NA LISTA DE EVENTOS O LIGAVEL
-				if (ligavel2.getId().equals(evento1.getIdAparelho())) {
-					//EXISTIR O TEMPO IGUAL TEMPO ACTUAL
+				
+				//EXISTIR O TEMPO IGUAL TEMPO ACTUAL
+				if (Relogio.getInstanciaUnica().getTempoAtual() == (int)evento1.getTempo()) {
 					
-					if (Relogio.getInstanciaUnica().getTempoAtual() == (int)evento1.getTempo()) {
-						//MUDAR ESTADO LIGAVEL E TEMPOS INICIO E FIM
-						
-						ligavel2.setEstadoAparelho(evento1.getEstado());
+					//EXISTIR NA LISTA DE EVENTOS O LIGAVEL
+					if (ligavel2.getId().equals(evento1.getIdAparelho())) {
 
-						//TO DELETE
-						System.err.println(evento1.getIdAparelho());
-						System.err.println(Ligavel_Tipo.MAQLAVARROUPA.toString());
-						System.err.println(evento1.getAccao());
-						System.err.println(LigavelEstado.PROGRAMA.toString());
+						//MUDAR ESTADO LIGAVEL E TEMPOS INICIO E FIM
+						ligavel2.setEstadoAparelho(evento1.getEstado());
+						
+
+//						//TO DELETE
+//						System.err.println(ligavel2.getId());
+//						System.err.println(evento1.getIdAparelho());
+//						System.err.println(Relogio.getInstanciaUnica().getTempoAtual());
+//						System.err.println(evento1.getTempo());
+//						System.err.println(evento1.getEstado());
+
 						// TO DELETE
 						try {
-							Thread.sleep(500);
+							Thread.sleep(250);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-						
-						
+							
+						//local variables
+						Aparelho aparelho = null;
+						MaquinaLavarRoupa maquinaLavarRoupa = null;
+						Ligavel ligavelTemp = null;
 						
 						//ADICIONA STRING COM O PROGRAMA SE A ACCAO FOR PROGRAMA						
 						if (evento1.getIdAparelho().equals(Ligavel_Tipo.MAQLAVARROUPA.toString()) && evento1.getAccao().equals(LigavelEstado.PROGRAMA.toString())) {
@@ -442,6 +445,8 @@ public class Instalacao extends Observable {
 							EventoPrograma eventoPrograma = (EventoPrograma)evento1;
 							maquinaLavarRoupa.setProgramaSelecionado(eventoPrograma.getPrograma());
 							maquinaLavarRoupa.setEstadoAparelho(LigavelEstado.LIGA);
+							
+							
 
 							//ligaveis.add((Ligavel)maquinaLavarRoupa);
 						}
@@ -476,15 +481,41 @@ public class Instalacao extends Observable {
 							EventoAumenta eventoAumenta = (EventoAumenta)evento1;
 							aparelho.aumenta((int)eventoAumenta.getAumenta());
 							aparelho.setEstadoAparelho(LigavelEstado.LIGA);//manter ligado, mesmo apos aumentar
+							aparelho.aumenta((int)eventoAumenta.getAumenta());
 							//ligaveis.add((Ligavel)aparelho);
+							
+	
+							
+							//VOLTA A COLOCAR NA LISTA
+							ligavel2 = (Ligavel)aparelho;
+							
+						
+							
 						}
+						
+						//EXIT LOOP
+						break;
 						
 						
 						
 //						//TO DELETE
 //						System.err.println(ligavel2.getId() + " = " + ligavel2.getEstadoAparelho());
-					}			 
+					}
 				}
+				
+				//EXIT: SE O TEMPO DO EVENTO FOR MAIOR QUE O TEMPO ACTUAL, INTERROMPE O METODO
+				else if (Relogio.getInstanciaUnica().getTempoAtual() < (int)evento1.getTempo()) { 
+					return;
+				} 
+				
+				//EXIT: SE O TEMPO ACTUAL FOR MAIOR QUE O EVENTO, INTERROMPE O CICLO
+				else if (Relogio.getInstanciaUnica().getTempoAtual() > (int)evento1.getTempo()) { 
+					break;
+				} 
+				
+				
+
+				
 			}
 		}
 	}
@@ -501,7 +532,7 @@ public class Instalacao extends Observable {
 	}
 
 	/** */
-	public void simula(long fim){
+public void simula(long fim){
 		
 //		//LIST PriorityQUEUE and COMPARATOR
 //		Comparator<Evento> comparator = new StringLengthComparator();
@@ -516,33 +547,24 @@ public class Instalacao extends Observable {
 //        Collections.sort(listQueue);
        
 		//START THE CLOCK
-		int t;
-		for (t = 0; t != fim; t++) {
+		//TO DELETE, CHANGE CLOCK TO START AT...
+		int t = 49;
+		Relogio.getInstanciaUnica().setCounter(t);
+		
+		for (t = 49; t != fim; t++) {
 			//VERIFICA OS EVENTOS E ACTUALIZA ESTADOS
 			executaEventos();
 			//PRINT TO CONSOLE
 			System.out.println(this.toString());
-			
-//			// TO PRINT
-//			System.out.println("----------------PRINT_07_LIGAVEIS------------------");
-//			for (Ligavel ligavel : ligaveis) {
-//				System.err.println(ligavel.toString());
-//			}
-//			
-			//ADD +1 COUNTER
+			//INCREMENT +1
 			Relogio.getInstanciaUnica().tique();
 		}
 		
-		// TO DELETE
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		//FINAL MESSAGE
+		if (t == fim) {
+			System.err.println("fim: " + (fim-1) + ";[unidades]");
+			System.err.println("END WITH SUCCESS!!!");
 		}
-
-		System.err.println("fim: " + fim + ";[unidades]");
-		System.err.println("END WITH SUCCESS!!!");
 	}
 	
 }
