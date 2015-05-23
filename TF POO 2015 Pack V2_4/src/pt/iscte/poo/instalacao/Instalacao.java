@@ -484,11 +484,9 @@ public class Instalacao extends Observable {
 							//VOLTA A COLOCAR NA LISTA
 							ligavel2 = (Ligavel)aparelho;
 							
-							//TO DELETE
-							System.out.println("----------------PRINT_02_APARELHOS_DONE------------------");
-							System.out.println(ligavel2.toString());
-							
-	
+//							//TO DELETE
+//							System.out.println("----------------PRINT_02_APARELHOS_DONE------------------");
+//							System.out.println(ligavel2.toString());
 						}
 						//EXIT LOOP
 						break;
@@ -536,10 +534,10 @@ public void simula(long fim){
        
 		//START THE CLOCK
 		//TO DELETE, CHANGE CLOCK TO START AT...
-		int t = 49;
+		int t = 0;
 		Relogio.getInstanciaUnica().setCounter(t);
 		
-		for (t = 49; t != fim; t++) {
+		for (t = 0; t != fim; t++) {
 			//VERIFICA OS EVENTOS E ACTUALIZA ESTADOS
 			executaEventos();
 			//PRINT TO CONSOLE
