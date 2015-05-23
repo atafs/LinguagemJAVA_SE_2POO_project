@@ -54,11 +54,11 @@ public class Tomada {
 
 			//APARELHOS POTENCIA FIXA
 			if (aparelho.estaLigado() && aparelho.getPotenciaAparelho().equals(Ligavel_Potencia.POTENCIA_MAXIMA) ) {
-				potenciaNaTomada += aparelho.potenciaActual();	
+				potenciaNaTomada += aparelho.potenciaMaxima();
 			} 
 			//APARELHOS POTENCIA VARIAVEL
 			else if (aparelho.estaLigado() && aparelho.getPotenciaAparelho().equals(Ligavel_Potencia.POTENCIA)) {
-				potenciaNaTomada += aparelho.potenciaMaxima();	
+				potenciaNaTomada += aparelho.potenciaActual();		
 			}		
 		}
 

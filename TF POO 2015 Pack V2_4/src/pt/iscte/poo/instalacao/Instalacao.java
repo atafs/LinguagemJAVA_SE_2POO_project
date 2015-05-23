@@ -337,7 +337,7 @@ public class Instalacao extends Observable {
 						//PERCORRER A LISTA DE LINHAS
 						for (Linha linha : listLinhas) {
 							if (linha.getId().equals(ligacao.getLigadoA())) {
-								int nTomadasTripla = (int)searchTriplaList_nTomadas(ligacao.getId());
+								int nTomadasTripla = (int)procuraTriplaNaLista_nTomadas(ligacao.getId());
 								long nTomadasLinha = linha.getNumeroTomadas();
 								int total = (int) (nTomadasTripla + nTomadasLinha - 1); //tomada usada pela tripla
 								linha.setNumeroTomadas(total);
@@ -398,116 +398,116 @@ public class Instalacao extends Observable {
 	}
 	
 	/** */
-	public void executaEventos() {
-		//LIGA LIGAVEL MUDANDO O ESTADO E REGISTANDO TEMPOS (inicio e fim)
-		for (Evento evento1 : eventos) {
-			
-			//PERCORRER A LISTA DE LIGAVEIS
-			for (Ligavel ligavel2 : ligaveis) {
-				
-				//EXISTIR O TEMPO IGUAL TEMPO ACTUAL
-				if (Relogio.getInstanciaUnica().getTempoAtual() == (int)evento1.getTempo()) {
-					
-					//EXISTIR NA LISTA DE EVENTOS O LIGAVEL
-					if (ligavel2.getId().equals(evento1.getIdAparelho())) {
-
-						//MUDAR ESTADO LIGAVEL E TEMPOS INICIO E FIM
-						ligavel2.setEstadoAparelho(evento1.getEstado());
-						
-
-//						//TO DELETE
-//						System.err.println(ligavel2.getId());
-//						System.err.println(evento1.getIdAparelho());
-//						System.err.println(Relogio.getInstanciaUnica().getTempoAtual());
-//						System.err.println(evento1.getTempo());
-//						System.err.println(evento1.getEstado());
-
-						// TO DELETE
-						try {
-							Thread.sleep(250);
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-							
-						//local variables
-						Aparelho aparelho = null;
-						MaquinaLavarRoupa maquinaLavarRoupa = null;
-						Ligavel ligavelTemp = null;
-						
-						//ADICIONA STRING COM O PROGRAMA SE A ACCAO FOR PROGRAMA						
-						if (evento1.getIdAparelho().equals(Ligavel_Tipo.MAQLAVARROUPA.toString()) && evento1.getAccao().equals(LigavelEstado.PROGRAMA.toString())) {
-				
-							//ligavelTemp = ligavel2;
-							aparelho = (Aparelho) ligavel2;
-							//ligaveis.remove(ligavel2);
-							maquinaLavarRoupa = (MaquinaLavarRoupa)aparelho;
-							EventoPrograma eventoPrograma = (EventoPrograma)evento1;
-							maquinaLavarRoupa.setProgramaSelecionado(eventoPrograma.getPrograma());
-							maquinaLavarRoupa.setEstadoAparelho(LigavelEstado.LIGA);
-				
-							//ligaveis.add((Ligavel)maquinaLavarRoupa);
-						}
-						
-						//LIGA MAQUINA LAVAR ROUPA COLOCANDO O TEMPO NUMA VARIAVEL
-						if (evento1.getIdAparelho().equals(Ligavel_Tipo.MAQLAVARROUPA.toString()) && evento1.getAccao().equals(LigavelEstado.LIGA.toString())) {
-							
-							//ligavelTemp = ligavel2;
-							aparelho = (Aparelho) ligavel2;
-							//ligaveis.remove(ligavel2);
-							maquinaLavarRoupa = (MaquinaLavarRoupa)aparelho;
-							
-							//TO DELETE
-							System.err.println("I AM HERE");
-							
-							for (Programa programa : maquinaLavarRoupa.getProgramas()) {
-								if (programa.getId().equals(maquinaLavarRoupa.getProgramaSelecionado())) {
-									programa.setTempoInicio(evento1.getTempo());
-								}
-							}
-							maquinaLavarRoupa.setPotenciaActual(maquinaLavarRoupa.potenciaActualMaquina());
-							
-							//ligaveis.add((Ligavel)maquinaLavarRoupa);
-						}
-						
-						//AUMENTA VALOR DO APARELHO
-						if (evento1.getAccao().equals(LigavelEstado.AUMENTA.toString())) {
-							
-							//ligavelTemp = ligavel2;
-							aparelho = (Aparelho) ligavel2;
-							//ligaveis.remove(ligavel2);
-							EventoAumenta eventoAumenta = (EventoAumenta)evento1;
-							aparelho.aumenta((int)eventoAumenta.getAumenta());
-							aparelho.setEstadoAparelho(LigavelEstado.LIGA);//manter ligado, mesmo apos aumentar
-							//ligaveis.add((Ligavel)aparelho);
-
-							//VOLTA A COLOCAR NA LISTA
-							ligavel2 = (Ligavel)aparelho;
-							
+//	public void executaEventos() {
+//		//LIGA LIGAVEL MUDANDO O ESTADO E REGISTANDO TEMPOS (inicio e fim)
+//		for (Evento evento1 : eventos) {
+//			
+//			//PERCORRER A LISTA DE LIGAVEIS
+//			for (Ligavel ligavel2 : ligaveis) {
+//				
+//				//EXISTIR O TEMPO IGUAL TEMPO ACTUAL
+//				if (Relogio.getInstanciaUnica().getTempoAtual() == (int)evento1.getTempo()) {
+//					
+//					//EXISTIR NA LISTA DE EVENTOS O LIGAVEL
+//					if (ligavel2.getId().equals(evento1.getIdAparelho())) {
+//
+//						//MUDAR ESTADO LIGAVEL E TEMPOS INICIO E FIM
+//						ligavel2.setEstadoAparelho(evento1.getEstado());
+//						
+//
+////						//TO DELETE
+////						System.err.println(ligavel2.getId());
+////						System.err.println(evento1.getIdAparelho());
+////						System.err.println(Relogio.getInstanciaUnica().getTempoAtual());
+////						System.err.println(evento1.getTempo());
+////						System.err.println(evento1.getEstado());
+//
+//						// TO DELETE
+//						try {
+//							Thread.sleep(250);
+//						} catch (InterruptedException e) {
+//							// TODO Auto-generated catch block
+//							e.printStackTrace();
+//						}
+//							
+//						//local variables
+//						Aparelho aparelho = null;
+//						MaquinaLavarRoupa maquinaLavarRoupa = null;
+//						Ligavel ligavelTemp = null;
+//						
+//						//ADICIONA STRING COM O PROGRAMA SE A ACCAO FOR PROGRAMA						
+//						if (evento1.getIdAparelho().equals(Ligavel_Tipo.MAQLAVARROUPA.toString()) && evento1.getAccao().equals(LigavelEstado.PROGRAMA.toString())) {
+//				
+//							//ligavelTemp = ligavel2;
+//							aparelho = (Aparelho) ligavel2;
+//							//ligaveis.remove(ligavel2);
+//							maquinaLavarRoupa = (MaquinaLavarRoupa)aparelho;
+//							EventoPrograma eventoPrograma = (EventoPrograma)evento1;
+//							maquinaLavarRoupa.setProgramaSelecionado(eventoPrograma.getPrograma());
+//							maquinaLavarRoupa.setEstadoAparelho(LigavelEstado.LIGA);
+//				
+//							//ligaveis.add((Ligavel)maquinaLavarRoupa);
+//						}
+//						
+//						//LIGA MAQUINA LAVAR ROUPA COLOCANDO O TEMPO NUMA VARIAVEL
+//						if (evento1.getIdAparelho().equals(Ligavel_Tipo.MAQLAVARROUPA.toString()) && evento1.getAccao().equals(LigavelEstado.LIGA.toString())) {
+//							
+//							//ligavelTemp = ligavel2;
+//							aparelho = (Aparelho) ligavel2;
+//							//ligaveis.remove(ligavel2);
+//							maquinaLavarRoupa = (MaquinaLavarRoupa)aparelho;
+//							
 //							//TO DELETE
-//							System.out.println("----------------PRINT_02_APARELHOS_DONE------------------");
-//							System.out.println(ligavel2.toString());
-						}
-						//EXIT LOOP
-						break;
-					}
-				}
-				
-				//EXIT: SE O TEMPO DO EVENTO FOR MAIOR QUE O TEMPO ACTUAL, INTERROMPE O METODO
-				else if (Relogio.getInstanciaUnica().getTempoAtual() < (int)evento1.getTempo()) { 
-					return;
-				} 
-				
-				//EXIT: SE O TEMPO ACTUAL FOR MAIOR QUE O EVENTO, INTERROMPE O CICLO
-				else if (Relogio.getInstanciaUnica().getTempoAtual() > (int)evento1.getTempo()) { 
-					break;
-				} 
-			}
-		}
-	}
+//							System.err.println("I AM HERE");
+//							
+//							for (Programa programa : maquinaLavarRoupa.getProgramas()) {
+//								if (programa.getId().equals(maquinaLavarRoupa.getProgramaSelecionado())) {
+//									programa.setTempoInicio(evento1.getTempo());
+//								}
+//							}
+//							maquinaLavarRoupa.setPotenciaActual(maquinaLavarRoupa.potenciaActualMaquina());
+//							
+//							//ligaveis.add((Ligavel)maquinaLavarRoupa);
+//						}
+//						
+//						//AUMENTA VALOR DO APARELHO
+//						if (evento1.getAccao().equals(LigavelEstado.AUMENTA.toString())) {
+//							
+//							//ligavelTemp = ligavel2;
+//							aparelho = (Aparelho) ligavel2;
+//							//ligaveis.remove(ligavel2);
+//							EventoAumenta eventoAumenta = (EventoAumenta)evento1;
+//							aparelho.aumenta((int)eventoAumenta.getAumenta());
+//							aparelho.setEstadoAparelho(LigavelEstado.LIGA);//manter ligado, mesmo apos aumentar
+//							//ligaveis.add((Ligavel)aparelho);
+//
+//							//VOLTA A COLOCAR NA LISTA
+//							ligavel2 = (Ligavel)aparelho;
+//							
+////							//TO DELETE
+////							System.out.println("----------------PRINT_02_APARELHOS_DONE------------------");
+////							System.out.println(ligavel2.toString());
+//						}
+//						//EXIT LOOP
+//						break;
+//					}
+//				}
+//				
+//				//EXIT: SE O TEMPO DO EVENTO FOR MAIOR QUE O TEMPO ACTUAL, INTERROMPE O METODO
+//				else if (Relogio.getInstanciaUnica().getTempoAtual() < (int)evento1.getTempo()) { 
+//					return;
+//				} 
+//				
+//				//EXIT: SE O TEMPO ACTUAL FOR MAIOR QUE O EVENTO, INTERROMPE O CICLO
+//				else if (Relogio.getInstanciaUnica().getTempoAtual() > (int)evento1.getTempo()) { 
+//					break;
+//				} 
+//			}
+//		}
+//	}
 	
 	/** Search for the nTomadas in a Class Tripla object, kept in a list of triplas */
-	public long searchTriplaList_nTomadas(String id) {
+	public long procuraTriplaNaLista_nTomadas(String id) {
 		long nTomadas = 0;
 		for (Tripla tripla : Ligavel_Tipo.getListTriplas()) {
 			if (id.equals(tripla.getId())) {
@@ -539,7 +539,11 @@ public void simula(long fim){
 		
 		for (t = 0; t != fim; t++) {
 			//VERIFICA OS EVENTOS E ACTUALIZA ESTADOS
-			executaEventos();
+			//executaEventos();
+			
+			for (Evento evento1 : eventos) {
+				LigavelEstado.selecionaNovoEvento(evento1, ligaveis);
+			}
 			//PRINT TO CONSOLE
 			System.out.println(this.toString());
 			//INCREMENT +1

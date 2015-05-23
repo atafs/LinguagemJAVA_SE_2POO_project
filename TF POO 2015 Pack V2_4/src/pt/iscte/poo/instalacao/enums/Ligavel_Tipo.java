@@ -88,7 +88,8 @@ public enum Ligavel_Tipo {
 				lampadaVariavel.setPotenciaMaxima(potencia);
 				//POTENCIA INICIAL DO APARELHO (50% DA POTENCIA MAXIMA)
 				lampadaVariavel.setPotenciaActual(potencia/2);
-				lampadaVariavel.setPotenciaAparelho(novoAparelhoPotencia);
+				//APESAR DE O JSON REFERIR A POTENCIA_MAXIMA, ESTE APARELHO E DE POTENCIA VARIAVEL
+				lampadaVariavel.setPotenciaAparelho(Ligavel_Potencia.POTENCIA);
 				
 				listAparelhos.add(lampadaVariavel);
 				return lampadaVariavel;
