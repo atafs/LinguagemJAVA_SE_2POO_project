@@ -108,13 +108,6 @@ public enum LigavelEstado {
 					// MUDAR ESTADO LIGAVEL E TEMPOS INICIO E FIM
 					ligavel2.setEstadoAparelho(evento1.getEstado());
 
-					// //TO DELETE
-					// System.err.println(ligavel2.getId());
-					// System.err.println(evento1.getIdAparelho());
-					// System.err.println(Relogio.getInstanciaUnica().getTempoAtual());
-					// System.err.println(evento1.getTempo());
-					// System.err.println(evento1.getEstado());
-
 					// TO DELETE
 					try {
 						Thread.sleep(250);
@@ -129,28 +122,23 @@ public enum LigavelEstado {
 					Ligavel ligavelTemp = null;
 
 					// ADICIONA STRING COM O PROGRAMA SE A ACCAO FOR PROGRAMA
-					if (evento1.getIdAparelho().equals(
-							Ligavel_Tipo.MAQLAVARROUPA.toString())
-							&& evento1.getAccao().equals(
-									LigavelEstado.PROGRAMA.toString())) {
+					if (evento1.getIdAparelho().equals(Ligavel_Tipo.MAQLAVARROUPA.toString())
+							&& evento1.getAccao().equals(LigavelEstado.PROGRAMA.toString())) {
 
 						// ligavelTemp = ligavel2;
 						aparelho = (Aparelho) ligavel2;
 						// ligaveis.remove(ligavel2);
 						maquinaLavarRoupa = (MaquinaLavarRoupa) aparelho;
 						EventoPrograma eventoPrograma = (EventoPrograma) evento1;
-						maquinaLavarRoupa.setProgramaSelecionado(eventoPrograma
-								.getPrograma());
+						maquinaLavarRoupa.setProgramaSelecionado(eventoPrograma.getPrograma());
 						maquinaLavarRoupa.setEstadoAparelho(LigavelEstado.LIGA);
 
 						// ligaveis.add((Ligavel)maquinaLavarRoupa);
 					}
 
 					// LIGA MAQUINA LAVAR ROUPA COLOCANDO O TEMPO NUMA VARIAVEL
-					if (evento1.getIdAparelho().equals(
-							Ligavel_Tipo.MAQLAVARROUPA.toString())
-							&& evento1.getAccao().equals(
-									LigavelEstado.LIGA.toString())) {
+					if (evento1.getIdAparelho().equals(Ligavel_Tipo.MAQLAVARROUPA.toString())
+							&& evento1.getAccao().equals(LigavelEstado.LIGA.toString())) {
 
 						// ligavelTemp = ligavel2;
 						aparelho = (Aparelho) ligavel2;
@@ -160,55 +148,39 @@ public enum LigavelEstado {
 						// TO DELETE
 						System.err.println("I AM HERE");
 
-						for (Programa programa : maquinaLavarRoupa
-								.getProgramas()) {
+						for (Programa programa : maquinaLavarRoupa.getProgramas()) {
 							if (programa.getId().equals(
-									maquinaLavarRoupa.getProgramaSelecionado())) {
+								maquinaLavarRoupa.getProgramaSelecionado())) {
 								programa.setTempoInicio(evento1.getTempo());
 							}
 						}
-						maquinaLavarRoupa.setPotenciaActual(maquinaLavarRoupa
-								.potenciaActualMaquina());
-
+						maquinaLavarRoupa.setPotenciaActual(maquinaLavarRoupa.potenciaActualMaquina());
 						// ligaveis.add((Ligavel)maquinaLavarRoupa);
 					}
 
 					// AUMENTA VALOR DO APARELHO
-					if (evento1.getAccao().equals(
-							LigavelEstado.AUMENTA.toString())) {
-
-						// ligavelTemp = ligavel2;
+					if (evento1.getAccao().equals(LigavelEstado.AUMENTA.toString())) {
+						
 						aparelho = (Aparelho) ligavel2;
-						// ligaveis.remove(ligavel2);
 						EventoAumenta eventoAumenta = (EventoAumenta) evento1;
 						aparelho.aumenta((int) eventoAumenta.getAumenta());
-						aparelho.setEstadoAparelho(LigavelEstado.LIGA);// manter
-																		// ligado,
-																		// mesmo
-																		// apos
-																		// aumentar
-						// ligaveis.add((Ligavel)aparelho);
-
+						
+						//MANTER LIGADO O MESMO APOS AUMENTAR
+						aparelho.setEstadoAparelho(LigavelEstado.LIGA);
 						// VOLTA A COLOCAR NA LISTA
 						ligavel2 = (Ligavel) aparelho;
-
-						// //TO DELETE
-						// System.out.println("----------------PRINT_02_APARELHOS_DONE------------------");
-						// System.out.println(ligavel2.toString());
 					}
 					// EXIT LOOP
 					break;
 				}
 			}
 
-			// EXIT: SE O TEMPO DO EVENTO FOR MAIOR QUE O TEMPO ACTUAL,
-			// INTERROMPE O METODO
+			// EXIT: SE O TEMPO DO EVENTO FOR MAIOR QUE O TEMPO ACTUAL, INTERROMPE O METODO
 			else if (Relogio.getInstanciaUnica().getTempoAtual() < (int) evento1.getTempo()) {
 				return;
 			}
 
-			// EXIT: SE O TEMPO ACTUAL FOR MAIOR QUE O EVENTO, INTERROMPE O
-			// CICLO
+			// EXIT: SE O TEMPO ACTUAL FOR MAIOR QUE O EVENTO, INTERROMPE O CICLO
 			else if (Relogio.getInstanciaUnica().getTempoAtual() > (int) evento1.getTempo()) {
 				break;
 			}
