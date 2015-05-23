@@ -130,7 +130,7 @@ public enum Ligavel_Tipo {
 				
 				maqLavarRoupa.setEstadoAparelho(LigavelEstado.DESLIGA);
 				maqLavarRoupa.setTipoAparelho(novo);
-				maqLavarRoupa.setPotenciaAparelho(novoAparelhoPotencia);
+				maqLavarRoupa.setPotenciaAparelho(Ligavel_Potencia.POTENCIA);
 				
 				listAparelhos.add(maqLavarRoupa);
 				return maqLavarRoupa;

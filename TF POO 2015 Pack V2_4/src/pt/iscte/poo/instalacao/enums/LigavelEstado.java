@@ -110,7 +110,7 @@ public enum LigavelEstado {
 
 					// TO DELETE
 					try {
-						Thread.sleep(250);
+						Thread.sleep(100);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -119,59 +119,110 @@ public enum LigavelEstado {
 					// local variables
 					Aparelho aparelho = null;
 					MaquinaLavarRoupa maquinaLavarRoupa = null;
-					Ligavel ligavelTemp = null;
+					//Ligavel ligavelTemp = null;
 
-					// ADICIONA STRING COM O PROGRAMA SE A ACCAO FOR PROGRAMA
-					if (evento1.getIdAparelho().equals(Ligavel_Tipo.MAQLAVARROUPA.toString())
-							&& evento1.getAccao().equals(LigavelEstado.PROGRAMA.toString())) {
-
-						// ligavelTemp = ligavel2;
-						aparelho = (Aparelho) ligavel2;
-						// ligaveis.remove(ligavel2);
-						maquinaLavarRoupa = (MaquinaLavarRoupa) aparelho;
-						EventoPrograma eventoPrograma = (EventoPrograma) evento1;
-						maquinaLavarRoupa.setProgramaSelecionado(eventoPrograma.getPrograma());
-						maquinaLavarRoupa.setEstadoAparelho(LigavelEstado.LIGA);
-
-						// ligaveis.add((Ligavel)maquinaLavarRoupa);
-					}
-
-					// LIGA MAQUINA LAVAR ROUPA COLOCANDO O TEMPO NUMA VARIAVEL
-					if (evento1.getIdAparelho().equals(Ligavel_Tipo.MAQLAVARROUPA.toString())
-							&& evento1.getAccao().equals(LigavelEstado.LIGA.toString())) {
-
-						// ligavelTemp = ligavel2;
-						aparelho = (Aparelho) ligavel2;
-						// ligaveis.remove(ligavel2);
-						maquinaLavarRoupa = (MaquinaLavarRoupa) aparelho;
-
-						// TO DELETE
-						System.err.println("I AM HERE");
-
-						for (Programa programa : maquinaLavarRoupa.getProgramas()) {
-							if (programa.getId().equals(
-								maquinaLavarRoupa.getProgramaSelecionado())) {
-								programa.setTempoInicio(evento1.getTempo());
-							}
+					//PARA O SWITCH
+					String accao = evento1.getAccao();
+					String tipoUpperCase = accao.toUpperCase();
+					LigavelEstado estado = LigavelEstado.valueOf(tipoUpperCase);
+					
+					switch (estado) {
+					case PROGRAMA:
+						//E MAQ_LAVAR_ROUPA
+						if (evento1.getIdAparelho().equals(Ligavel_Tipo.MAQLAVARROUPA.toString())) {
+							// ligavelTemp = ligavel2;
+							aparelho = (Aparelho) ligavel2;
+							// ligaveis.remove(ligavel2);
+							maquinaLavarRoupa = (MaquinaLavarRoupa) aparelho;
+							EventoPrograma eventoPrograma = (EventoPrograma) evento1;
+							maquinaLavarRoupa.setProgramaSelecionado(eventoPrograma.getPrograma());
+							maquinaLavarRoupa.setEstadoAparelho(LigavelEstado.EM_ESPERA);
 						}
-						maquinaLavarRoupa.setPotenciaActual(maquinaLavarRoupa.potenciaActualMaquina());
-						// ligaveis.add((Ligavel)maquinaLavarRoupa);
-					}
-
-					// AUMENTA VALOR DO APARELHO
-					if (evento1.getAccao().equals(LigavelEstado.AUMENTA.toString())) {
+						break;
 						
+					case LIGA: 
+						//E MAQ_LAVAR_ROUPA	
+						if (evento1.getIdAparelho().equals(Ligavel_Tipo.MAQLAVARROUPA.toString())) {
+							aparelho = (Aparelho) ligavel2;
+							maquinaLavarRoupa = (MaquinaLavarRoupa) aparelho;
+
+							for (Programa programa : maquinaLavarRoupa.getProgramas()) {
+								if (programa.getId().equals(
+									maquinaLavarRoupa.getProgramaSelecionado())) {
+									programa.setTempoInicio(evento1.getTempo());
+								}
+							}
+							maquinaLavarRoupa.setPotenciaActual(maquinaLavarRoupa.potenciaActualMaquina());
+						}
+						break;
+					case AUMENTA:
+		
 						aparelho = (Aparelho) ligavel2;
 						EventoAumenta eventoAumenta = (EventoAumenta) evento1;
 						aparelho.aumenta((int) eventoAumenta.getAumenta());
-						
-						//MANTER LIGADO O MESMO APOS AUMENTAR
+
+						// MANTER LIGADO O MESMO APOS AUMENTAR
 						aparelho.setEstadoAparelho(LigavelEstado.LIGA);
 						// VOLTA A COLOCAR NA LISTA
 						ligavel2 = (Ligavel) aparelho;
+						
+						break;
+						
+					default:
+						break;
 					}
-					// EXIT LOOP
-					break;
+					
+//					// ADICIONA STRING COM O PROGRAMA SE A ACCAO FOR PROGRAMA
+//					if (evento1.getIdAparelho().equals(Ligavel_Tipo.MAQLAVARROUPA.toString())
+//							&& evento1.getAccao().equals(LigavelEstado.PROGRAMA.toString())) {
+//
+//						// ligavelTemp = ligavel2;
+//						aparelho = (Aparelho) ligavel2;
+//						// ligaveis.remove(ligavel2);
+//						maquinaLavarRoupa = (MaquinaLavarRoupa) aparelho;
+//						EventoPrograma eventoPrograma = (EventoPrograma) evento1;
+//						maquinaLavarRoupa.setProgramaSelecionado(eventoPrograma.getPrograma());
+//						maquinaLavarRoupa.setEstadoAparelho(LigavelEstado.EM_ESPERA);
+//
+//						// ligaveis.add((Ligavel)maquinaLavarRoupa);
+//					}
+
+					// LIGA MAQUINA LAVAR ROUPA COLOCANDO O TEMPO NUMA VARIAVEL
+//					if (evento1.getIdAparelho().equals(Ligavel_Tipo.MAQLAVARROUPA.toString())
+//							&& evento1.getAccao().equals(LigavelEstado.LIGA.toString())) {
+//
+//						// ligavelTemp = ligavel2;
+//						aparelho = (Aparelho) ligavel2;
+//						// ligaveis.remove(ligavel2);
+//						maquinaLavarRoupa = (MaquinaLavarRoupa) aparelho;
+//
+//						// TO DELETE
+//						System.err.println("I AM HERE");
+//
+//						for (Programa programa : maquinaLavarRoupa.getProgramas()) {
+//							if (programa.getId().equals(
+//								maquinaLavarRoupa.getProgramaSelecionado())) {
+//								programa.setTempoInicio(evento1.getTempo());
+//							}
+//						}
+//						maquinaLavarRoupa.setPotenciaActual(maquinaLavarRoupa.potenciaActualMaquina());
+//						// ligaveis.add((Ligavel)maquinaLavarRoupa);
+//					}
+
+//					// AUMENTA VALOR DO APARELHO
+//					if (evento1.getAccao().equals(LigavelEstado.AUMENTA.toString())) {
+//						
+//						aparelho = (Aparelho) ligavel2;
+//						EventoAumenta eventoAumenta = (EventoAumenta) evento1;
+//						aparelho.aumenta((int) eventoAumenta.getAumenta());
+//						
+//						//MANTER LIGADO O MESMO APOS AUMENTAR
+//						aparelho.setEstadoAparelho(LigavelEstado.LIGA);
+//						// VOLTA A COLOCAR NA LISTA
+//						ligavel2 = (Ligavel) aparelho;
+//					}
+//					// EXIT LOOP
+//					break;
 				}
 			}
 
