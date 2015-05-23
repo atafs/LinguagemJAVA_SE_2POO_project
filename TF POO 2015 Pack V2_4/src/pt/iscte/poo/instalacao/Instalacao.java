@@ -14,6 +14,7 @@ import pt.iscte.poo.instalacao.aparelhos.maq_lavar.Programa;
 import pt.iscte.poo.instalacao.enums.LigavelEstado;
 import pt.iscte.poo.instalacao.enums.Ligavel_Tipo;
 import pt.iscte.poo.instalacao.enums.LinhaTomadaEstado;
+import pt.iscte.poo.instalacao.enums.MaqLavarRoupaEstado;
 import pt.iscte.poo.instalacao.eventos.Evento;
 import pt.iscte.poo.instalacao.eventos.EventoAumenta;
 import pt.iscte.poo.instalacao.eventos.EventoPrograma;
@@ -543,6 +544,15 @@ public void simula(long fim){
 			
 			for (Evento evento1 : eventos) {
 				LigavelEstado.selecionaNovoEvento(evento1, ligaveis);
+			}
+			
+			for (Ligavel ligavel : ligaveis) {
+				if (ligavel.getId().equals(Ligavel_Tipo.MAQLAVARROUPA.toString())) {
+					Aparelho aparelho = (Aparelho)ligavel;
+					MaquinaLavarRoupa maq = (MaquinaLavarRoupa) aparelho;	
+					maq.setPotenciaActual(maq.potenciaActualMaquina());
+					ligavel = (Ligavel) maq;
+				}
 			}
 			//PRINT TO CONSOLE
 			System.out.println(this.toString());
