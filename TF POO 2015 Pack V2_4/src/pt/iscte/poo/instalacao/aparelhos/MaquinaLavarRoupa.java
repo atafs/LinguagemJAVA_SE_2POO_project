@@ -102,7 +102,6 @@ public class MaquinaLavarRoupa extends AparelhoPotenciaVariavel {
 				long diferenca = calcDiferenca(programa.getTempoInicio());
 				
 				//for (Ciclo ciclo : programa.getCiclos()) {
-				iterador = 0;
 				for (int i = 0; i < programa.getCiclos().size(); i++) {
 					
 					if (actualizarCiclo) {
@@ -114,6 +113,11 @@ public class MaquinaLavarRoupa extends AparelhoPotenciaVariavel {
 						return cicloActual.getPotencia();
 					
 					} else {
+						
+						//GUARDA PARA EVITAR OUT_OF_BOUND_EXCEPTIONS
+						if (iterador >= programa.getCiclos().size()) {
+							break;
+						}
 						cicloActual = programa.getCiclos().get(iterador++);
 						actualizarTempoInicio = true;
 					}
