@@ -17,10 +17,10 @@ public class MaquinaLavarRoupa extends AparelhoPotenciaVariavel {
 	private MaqLavarRoupaEstado estado;
 	
 	//TEMPOS E PROGRAMA
-	private int iterador;
-	private Programa programaActual;
-	private Ciclo cicloActual;
-	private long tempoInicial;
+//	private int iterador;
+//	private Programa programaActual;
+//	private Ciclo cicloActual;
+
 	
 	//CONSTRUCTOR
 	public MaquinaLavarRoupa(String nome, double potenciaMaxima) {
@@ -54,32 +54,51 @@ public class MaquinaLavarRoupa extends AparelhoPotenciaVariavel {
 	//AUX METHOD
 	public long calcDiferenca() {
 		long tempoActual = Relogio.getInstanciaUnica().getTempoAtual();
-		long diferenca = tempoActual - programaActual.getTempoInicio();
+		long diferenca = tempoActual - /* tempo inicial */;
 		return diferenca;
 	}
 	
 	//METHOD
 	public double potenciaActualMaquina() {
 		
+//		//CICLO PARA BUSCAR O PROGRAMA CERTO
+//		for (Programa programa : programas) {
+//			if (programa.getId().equals(programaSelecionado)) {
+//
+//				//TEMPOS
+//				long diferenca = calcDiferenca();
+//				
+//				//CICLO PARA BUSCAR A POTENCIA CERTA
+//				iterador = 0;
+//				for (int i = 0; i < programa.getCiclos().size(); i++) {
+//					if (diferenca < cicloActual.getDuracao()) {
+//						return programa.getCiclos().get(iterador).getPotencia();
+//					} else {
+//						cicloActual = programa.getCiclos().get(iterador++);
+//						programaActual.setTempoInicio(Relogio.getInstanciaUnica().getTempoAtual());
+//					}
+//				}
+//			}
+//		}
+		
+
+		
 		//CICLO PARA BUSCAR O PROGRAMA CERTO
 		for (Programa programa : programas) {
 			if (programa.getId().equals(programaSelecionado)) {
-
+				
 				//TEMPOS
 				long diferenca = calcDiferenca();
 				
-				//CICLO PARA BUSCAR A POTENCIA CERTA
-				iterador = 0;
-				for (int i = 0; i < programa.getCiclos().size(); i++) {
-					if (diferenca < cicloActual.getDuracao()) {
-						return programa.getCiclos().get(iterador).getPotencia();
-					} else {
-						cicloActual = programa.getCiclos().get(iterador++);
-						programaActual.setTempoInicio(Relogio.getInstanciaUnica().getTempoAtual());
+				for (Ciclo ciclo : programa.getCiclos()) {
+					
+					if (diferenca < ciclo.getDuracao()) {
+						return ciclo.getPotencia();
 					}
 				}
 			}
 		}
+		
 		return 0.0;
 		
 	
@@ -116,28 +135,20 @@ public class MaquinaLavarRoupa extends AparelhoPotenciaVariavel {
 		this.programaSelecionado = programaSelecionado;
 	}
 
-	public long getTempoInicial() {
-		return tempoInicial;
-	}
-
-	public void setTempoInicial(long tempoInicial) {
-		this.tempoInicial = tempoInicial;
-	}
-
-	public Programa getProgramaActual() {
-		return programaActual;
-	}
-
-	public void setProgramaActual(Programa programaActual) {
-		this.programaActual = programaActual;
-	}
-
-	public Ciclo getCicloActual() {
-		return cicloActual;
-	}
-
-	public void setCicloActual(Ciclo cicloActual) {
-		this.cicloActual = cicloActual;
-	}
+//	public Programa getProgramaActual() {
+//		return programaActual;
+//	}
+//
+//	public void setProgramaActual(Programa programaActual) {
+//		this.programaActual = programaActual;
+//	}
+//
+//	public Ciclo getCicloActual() {
+//		return cicloActual;
+//	}
+//
+//	public void setCicloActual(Ciclo cicloActual) {
+//		this.cicloActual = cicloActual;
+//	}
 
 }

@@ -551,7 +551,6 @@ public void simula(long fim){
 					Aparelho aparelho = (Aparelho)ligavel;
 					MaquinaLavarRoupa maq = (MaquinaLavarRoupa) aparelho;	
 					maq.setPotenciaActual(maq.potenciaActualMaquina());
-					maq.setTempoInicial(Relogio.getInstanciaUnica().getTempoAtual());
 					ligavel = (Ligavel) maq;
 				}
 			}
