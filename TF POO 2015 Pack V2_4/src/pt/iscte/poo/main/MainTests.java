@@ -14,6 +14,8 @@ import org.json.simple.parser.ParseException;
 import pt.iscte.poo.graficos.Chart;
 import pt.iscte.poo.instalacao.Instalacao;
 import pt.iscte.poo.instalacao.Ligavel;
+import pt.iscte.poo.instalacao.Linha;
+import pt.iscte.poo.instalacao.eventos.Evento;
 
 public class MainTests {
 
@@ -32,62 +34,46 @@ public class MainTests {
 			JSONArray objectos = (JSONArray) json.parse(new BufferedReader(new FileReader("instalacao.json")));
 			instalacao.init(objectos);
 			
-//			// TO PRINT
-//			 System.out.println("----------------PRINT_01_LINHAS_DONE------------------");
-//			 for (Linha linha : instalacao.getListLinhas()) {
-//				 System.err.println(linha.toString());
-//			 }
-//			 paragraph();
+			// TO PRINT
+			 System.out.println("----------------PRINT_01_instalacao------------------");
+			 for (Linha linha : instalacao.getListLinhas()) {
+				 System.err.println(linha.toString());
+			 }
+			 paragraph();
 
 			JSONArray listaAparelhos = (JSONArray) json.parse(new BufferedReader(new FileReader("aparelhos.json")));
 			List<Ligavel> aparelhos = instalacao.lerAparelhos(listaAparelhos);
 
-//			// TO PRINT
-//			 System.out.println("----------------PRINT_02_APARELHOS_DONE------------------");
-//			 for (Ligavel ligavel : aparelhos) {
-//				 System.out.println(ligavel.toString());
-//			 }
-//			 paragraph();
-
+			// TO PRINT
+			System.out.println("----------------PRINT_02_aparelhos------------------");
+			for (Ligavel ligavel : instalacao.getLigaveis()) {
+				System.out.println(ligavel);
+			}
+			 paragraph();				
+			
 			JSONArray listaLigacoes = (JSONArray) json.parse(new BufferedReader(new FileReader("ligacoes.json")));
 			//TO CREATE
 			instalacao.lerLigacoes(listaLigacoes, aparelhos);
 
-//			// TO PRINT
-//			System.out.println("----------------PRINT_07_LIGACOES------------------");
-//			for (Ligavel ligavel : instalacao.getLigaveis()) {
-//				System.err.println("ligacao: " + ligavel.getId());
-//				System.err.println("-> " + ligavel.getPotenciaAparelho());
-//				
-//			}
-//			 paragraph();	
-			 
-//			// TO PRINT
-//			System.out.println("----------------PRINT_02_APARELHOS_DONE------------------");
-//			for (Ligavel ligavel : aparelhos) {
-//				System.out.println(ligavel.toString());
-//			}
-//			paragraph();
+			// TO PRINT
+			System.out.println("----------------PRINT_03_ligacoes------------------");
+			for (Ligavel ligavel : instalacao.getLigaveis()) {
+				System.err.println("ligacao: " + ligavel.getId());
+				System.err.println("-> " + ligavel.getPotenciaAparelho());
+				
+			}
+			 paragraph();	
 			 
 			JSONArray listaEventos = (JSONArray) json.parse(new BufferedReader(new FileReader("eventos.json")));
 			// TO CREATE
 			instalacao.lerEventos(listaEventos);
 			
-//			// TO PRINT
-//			 System.out.println("----------------PRINT:LINHA DE NOVO------------------");
-//			 for (Linha linha : instalacao.getListLinhas()) {
-//				 System.err.println(linha.toString());
-//			 }
-//			 paragraph();
-			
-//			// TO PRINT
-//			System.out.println("----------------PRINT_08_EVENTOS_TEMPOS------------------");
-//			for (Ligavel ligavel : instalacao.getLigaveis()) {
-//				System.out.println("evento: " + ligavel.getId());
-//				// System.out.println(ligavel.toString());
-//				System.out.println("-> " + ligavel.getPotenciaAparelho());
-//			}
-//			 paragraph();
+			// TO PRINT
+			 System.out.println("----------------PRINT_04_eventos------------------");
+			 for (Evento evento : instalacao.getEventos()) {
+				 System.out.println(evento.toString());
+			 }
+			 paragraph();
 
 			long fim = Long.valueOf(JOptionPane.showInputDialog("Please enter the end time"));
 

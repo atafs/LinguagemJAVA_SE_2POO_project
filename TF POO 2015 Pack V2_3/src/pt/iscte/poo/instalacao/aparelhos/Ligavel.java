@@ -5,7 +5,6 @@
 
 package pt.iscte.poo.instalacao.aparelhos;
 
-import pt.iscte.poo.instalacao.Tomada;
 import pt.iscte.poo.instalacao.enums.LigavelEstado;
 import pt.iscte.poo.instalacao.enums.Ligavel_Potencia;
 

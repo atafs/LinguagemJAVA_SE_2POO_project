@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import pt.iscte.poo.instalacao.Relogio;
 
 /** DAO */
 public class Programa {
@@ -32,7 +31,7 @@ public class Programa {
 		
 		for (Object o : tempCiclos) {
 			JSONObject p = (JSONObject) o;
-			ciclos.add(new Ciclo(obj));		
+			ciclos.add(new Ciclo(p));		
 		}
 	}
 
