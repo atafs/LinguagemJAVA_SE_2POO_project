@@ -18,6 +18,7 @@ import pt.iscte.poo.instalacao.aparelhos.MaquinaLavarRoupa;
 import pt.iscte.poo.instalacao.aparelhos.Tripla;
 import pt.iscte.poo.instalacao.aparelhos.maq_lavar.Programa;
 import pt.iscte.poo.instalacao.comparator.EventoTempoComparator;
+import pt.iscte.poo.instalacao.comparator.LinhaNomeComparator;
 import pt.iscte.poo.instalacao.enums.LigavelEstado;
 import pt.iscte.poo.instalacao.enums.Ligavel_Tipo;
 import pt.iscte.poo.instalacao.enums.LinhaTomadaEstado;
@@ -539,7 +540,7 @@ public void simula(long fim){
 		for (t = 0; t != fim; t++) {
 			//VERIFICA OS EVENTOS E ACTUALIZA ESTADOS
 			//executaEventos();
-			
+			Collections.sort(eventos, new EventoTempoComparator());
 			for (Evento evento1 : eventos) {
 				LigavelEstado.selecionaNovoEvento(evento1, ligaveis);
 			}
@@ -556,8 +557,9 @@ public void simula(long fim){
 			//PRINT TO CONSOLE
 			System.out.println(this.toString());
 			
+			
 			//PRINT TO SWING: OBSERVER PATTERN: uma classe observa e regista alteracoes de outra 
-			//Collections.sort(listLinhas);
+			Collections.sort(listLinhas, new LinhaNomeComparator());
 			Map<String, Double> potencias = new HashMap<>();
 			for (Linha linha : listLinhas) {
 				double d = linha.somaPotenciaLinha();
@@ -565,14 +567,14 @@ public void simula(long fim){
 				potencias.put(linha.getId(), d);
 			}
 			
-			//System.err.println(potencias);
-			//Collections.sort(potencias);
-	
+			//INCREMENT CLOCK
+			Relogio.getInstanciaUnica().tique();
+			
+			//OBSERVER PATTERN
 			this.setChanged(); 
 			this.notifyObservers(potencias); 
 			
-			//INCREMENT +1
-			Relogio.getInstanciaUnica().tique();
+		
 		}
 		
 		//FINAL MESSAGE
