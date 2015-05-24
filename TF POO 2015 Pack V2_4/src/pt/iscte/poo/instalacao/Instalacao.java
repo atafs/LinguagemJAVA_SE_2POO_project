@@ -272,12 +272,6 @@ public class Instalacao extends Observable implements Comparable<Evento>{
 		return null;
 	}
 	
-	//ADD METHODS FROM MAIN
-	/** */
-	public void addObserver(Chart grafico){
-		
-	}
-	
 	/** */
 	public List<Ligavel> lerAparelhos(JSONArray aparelhos){
 		
@@ -562,9 +556,7 @@ public void simula(long fim){
 			Collections.sort(listLinhas, new LinhaNomeComparator());
 			Map<String, Double> potencias = new HashMap<>();
 			for (Linha linha : listLinhas) {
-				double d = linha.somaPotenciaLinha();
-				System.err.println(d);
-				potencias.put(linha.getId(), d);
+				potencias.put(linha.getId(), linha.somaPotenciaLinha());
 			}
 			
 			//INCREMENT CLOCK
