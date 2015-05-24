@@ -547,10 +547,11 @@ public void simula(long fim){
 			}
 			
 			for (Ligavel ligavel : ligaveis) {
-				if (ligavel.getId().equals(Ligavel_Tipo.MAQLAVARROUPA.toString())) {
+				if (ligavel.getId().equals(Ligavel_Tipo.MAQLAVARROUPA.toString()) && ligavel.getEstadoAparelho().equals(LigavelEstado.LIGA)) {
 					Aparelho aparelho = (Aparelho)ligavel;
 					MaquinaLavarRoupa maq = (MaquinaLavarRoupa) aparelho;	
 					maq.setPotenciaActual(maq.potenciaActualMaquina());
+					maq.setTempoInicial(Relogio.getInstanciaUnica().getTempoAtual());
 					ligavel = (Ligavel) maq;
 				}
 			}

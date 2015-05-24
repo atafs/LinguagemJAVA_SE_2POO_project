@@ -50,7 +50,7 @@ public class Programa {
 		this.id = id;
 	}
 	
-	public Ciclo getCiclo() {
+	public Ciclo programa() {
 		return selecionado;
 	}
 	

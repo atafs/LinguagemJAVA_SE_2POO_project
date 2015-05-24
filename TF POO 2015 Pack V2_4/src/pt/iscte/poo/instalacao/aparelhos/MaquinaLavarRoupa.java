@@ -16,6 +16,12 @@ public class MaquinaLavarRoupa extends AparelhoPotenciaVariavel {
 	private String programaSelecionado = null;
 	private MaqLavarRoupaEstado estado;
 	
+	//TEMPOS E PROGRAMA
+	private int iterador;
+	private Programa programaActual;
+	private Ciclo cicloActual;
+	private long tempoInicial;
+	
 	//CONSTRUCTOR
 	public MaquinaLavarRoupa(String nome, double potenciaMaxima) {
 		super(nome, potenciaMaxima);
@@ -45,20 +51,31 @@ public class MaquinaLavarRoupa extends AparelhoPotenciaVariavel {
 		return toReturn;
 	}
 	
+	//AUX METHOD
+	public long calcDiferenca() {
+		long tempoActual = Relogio.getInstanciaUnica().getTempoAtual();
+		long diferenca = tempoActual - programaActual.getTempoInicio();
+		return diferenca;
+	}
+	
 	//METHOD
 	public double potenciaActualMaquina() {
 		
 		//CICLO PARA BUSCAR O PROGRAMA CERTO
 		for (Programa programa : programas) {
 			if (programa.getId().equals(programaSelecionado)) {
-				long tempoInicial = programa.getTempoInicio();
-				long tempoActual = Relogio.getInstanciaUnica().getTempoAtual();
-				long diferenca = tempoActual - tempoInicial;
+
+				//TEMPOS
+				long diferenca = calcDiferenca();
 				
 				//CICLO PARA BUSCAR A POTENCIA CERTA
-				for (Ciclo ciclo : programa.getCiclos()) {
-					if (diferenca < ciclo.getDuracao()) {
-						return ciclo.getPotencia();
+				iterador = 0;
+				for (int i = 0; i < programa.getCiclos().size(); i++) {
+					if (diferenca < cicloActual.getDuracao()) {
+						return programa.getCiclos().get(iterador).getPotencia();
+					} else {
+						cicloActual = programa.getCiclos().get(iterador++);
+						programaActual.setTempoInicio(Relogio.getInstanciaUnica().getTempoAtual());
 					}
 				}
 			}
@@ -97,6 +114,30 @@ public class MaquinaLavarRoupa extends AparelhoPotenciaVariavel {
 
 	public void setProgramaSelecionado(String programaSelecionado) {
 		this.programaSelecionado = programaSelecionado;
+	}
+
+	public long getTempoInicial() {
+		return tempoInicial;
+	}
+
+	public void setTempoInicial(long tempoInicial) {
+		this.tempoInicial = tempoInicial;
+	}
+
+	public Programa getProgramaActual() {
+		return programaActual;
+	}
+
+	public void setProgramaActual(Programa programaActual) {
+		this.programaActual = programaActual;
+	}
+
+	public Ciclo getCicloActual() {
+		return cicloActual;
+	}
+
+	public void setCicloActual(Ciclo cicloActual) {
+		this.cicloActual = cicloActual;
 	}
 
 }

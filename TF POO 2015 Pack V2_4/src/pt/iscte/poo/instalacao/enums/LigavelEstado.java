@@ -137,6 +137,7 @@ public enum LigavelEstado {
 							EventoPrograma eventoPrograma = (EventoPrograma) evento1;
 							maquinaLavarRoupa.setProgramaSelecionado(eventoPrograma.getPrograma());
 							maquinaLavarRoupa.setEstadoAparelho(LigavelEstado.EM_ESPERA);
+							//ligavel2 = (Ligavel) maquinaLavarRoupa;
 						}
 						break;
 						
@@ -150,9 +151,13 @@ public enum LigavelEstado {
 								if (programa.getId().equals(
 									maquinaLavarRoupa.getProgramaSelecionado())) {
 									programa.setTempoInicio(evento1.getTempo());
+									maquinaLavarRoupa.setProgramaActual(programa);
+									maquinaLavarRoupa.setCicloActual(programa.getCiclos().get(0));
+									
 								}
 							}
 							maquinaLavarRoupa.setPotenciaActual(maquinaLavarRoupa.potenciaActualMaquina());
+							//ligavel2 = (Ligavel) maquinaLavarRoupa;
 						}
 						break;
 					case AUMENTA:
