@@ -557,14 +557,19 @@ public void simula(long fim){
 			System.out.println(this.toString());
 			
 			//PRINT TO SWING: OBSERVER PATTERN: uma classe observa e regista alteracoes de outra 
+			//Collections.sort(listLinhas);
 			Map<String, Double> potencias = new HashMap<>();
 			for (Linha linha : listLinhas) {
-				potencias.put(linha.getId(), linha.somaPotenciaLinha());
+				double d = linha.somaPotenciaLinha();
+				System.err.println(d);
+				potencias.put(linha.getId(), d);
 			}
+			
+			//System.err.println(potencias);
 			//Collections.sort(potencias);
 	
-			setChanged(); 
-			notifyObservers(potencias); 
+			this.setChanged(); 
+			this.notifyObservers(potencias); 
 			
 			//INCREMENT +1
 			Relogio.getInstanciaUnica().tique();
