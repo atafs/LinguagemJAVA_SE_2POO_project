@@ -2,8 +2,6 @@ package modules.lists.priority_queue;
 
 import java.util.Comparator;
 
-import pt.iscte.poo.instalacao.eventos.Evento;
-
 public class StringLengthComparator implements Comparator<String> {
 	
 	@Override

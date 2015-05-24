@@ -7,25 +7,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 
-import modules.comparator.colection_compare_to.ComparadorPorDataIgual;
-import modules.comparator.colection_compare_to.Data;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import pt.iscte.poo.graficos.Chart;
 import pt.iscte.poo.instalacao.aparelhos.MaquinaLavarRoupa;
 import pt.iscte.poo.instalacao.aparelhos.Tripla;
-import pt.iscte.poo.instalacao.aparelhos.maq_lavar.Programa;
 import pt.iscte.poo.instalacao.comparator.EventoTempoComparator;
 import pt.iscte.poo.instalacao.comparator.LinhaNomeComparator;
 import pt.iscte.poo.instalacao.enums.LigavelEstado;
 import pt.iscte.poo.instalacao.enums.Ligavel_Tipo;
 import pt.iscte.poo.instalacao.enums.LinhaTomadaEstado;
-import pt.iscte.poo.instalacao.enums.MaqLavarRoupaEstado;
 import pt.iscte.poo.instalacao.eventos.Evento;
-import pt.iscte.poo.instalacao.eventos.EventoAumenta;
-import pt.iscte.poo.instalacao.eventos.EventoPrograma;
 import pt.iscte.poo.instalacao.ligacoes.Ligacao;
 
 public class Instalacao extends Observable implements Comparable<Evento>{

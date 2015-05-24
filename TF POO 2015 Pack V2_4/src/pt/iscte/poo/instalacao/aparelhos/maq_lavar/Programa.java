@@ -2,12 +2,6 @@ package pt.iscte.poo.instalacao.aparelhos.maq_lavar;
 
 import java.util.ArrayList;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-
-import pt.iscte.poo.instalacao.Ligavel;
-import pt.iscte.poo.instalacao.enums.Ligavel_Tipo;
-
 /** DAO */
 public class Programa {
 	
