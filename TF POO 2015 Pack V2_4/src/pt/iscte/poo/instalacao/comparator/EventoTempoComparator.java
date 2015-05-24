@@ -4,7 +4,7 @@ import java.util.Comparator;
 
 import pt.iscte.poo.instalacao.eventos.Evento;
 
-public class StringLengthComparator implements Comparator<Evento> {
+public class EventoTempoComparator implements Comparator<Evento> {
 
 	@Override
 	public int compare(Evento x, Evento y) {

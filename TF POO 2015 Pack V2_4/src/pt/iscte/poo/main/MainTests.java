@@ -94,6 +94,7 @@ public class MainTests {
 
 			grafico.setVisible(true);
 			instalacao.simula(fim);
+			
 
 		} catch (IOException e) {
 			e.printStackTrace();

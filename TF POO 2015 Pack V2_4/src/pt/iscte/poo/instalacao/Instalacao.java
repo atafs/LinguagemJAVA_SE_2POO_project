@@ -1,8 +1,14 @@
 package pt.iscte.poo.instalacao;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Observable;
+
+import modules.comparator.colection_compare_to.ComparadorPorDataIgual;
+import modules.comparator.colection_compare_to.Data;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -11,6 +17,7 @@ import pt.iscte.poo.graficos.Chart;
 import pt.iscte.poo.instalacao.aparelhos.MaquinaLavarRoupa;
 import pt.iscte.poo.instalacao.aparelhos.Tripla;
 import pt.iscte.poo.instalacao.aparelhos.maq_lavar.Programa;
+import pt.iscte.poo.instalacao.comparator.EventoTempoComparator;
 import pt.iscte.poo.instalacao.enums.LigavelEstado;
 import pt.iscte.poo.instalacao.enums.Ligavel_Tipo;
 import pt.iscte.poo.instalacao.enums.LinhaTomadaEstado;
@@ -20,7 +27,7 @@ import pt.iscte.poo.instalacao.eventos.EventoAumenta;
 import pt.iscte.poo.instalacao.eventos.EventoPrograma;
 import pt.iscte.poo.instalacao.ligacoes.Ligacao;
 
-public class Instalacao extends Observable {
+public class Instalacao extends Observable implements Comparable<Evento>{
 
 	//ATTRIBUTES
 	private static Instalacao instance = null;
@@ -61,15 +68,6 @@ public class Instalacao extends Observable {
 			instance = new Instalacao();
 		}
 		return instance;
-	}
-	
-	/** OBSERVER PATTERN: uma classe observa e regista alteracoes de outra */
-	public void setChange() {
-		//...
-	}
-	
-	public void notifyObserver() {
-		//...
 	}
 	
 	/* existe o metodo: public void observadoAddObserver(Observer observer) {}; */
@@ -557,6 +555,17 @@ public void simula(long fim){
 			}
 			//PRINT TO CONSOLE
 			System.out.println(this.toString());
+			
+			//PRINT TO SWING: OBSERVER PATTERN: uma classe observa e regista alteracoes de outra 
+			Map<String, Double> potencias = new HashMap<>();
+			for (Linha linha : listLinhas) {
+				potencias.put(linha.getId(), linha.somaPotenciaLinha());
+			}
+			//Collections.sort(potencias);
+	
+			setChanged(); 
+			notifyObservers(potencias); 
+			
 			//INCREMENT +1
 			Relogio.getInstanciaUnica().tique();
 		}
@@ -567,5 +576,14 @@ public void simula(long fim){
 			System.err.println("END WITH SUCCESS!!!");
 		}
 	}
-	
+
+	@Override
+	public int compareTo(Evento o) {
+		for (Evento evento : eventos) {
+			if(evento.getTempo() != o.getTempo())
+				return ((int)evento.getTempo() - (int)o.getTempo());
+		}
+		return 0;
+		
+	}
 }
