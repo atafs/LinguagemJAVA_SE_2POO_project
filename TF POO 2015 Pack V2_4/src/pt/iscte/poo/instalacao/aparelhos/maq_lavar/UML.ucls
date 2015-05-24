@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class-diagram version="1.1.8" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
-  associations="true" dependencies="false" nesting-relationships="true">  
-  <class id="1" language="java" name="pt.iscte.poo.instalacao.aparelhos.maq_lavar.Ciclo" project="TF POO 2015 Pack V2_3" 
-    file="/TF POO 2015 Pack V2_3/src/pt/iscte/poo/instalacao/aparelhos/maq_lavar/Ciclo.java" binary="false" 
+<class-diagram version="1.1.8" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
+  <class id="1" language="java" name="pt.iscte.poo.instalacao.aparelhos.maq_lavar.Ciclo" project="TF POO 2015 Pack V2_4" 
+    file="/TF POO 2015 Pack V2_4/src/pt/iscte/poo/instalacao/aparelhos/maq_lavar/Ciclo.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="142" y="327"/>    
+    <position height="-1" width="-1" x="501" y="199"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -12,10 +12,10 @@
     </display>  
   </class>  
   <class id="2" language="java" name="pt.iscte.poo.instalacao.aparelhos.maq_lavar.Programa" 
-    project="TF POO 2015 Pack V2_3" 
-    file="/TF POO 2015 Pack V2_3/src/pt/iscte/poo/instalacao/aparelhos/maq_lavar/Programa.java" binary="false" 
+    project="TF POO 2015 Pack V2_4" 
+    file="/TF POO 2015 Pack V2_4/src/pt/iscte/poo/instalacao/aparelhos/maq_lavar/Programa.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="142" y="89"/>    
+    <position height="-1" width="-1" x="148" y="179"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -23,25 +23,19 @@
     </display>  
   </class>  
   <association id="3">    
+    <bendpoint x="319" y="132"/>    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="4" name="ciclos">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="5" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
+      <attribute id="4" name="ciclos"/>      
+      <multiplicity id="5" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="6">    
+    <bendpoint x="319" y="291"/>    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="7" name="selecionado">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="8" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
+      <attribute id="7" name="selecionado"/>      
+      <multiplicity id="8" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  

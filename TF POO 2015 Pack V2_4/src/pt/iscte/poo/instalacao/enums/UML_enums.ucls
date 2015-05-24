@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.8" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
+  <enumeration id="1" language="java" name="pt.iscte.poo.instalacao.enums.Ligavel_Potencia" 
+    project="TF POO 2015 Pack V2_4" 
+    file="/TF POO 2015 Pack V2_4/src/pt/iscte/poo/instalacao/enums/Ligavel_Potencia.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="153" width="210" x="265" y="293"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <enumeration id="2" language="java" name="pt.iscte.poo.instalacao.enums.LigavelEstado" project="TF POO 2015 Pack V2_4" 
+    file="/TF POO 2015 Pack V2_4/src/pt/iscte/poo/instalacao/enums/LigavelEstado.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="243" width="260" x="-35" y="-134"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <enumeration id="3" language="java" name="pt.iscte.poo.instalacao.enums.Ligavel_Tipo" project="TF POO 2015 Pack V2_4" 
+    file="/TF POO 2015 Pack V2_4/src/pt/iscte/poo/instalacao/enums/Ligavel_Tipo.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="387" width="283" x="265" y="-134"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <enumeration id="4" language="java" name="pt.iscte.poo.instalacao.enums.MaqLavarRoupaEstado" 
+    project="TF POO 2015 Pack V2_4" 
+    file="/TF POO 2015 Pack V2_4/src/pt/iscte/poo/instalacao/enums/MaqLavarRoupaEstado.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="189" width="200" x="588" y="-134"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <enumeration id="5" language="java" name="pt.iscte.poo.instalacao.enums.LinhaTomadaEstado" 
+    project="TF POO 2015 Pack V2_4" 
+    file="/TF POO 2015 Pack V2_4/src/pt/iscte/poo/instalacao/enums/LinhaTomadaEstado.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="135" width="294" x="828" y="-134"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <association id="6">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="7" name="novoAparelhoPotencia"/>      
+      <multiplicity id="8" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

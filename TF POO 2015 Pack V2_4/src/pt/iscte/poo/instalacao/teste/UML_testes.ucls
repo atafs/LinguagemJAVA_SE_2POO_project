@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.8" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
+  <class id="1" language="java" name="pt.iscte.poo.instalacao.teste.TesteInstalacao" project="TF POO 2015 Pack V2_4" 
+    file="/TF POO 2015 Pack V2_4/src/pt/iscte/poo/instalacao/teste/TesteInstalacao.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="225" width="222" x="12" y="-29"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="pt.iscte.poo.instalacao.teste.TesteTomada" project="TF POO 2015 Pack V2_4" 
+    file="/TF POO 2015 Pack V2_4/src/pt/iscte/poo/instalacao/teste/TesteTomada.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="171" width="179" x="274" y="-29"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="pt.iscte.poo.instalacao.teste.TesteAparelhos" project="TF POO 2015 Pack V2_4" 
+    file="/TF POO 2015 Pack V2_4/src/pt/iscte/poo/instalacao/teste/TesteAparelhos.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="171" width="180" x="493" y="-29"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="pt.iscte.poo.instalacao.teste.TesteLampada" project="TF POO 2015 Pack V2_4" 
+    file="/TF POO 2015 Pack V2_4/src/pt/iscte/poo/instalacao/teste/TesteLampada.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="189" width="152" x="713" y="-29"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="pt.iscte.poo.instalacao.teste.TesteLeituraDeAparelhosIsolados" 
+    project="TF POO 2015 Pack V2_4" 
+    file="/TF POO 2015 Pack V2_4/src/pt/iscte/poo/instalacao/teste/TesteLeituraDeAparelhosIsolados.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="135" width="216" x="905" y="-29"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
