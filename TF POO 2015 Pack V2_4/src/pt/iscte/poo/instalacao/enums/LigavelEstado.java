@@ -151,9 +151,6 @@ public enum LigavelEstado {
 								if (programa.getId().equals(
 									maquinaLavarRoupa.getProgramaSelecionado())) {
 									programa.setTempoInicio(evento1.getTempo());
-									maquinaLavarRoupa.setProgramaActual(programa);
-									maquinaLavarRoupa.setCicloActual(programa.getCiclos().get(0));
-									
 								}
 							}
 							maquinaLavarRoupa.setPotenciaActual(maquinaLavarRoupa.potenciaActualMaquina());

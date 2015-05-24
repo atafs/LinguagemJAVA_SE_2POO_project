@@ -552,6 +552,7 @@ public void simula(long fim){
 					MaquinaLavarRoupa maq = (MaquinaLavarRoupa) aparelho;	
 					maq.setPotenciaActual(maq.potenciaActualMaquina());
 					ligavel = (Ligavel) maq;
+					break;
 				}
 			}
 			//PRINT TO CONSOLE
