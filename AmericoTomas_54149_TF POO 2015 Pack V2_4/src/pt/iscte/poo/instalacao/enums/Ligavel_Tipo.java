@@ -20,7 +20,7 @@ import pt.iscte.poo.instalacao.aparelhos.maq_lavar.Ciclo;
 import pt.iscte.poo.instalacao.aparelhos.maq_lavar.Programa;
 
 public enum Ligavel_Tipo {
-	LAMPADAVARIAVEL("lampadaVariavel"), MAQLAVARROUPA("maqLavar"), TRIPLA("tripla"), COMPUTADOR("computador"), FRIGORIFICO("frigorifico"), LAMPADA("lampada"), MICROONDAS("microOndas"), TORRADEIRA("torradeira"), OTHERS("porCriar");;
+	LAMPADAVARIAVEL("lampv1"), MAQLAVARROUPA("maqLavar"), TRIPLA("tripla"), COMPUTADOR("comp"), FRIGORIFICO("frigorifico"), LAMPADA("lampada"), MICROONDAS("microOndas"), TORRADEIRA("torradeira"), OTHERS("porCriar");;
 	
 	// ATTRIBUTES
 	private String text;
@@ -87,7 +87,10 @@ public enum Ligavel_Tipo {
 				//POTENCIA MAXIMA DO APARELHO
 				lampadaVariavel.setPotenciaMaxima(potencia);
 				//POTENCIA INICIAL DO APARELHO (50% DA POTENCIA MAXIMA)
-				lampadaVariavel.setPotenciaActual(potencia/2);
+				
+
+				double temp = (double)(int)(Math.random()*potencia);
+				lampadaVariavel.setPotenciaActual(temp);
 				//APESAR DE O JSON REFERIR A POTENCIA_MAXIMA, ESTE APARELHO E DE POTENCIA VARIAVEL
 				lampadaVariavel.setPotenciaAparelho(Ligavel_Potencia.POTENCIA);
 				
@@ -146,11 +149,12 @@ public enum Ligavel_Tipo {
 				return tripla;
 			
 			case COMPUTADOR:
-				Computador computador = new Computador(id, potencia);
+				Computador computador = new Computador(id, (double)(int)Math.random()*potencia);
 				computador.setEstadoAparelho(LigavelEstado.DESLIGA);
 				computador.setTipoAparelho(novo);
 				computador.setPotenciaActual(potencia);
-				computador.setPotenciaAparelho(novoAparelhoPotencia);
+				computador.setPotenciaMaxima(potencia);
+				computador.setPotenciaAparelho(Ligavel_Potencia.POTENCIA);
 				
 				listAparelhos.add(computador);
 				return computador;

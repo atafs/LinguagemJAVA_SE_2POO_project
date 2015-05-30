@@ -10,6 +10,7 @@ import java.util.Observable;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import pt.iscte.poo.instalacao.aparelhos.Computador;
 import pt.iscte.poo.instalacao.aparelhos.MaquinaLavarRoupa;
 import pt.iscte.poo.instalacao.aparelhos.Tripla;
 import pt.iscte.poo.instalacao.comparator.EventoTempoComparator;
@@ -348,11 +349,11 @@ public class Instalacao extends Observable implements Comparable<Evento>{
 //			 System.out.println(ligacao.toString());
 //		 }
 //		 
-//		// TO PRINT
-//		System.out.println("----------------PRINT_LINHA------------------");
-//		for (Linha linha1 : listLinhas) {
-//			System.out.println(linha1.toString());
-//		}
+		// TO PRINT
+		System.out.println("----------------PRINT_LINHA------------------");
+		for (Linha linha1 : listLinhas) {
+			System.out.println(linha1.toString());
+		}
 	}
 	
 	/** */
@@ -375,11 +376,7 @@ public class Instalacao extends Observable implements Comparable<Evento>{
 //			System.out.println(evento.toString());
 //		}	
 		
-//		// TO PRINT
-//		System.out.println("----------------PRINT_07_LIGAVEIS------------------");
-//		for (Ligavel ligavel : ligaveis) {
-//			System.err.println(ligavel.toString());
-//		}
+
 		
 	}
 	
@@ -537,8 +534,18 @@ public void simula(long fim){
 					MaquinaLavarRoupa maq = (MaquinaLavarRoupa) aparelho;	
 					maq.setPotenciaActual(maq.potenciaActualMaquina());
 					ligavel = (Ligavel) maq;
+				}
+				
+				if (ligavel.getId().equals(Ligavel_Tipo.COMPUTADOR.toString())&& ligavel.getEstadoAparelho().equals(LigavelEstado.LIGA)) {
+					Aparelho aparelho = (Aparelho)ligavel;
+					Computador comp = (Computador) aparelho;	
+					double temp = (double)(int)(Math.random()*comp.potenciaAtual());
+					comp.setPotenciaActual(temp);
+					ligavel = (Ligavel) comp;
 					break;
 				}
+				
+				
 			}
 			//PRINT TO CONSOLE
 			System.out.println(this.toString());
