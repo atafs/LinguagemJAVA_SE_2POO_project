@@ -1,5 +1,4 @@
-{"frigorifico":
-	{"id": "frigo",			  
-	 "potencia": 100
-	}
+{"tipo" : "frigorifico",
+ "id": "frigo",			  
+ "potencia": 100.0
 }

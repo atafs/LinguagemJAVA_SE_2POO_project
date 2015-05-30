@@ -1,5 +1,4 @@
-{"computador": 
-	{"id": "comp",			  
-	 "potenciaMaxima": 100.0
-	}
+{"tipo" : "computador", 
+ "id": "comp",			  
+ "potenciaMaxima": 100.0
 }				
