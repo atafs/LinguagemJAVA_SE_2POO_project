@@ -78,10 +78,10 @@
 	<classpathentry kind="lib" path="myJAR/SWING20.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/AmericoLIB"/>
 	<classpathentry kind="lib" path="/TF POO 2015 LIBRARIES/json/json-simple-1.1.1.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JDK_8"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JUnit"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JSON"/>
 	<classpathentry kind="lib" path="/TF POO 2015 LIBRARIES/junit/junit.jar"/>
 	<classpathentry kind="lib" path="/TF POO 2015 LIBRARIES/junit/org.hamcrest.core_1.3.0.v201303031735.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
