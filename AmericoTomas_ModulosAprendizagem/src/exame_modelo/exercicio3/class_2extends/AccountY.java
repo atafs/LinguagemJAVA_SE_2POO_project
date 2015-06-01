@@ -1,10 +1,10 @@
-package exame_modelo.exercicio2.class_2extends;
+package exame_modelo.exercicio3.class_2extends;
 
 import java.util.List;
 
-import exame_modelo.exercicio2.account.Data;
-import exame_modelo.exercicio2.account.Movement;
-import exame_modelo.exercicio2.class_1abstract.Account;
+import exame_modelo.exercicio3.account.Data;
+import exame_modelo.exercicio3.account.Movement;
+import exame_modelo.exercicio3.class_1abstract.Account;
 
 public class AccountY extends Account {
 

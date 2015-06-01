@@ -1,4 +1,4 @@
-package exame_modelo.exercicio1;
+package exame_modelo.exercicio1e2;
 
 //DAO CLASS
 public class Car {

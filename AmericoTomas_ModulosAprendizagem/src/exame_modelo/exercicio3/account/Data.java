@@ -1,4 +1,4 @@
-package exame_modelo.exercicio2.account;
+package exame_modelo.exercicio3.account;
 
 //DAO CLASS
 public class Data implements Comparable<Data> {

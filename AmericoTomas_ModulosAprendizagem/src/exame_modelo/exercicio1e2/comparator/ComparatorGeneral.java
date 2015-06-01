@@ -1,8 +1,8 @@
-package exame_modelo.exercicio1.comparator;
+package exame_modelo.exercicio1e2.comparator;
 
 import java.util.Comparator;
 
-import exame_modelo.exercicio1.Car;
+import exame_modelo.exercicio1e2.Car;
 
 public class ComparatorGeneral implements Comparator<Car>{
 

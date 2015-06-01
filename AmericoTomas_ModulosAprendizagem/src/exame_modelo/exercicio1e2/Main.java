@@ -1,9 +1,9 @@
-package exame_modelo.exercicio1;
+package exame_modelo.exercicio1e2;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-import exame_modelo.exercicio1.comparator.ComparatorGeneral;
+import exame_modelo.exercicio1e2.comparator.ComparatorGeneral;
 
 
 public class Main {

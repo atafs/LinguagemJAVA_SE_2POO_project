@@ -1,9 +1,9 @@
-package exame_modelo.exercicio2.class_1abstract;
+package exame_modelo.exercicio3.class_1abstract;
 
 import java.util.List;
 import java.util.LinkedList;
 
-import exame_modelo.exercicio2.account.Movement;
+import exame_modelo.exercicio3.account.Movement;
 
 //ABSTRACT
 public abstract class Account {
