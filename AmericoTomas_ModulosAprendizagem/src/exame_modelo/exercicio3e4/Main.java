@@ -1,12 +1,12 @@
-package exame_modelo.exercicio3;
+package exame_modelo.exercicio3e4;
 
 import java.util.LinkedList;
 
-import exame_modelo.exercicio3.account.Data;
-import exame_modelo.exercicio3.account.Movement;
-import exame_modelo.exercicio3.class_1abstract.Account;
-import exame_modelo.exercicio3.class_2extends.AccountX;
-import exame_modelo.exercicio3.class_2extends.AccountY;
+import exame_modelo.exercicio3e4.account.Data;
+import exame_modelo.exercicio3e4.account.Movement;
+import exame_modelo.exercicio3e4.class_1abstract.Account;
+import exame_modelo.exercicio3e4.class_2extends.AccountX;
+import exame_modelo.exercicio3e4.class_2extends.AccountY;
 
 public class Main {
 
