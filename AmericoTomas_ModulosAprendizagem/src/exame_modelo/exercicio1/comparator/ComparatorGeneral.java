@@ -2,8 +2,6 @@ package exame_modelo.exercicio1.comparator;
 
 import java.util.Comparator;
 
-import modules.comparator.colection_compare_to.ComparadorPorData;
-import modules.comparator.colection_compare_to.ComparadorPorNome;
 import exame_modelo.exercicio1.Car;
 
 public class ComparatorGeneral implements Comparator<Car>{

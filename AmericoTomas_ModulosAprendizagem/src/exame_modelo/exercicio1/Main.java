@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import exame_modelo.exercicio1.comparator.ComparatorGeneral;
-import exame_modelo.exercicio1.comparator.ComparatorOfCarsByYears;
 
 
 public class Main {
