@@ -17,6 +17,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import exame_modelo.exercicio3e4.exceptions.MyException;
+
 
 public class HighScores {
 
@@ -40,6 +42,13 @@ public class HighScores {
 
 		return toReturn;
 	}
+	
+	@SuppressWarnings("unused")
+	public void someMethod()throws MyException{
+	    //some condition here.
+	    //if(false) 
+	    	throw new MyException("THIS IS MY EXCEPTION!!!");
+	}
 
 	// alinea b).
 	public void escreveFicheiroSerializado(String nomeFicheiro){
@@ -47,9 +56,13 @@ public class HighScores {
 			ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(nomeFicheiro));
 			try {
 				output.writeObject(lista);
+				//AN EXCPEPTION IS THROWN
+				someMethod();
 			} finally {
 				output.close();
 			}
+		} catch(MyException e) {
+			e.printStackTrace();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
