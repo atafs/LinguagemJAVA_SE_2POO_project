@@ -16,7 +16,7 @@ public class MainFactoryPattern {
 		Car sedanCar = carFactory.buildCar(CarType.SEDAN);
 		Car luxuryCar = carFactory.buildCar(CarType.LUXURY);
 		
-		System.out.println("\n-------------PRINT1----------------");
+		System.out.println("\n-------------PRINT2----------------");
 		System.out.println(smallCar.getModel());
 		System.out.println(sedanCar.getModel());
 		System.out.println(luxuryCar.getModel());

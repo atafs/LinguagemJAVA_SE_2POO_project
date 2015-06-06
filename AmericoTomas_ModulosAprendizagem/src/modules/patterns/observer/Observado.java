@@ -11,7 +11,7 @@ public class Observado extends Observable {
 		System.out.println("Inicio...");
 		
 		Scanner teclado = new Scanner(System.in);
-		String linhaConsola = "";
+		String linhaConsola = "test";
 		while(!linhaConsola.equals("exit")) {
 			System.out.print("> ");
 			linhaConsola = teclado.nextLine();
@@ -21,11 +21,13 @@ public class Observado extends Observable {
 				// Notificar Observers
 				setChanged();
 				notifyObservers(linhaConsola);
+				
+				//END
+				System.out.println("Fim...");
+				return;
 			}
 		}
-		
 		teclado.close();
-		System.out.println("Fim...");
 	}
 	
 	

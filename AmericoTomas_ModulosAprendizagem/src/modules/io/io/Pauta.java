@@ -41,11 +41,12 @@ public class Pauta {
 			Scanner scanner = new Scanner(new File(nomeFicheiro));
 			try {
 				
-				int numero = -1;
 				String nome = "";
+				int numero = -1;
 				String nota = "";
 				int contador = 0;
 				
+				System.err.println("---ficheiro.txt: alunos---");
 				while(scanner.hasNextLine()){
 					if(contador == 0){
 						nome = scanner.nextLine();
@@ -68,7 +69,6 @@ public class Pauta {
 						nota = "";
 						contador = -1;
 					}
-					
 					contador++;
 				}
 			} finally {

@@ -10,7 +10,6 @@ public class Car {
 	
 	//CONSTRUCTOR: overload
 	public Car(String nickName, int yearOfConstruction) {
-		super();
 		this.nickName = nickName;
 		this.yearOfConstruction = yearOfConstruction;
 	}
@@ -24,6 +23,7 @@ public class Car {
 	public String getNickName() {
 		return nickName;
 	}
+	
 	public int getYearOfConstruction() {
 		return yearOfConstruction;
 	}

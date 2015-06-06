@@ -81,11 +81,9 @@ public class PhoneBookList implements PhoneBook {
 	@Override
 	public String toString() {
 		String toReturn = "";
-		
 		for (Contact contact : contacts) {
 			toReturn += "CONTACT: " + contact.toString() + "\n";
 		}
-		
 		return toReturn;
 	}
 

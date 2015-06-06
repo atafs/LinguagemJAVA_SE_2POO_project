@@ -8,7 +8,6 @@ public class Aluno {
 	
 	//CONSTRUCTOR
 	public Aluno(long numero, String nome) {
-		super();
 		this.numero = numero;
 		this.nome = nome;
 	}

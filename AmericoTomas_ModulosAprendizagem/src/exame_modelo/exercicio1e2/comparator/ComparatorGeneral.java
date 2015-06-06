@@ -12,12 +12,9 @@ public class ComparatorGeneral implements Comparator<Car>{
 		ComparatorOfCarsNicknames compPlate = new ComparatorOfCarsNicknames();
 		
 		if(compYear.compare(car1, car2) != 0){
-			//CRESCENTE
-			return compYear.compare(car1, car2);
-		
+			return compYear.compare(car1, car2);//CRESCENTE
 		} else {
-			//DECRESCENTE
-			return compPlate.compare(car2, car1);
+			return compPlate.compare(car2, car1);//DECRESCENTE
 		}
 	}
 

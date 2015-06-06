@@ -35,16 +35,13 @@ public class HighScores {
 	@Override
 	public String toString() {
 		String toReturn = "";
-
 		for (Jogador jogador : lista) {
 			toReturn += jogador.toString() + "\n";
 		}
-
 		return toReturn;
 	}
 	
-	@SuppressWarnings("unused")
-	public void someMethod()throws MyException{
+	public void someMethod() throws MyException{
 	    //some condition here.
 	    //if(false) 
 	    	throw new MyException("THIS IS MY EXCEPTION!!!");
